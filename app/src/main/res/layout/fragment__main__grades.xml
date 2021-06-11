@@ -53,6 +53,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__math_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/fragment__main__grades__math_tv"
@@ -74,6 +75,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__phys_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__phys_tv" />
@@ -94,6 +96,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__rus_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__rus_tv" />
@@ -114,6 +117,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="3"
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__inf_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__inf_tv" />
@@ -134,6 +138,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="2"
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__id_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__id_tv" />

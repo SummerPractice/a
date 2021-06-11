@@ -20,4 +20,6 @@
     <string name="fragment__main__quiz_results__res_tv">Рекомендуемые направления</string>
     <string name="fragment__main__quiz_results__gl_tv">Удачи!</string>
     <string name="fragment__main__grades__id_tv">ИД</string>
+    <string name="invalid_exam_grade">Баллы за экзамен в диапазоне 1 – 100</string>
+    <string name="invalid_id_grade">Баллы за ИД не могут превышать 10</string>
 </resources>
