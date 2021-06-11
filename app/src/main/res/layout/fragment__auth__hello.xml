@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".screens.auth.hello.HelloFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/fragment__auth__hello_icst"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:src="@drawable/icst"
         android:scaleType="centerCrop"
-        />
+        android:src="@drawable/icst"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__auth__hello__head_tv"
+        style="@style/headerText"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        style="@style/headerText"
         android:text="@string/fragment__auth__hello__welcome_tv"
-        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintBottom_toTopOf="@id/fragment__auth__hello_desc_tv"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello_icst" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__auth__hello_desc_tv"
+        style="@style/lightText"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        style="@style/lightText"
         android:text="@string/fragment__auth__hello_desc_tv"
         app:layout_constraintBottom_toTopOf="@id/fragment__auth__hello_start_btn"
         app:layout_constraintStart_toStartOf="@id/fragment__auth__hello__head_tv"
@@ -41,12 +40,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragment__auth__hello_start_btn"
-        app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello_desc_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         style="@style/button"
         android:text="@string/fragment__auth__hello_start_btn"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello_desc_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
