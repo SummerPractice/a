@@ -23,7 +23,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 
     private val stateObserver = Observer<SingUpViewModel.AuthState> {
         if (it.isSaved) nextFragment()
-        else Toast.makeText(context, it.errorMessage, Toast.LENGTH_SHORT).show()
+        else if (it.errorMessage.isNotEmpty()) Toast.makeText(context, it.errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(
