@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/helloFragment">
+    <fragment
+        android:id="@+id/helloFragment"
+        android:name="com.example.polycareer.screens.auth.hello.HelloFragment"
+        android:label="fragment__auth__hello"
+        tools:layout="@layout/fragment__auth__hello" >
+        <action
+            android:id="@+id/action_helloFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.polycareer.screens.auth.sign_up.SignUpFragment"
+        android:label="fragment__auth__sign_up"
+        tools:layout="@layout/fragment__auth__sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_gradesMarksFragment"
+            app:destination="@id/gradesMarksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gradesMarksFragment"
+        android:name="com.example.polycareer.screens.main.grades_marks.GradesMarksFragment"
+        android:label="fragment__main__grades_marks"
+        tools:layout="@layout/fragment__main__grades_marks" >
+        <action
+            android:id="@+id/action_gradesMarksFragment_to_quizItemFragment"
+            app:destination="@id/quizItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizItemFragment"
+        android:name="com.example.polycareer.screens.main.quiz_item.QuizItemFragment"
+        android:label="fragment__main__quiz_item"
+        tools:layout="@layout/fragment__main__quiz_item" >
+        <action
+            android:id="@+id/action_quizItemFragment_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizResultsFragment"
+        android:name="com.example.polycareer.screens.main.quiz_results.QuizResultsFragment"
+        android:label="fragment__main__quiz_results"
+        tools:layout="@layout/fragment__main__quiz_results" />
+</navigation>
