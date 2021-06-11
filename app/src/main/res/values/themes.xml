@@ -69,5 +69,4 @@
         <item name="android:paddingStart">5dp</item>
     </style>
 
-    <color name="text_gray">#FFBABABA</color>
 </resources>

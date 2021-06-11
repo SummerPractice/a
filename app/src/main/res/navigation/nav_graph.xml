@@ -20,13 +20,13 @@
         tools:layout="@layout/fragment__auth__sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_gradesMarksFragment"
-            app:destination="@id/gradesMarksFragment" />
+            app:destination="@id/gradesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gradesMarksFragment"
-        android:name="com.example.polycareer.screens.main.grades_marks.GradesMarksFragment"
-        android:label="fragment__main__grades_marks"
-        tools:layout="@layout/fragment__main__grades_marks" >
+        android:id="@+id/gradesFragment"
+        android:name="com.example.polycareer.screens.main.grades.GradesFragment"
+        android:label="fragment__main__grades"
+        tools:layout="@layout/fragment__main__grades">
         <action
             android:id="@+id/action_gradesMarksFragment_to_quizItemFragment"
             app:destination="@id/quizItemFragment" />
