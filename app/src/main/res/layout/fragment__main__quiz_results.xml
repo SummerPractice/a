@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".screens.main.quiz_results.QuizResultsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_results__head_tv"
