@@ -7,6 +7,7 @@ import com.example.polycareer.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_PolyCareer)
         setContentView(R.layout.activity_main)
     }
 }

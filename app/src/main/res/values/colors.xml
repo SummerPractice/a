@@ -9,4 +9,5 @@
     <color name="et_dark_green">#FF6AAE74</color>
     <color name="text_gray">#FFBABABA</color>
     <color name="dark_green">#FF216B2C</color>
+    <color name="splash_light">#FFE7FFF0</color>
 </resources>
