@@ -35,6 +35,10 @@ class SingUpViewModel(
         )
     }
 
+    fun navigationComplete() {
+        state = state.copy(false, "")
+    }
+
     sealed class AuthAction : BaseAction {
         object UserDetailSaved : AuthAction()
         class WrongUserDetail(val message: String) : AuthAction()

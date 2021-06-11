@@ -2,12 +2,13 @@ package com.example.polycareer.domain.usecase
 
 import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.repository.AuthRepository
+import com.example.polycareer.utils.isValidEmail
 
 class AuthUseCase(
     private val repository: AuthRepository
 ) {
     suspend fun execute(user: UserDetails): Result {
-        if (!validateEmail(user.email)) return Result.WrongData("Wrong email format")
+        if (!isValidEmail(user.email)) return Result.WrongData("Wrong email format")
 
         if (!repository.checkUserEmail(user.email)) {
             val isSaved = repository.saveUserDetail(user)
@@ -15,10 +16,6 @@ class AuthUseCase(
         }
 
         return Result.DataCorrect
-    }
-
-    private fun validateEmail(email: String): Boolean {
-        return email.contains("@")
     }
 
     sealed class Result {

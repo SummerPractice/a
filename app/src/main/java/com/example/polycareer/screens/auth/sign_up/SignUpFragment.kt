@@ -58,5 +58,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private fun nextFragment() {
         val navController = NavHostFragment.findNavController(this)
         navController.navigate(R.id.action_signUpFragment_to_gradesMarksFragment)
+        viewModel.navigationComplete()
     }
 }
