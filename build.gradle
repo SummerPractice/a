@@ -5,10 +5,12 @@ buildscript {
     ext.room_version = "2.3.0"
     ext.retrofit_version = "2.9.0"
     ext.koin_version = "2.0.0-GA2"
+    ext.chart_version = "v3.1.0"
 
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.1"
@@ -23,6 +25,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }

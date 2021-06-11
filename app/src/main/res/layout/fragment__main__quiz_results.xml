@@ -15,7 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__graph_rc"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.mikephil.charting.charts.RadarChart
+        android:id="@+id/fragment__main__quiz_results__graph_rc"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__head_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__res_tv"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_results__res_tv"
@@ -25,7 +36,7 @@
         android:text="@string/fragment__main__quiz_results__res_tv"
         app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__rv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__head_tv" />
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__graph_rc" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment__main__quiz_results__rv"

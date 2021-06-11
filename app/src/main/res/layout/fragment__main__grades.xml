@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__grades__inf_tv" />
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__grades__id_tv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__grades__math_tv"
@@ -104,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fragment__main__grades__inf_tv"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__grades__next_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__grades__id_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_tv"
         app:layout_constraintTop_toBottomOf="@id/fragment__main__grades__rus_tv" />
 
@@ -117,5 +117,26 @@
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__inf_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__inf_tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fragment__main__grades__id_tv"
+        style="@style/regularText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment__main__grades__id_tv"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__grades__next_btn"
+        app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_tv"
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__grades__inf_tv" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/fragment__main__grades__id_ev"
+        style="@style/editText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__id_tv"
+        app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
+        app:layout_constraintTop_toTopOf="@id/fragment__main__grades__id_tv" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

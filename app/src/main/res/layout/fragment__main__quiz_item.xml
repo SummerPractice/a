@@ -19,11 +19,13 @@
 
     <RadioGroup
         android:id="@+id/fragment__main__quiz_item__answers_rg"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__next_btn"
         app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_item__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__head_tv" />
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__head_tv">
+    </RadioGroup>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragment__main__quiz_item__next_btn"
