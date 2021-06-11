@@ -42,6 +42,8 @@
         android:id="@+id/fragment_auth__sign_up__email_et"
         style="@style/editText"
         android:hint="@string/fragment_auth__sign_up__email_et"
+        android:inputType="textEmailAddress"
+        android:maxLength="40"
         app:layout_constraintBottom_toTopOf="@id/fragment_auth__sign_up__terms_cb"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintLeft_toLeftOf="parent"

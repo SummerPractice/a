@@ -48,7 +48,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:maxLines">1</item>
-        <item name="android:maxLength">25</item>
+        <item name="android:maxLength">30</item>
         <item name="android:inputType">text</item>
         <item name="android:textColorHint">@color/text_gray</item>
         <item name="android:background">@drawable/edit_text_frame</item>
