@@ -2,4 +2,24 @@
     <string name="app_name">PolyCareer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment__auth__hello__welcome_tv">Приветствую, абитуриент!</string>
+    <string name="fragment__auth__hello_desc_tv">Это приложение поможет тебе определиться с выбором направления в ИКТН, узнать больше об образовательных программах, которые тебе подходят</string>
+    <string name="fragment__auth__hello_start_btn">Начать</string>
+    <string name="fragment_auth__sign_up__head_tv">Давай знакомиться</string>
+    <string name="fragment_auth__sign_up__firstname_et">Имя</string>
+    <string name="fragment_auth__sign_up__lastname_et">Фамилия</string>
+    <string name="fragment_auth__sign_up__email_et">Email</string>
+    <string name="fragment_auth__sign_up__terms_cb">Принимаю условия конфиденциальности</string>
+    <string name="fragment_auth__sign_up__email_cb">Хочу получать новости университета на указанную почту</string>
+    <string name="fragment_auth__sign_up__next_btn">Далее</string>
+    <string name="fragment_auth__sign_in__head_tv">Войти</string>
+    <string name="fragment__main__grades_choose">Баллы ЕГЭ</string>
+    <string name="fragment__main__grades__desc_tv">Укажите баллы полученные за ЕГЭ, так нам будет проще оценить вероятность прохождения на то или инное направление.</string>
+    <string name="fragment__main__grades__math_tv">Математика</string>
+    <string name="fragment__main__grades__phys_tv">Физика</string>
+    <string name="fragment__main__grades__rus_tv">Русский язык</string>
+    <string name="fragment__main__grades__inf_tv">Информатика</string>
+    <string name="fragment__main__quiz_results__head_tv">Результаты</string>
+    <string name="fragment__main__quiz_results__res_tv">Рекомендуемые направления</string>
+    <string name="fragment__main__quiz_results__gl_tv">Удачи!</string>
 </resources>
