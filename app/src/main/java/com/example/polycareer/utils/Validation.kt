@@ -15,3 +15,6 @@ fun isValidEmail(text: String): Boolean =
     } else {
         Patterns.EMAIL_ADDRESS.matcher(text).matches()
     }
+
+fun isValidName(text: String): Boolean =
+    text.isNotEmpty() && text.all { it.isLetter() }
