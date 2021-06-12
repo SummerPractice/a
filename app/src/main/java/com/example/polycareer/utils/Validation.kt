@@ -1,6 +1,5 @@
 package com.example.polycareer.utils
 
-import android.text.TextUtils
 import android.util.Patterns
 
 fun isValidExamGrade(text: String): Boolean =
@@ -9,12 +8,7 @@ fun isValidExamGrade(text: String): Boolean =
 fun isValidIdGrade(text: String): Boolean =
     text.isEmpty() || text.toInt() <= 10
 
-fun isValidEmail(text: String): Boolean =
-    if (TextUtils.isEmpty(text)) {
-        false
-    } else {
-        Patterns.EMAIL_ADDRESS.matcher(text).matches()
-    }
+fun String.isValidName(): Boolean = this.isNotEmpty() && this.all { it.isLetter() }
 
-fun isValidName(text: String): Boolean =
-    text.isNotEmpty() && text.all { it.isLetter() }
+fun String.isValidEmail(): Boolean =
+    this.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()

@@ -8,7 +8,7 @@ class AuthUseCase(
     private val repository: AuthRepository
 ) {
     suspend fun execute(user: UserDetails): Result {
-        if (!isValidEmail(user.email)) return Result.WrongData("Wrong email format")
+        if (!user.email.isValidEmail()) return Result.WrongData("Wrong email format")
 
         if (!repository.checkUserEmail(user.email)) {
             val isSaved = repository.saveUserDetail(user)

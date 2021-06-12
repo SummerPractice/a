@@ -36,7 +36,7 @@ class SingUpViewModel(
     }
 
     fun navigationComplete() {
-        state = state.copy(false, "")
+        state = state.copy(isSaved = false, errorMessage = "")
     }
 
     sealed class AuthAction : BaseAction {
