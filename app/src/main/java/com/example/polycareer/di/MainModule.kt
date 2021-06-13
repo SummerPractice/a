@@ -9,6 +9,6 @@ import org.koin.dsl.module
 
 val mainModule = module {
     single<AuthRepository> { AuthRepositoryTest() }
-    single<AuthUseCase> { AuthUseCase(get()) }
+    single { AuthUseCase(get()) }
     viewModel { SingUpViewModel(get()) }
 }

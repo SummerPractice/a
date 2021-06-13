@@ -26,5 +26,5 @@ abstract class BaseViewModel<ViewState : BaseState, ViewAction : BaseAction>(ini
 
     protected open fun onLoadData() {}
 
-    protected abstract fun onReduceState(viewAction: ViewAction): ViewState
+    protected abstract fun onReduceState(action: ViewAction): ViewState
 }
