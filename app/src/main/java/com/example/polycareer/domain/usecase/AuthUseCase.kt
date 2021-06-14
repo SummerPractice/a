@@ -7,31 +7,29 @@ import com.example.polycareer.utils.isValidName
 
 class AuthUseCase(
     private val repository: AuthRepository
-) {
-    suspend fun saveUser(user: UserDetails): Result {
+) : ValidateParam {
+    suspend fun saveUser(user: UserDetails): ValidateParam.Result {
         if (!repository.checkUserEmail(user.email)) {
             val isSaved = repository.saveUserDetail(user)
-            if (isSaved) return Result.Error("Failed to save data")
+            if (isSaved) return ValidateParam.Result.Error("Failed to save data")
         }
 
-        return Result.DataCorrect
+        return ValidateParam.Result.DataCorrect
     }
 
-    suspend fun validateFirstName(firstName: String): Result  =
-        if (firstName.isValidName()) Result.DataCorrect else Result.WrongData
+    suspend fun validateFirstName(firstName: String): ValidateParam.Result =
+        if (firstName.isValidName()) ValidateParam.Result.DataCorrect
+        else ValidateParam.Result.WrongData
 
-    suspend fun validateLastName(lastName: String): Result =
-        if (lastName.isValidName()) Result.DataCorrect else Result.WrongData
+    suspend fun validateLastName(lastName: String): ValidateParam.Result =
+        if (lastName.isValidName()) ValidateParam.Result.DataCorrect
+        else ValidateParam.Result.WrongData
 
-    suspend fun validateEmail(email: String): Result =
-        if (email.isValidEmail()) Result.DataCorrect else Result.WrongData
+    suspend fun validateEmail(email: String): ValidateParam.Result =
+        if (email.isValidEmail()) ValidateParam.Result.DataCorrect
+        else ValidateParam.Result.WrongData
 
-    suspend fun validateConf(isChecked: Boolean): Result =
-        if (isChecked) Result.DataCorrect else Result.WrongData
-
-    sealed interface Result {
-        object DataCorrect : Result
-        object WrongData : Result
-        class Error(val message: String) : Result
-    }
+    suspend fun validateConf(isChecked: Boolean): ValidateParam.Result =
+        if (isChecked) ValidateParam.Result.DataCorrect
+        else ValidateParam.Result.WrongData
 }
