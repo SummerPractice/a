@@ -2,7 +2,6 @@ package com.example.polycareer.screens.auth.sign_up
 
 import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseState
-import com.example.polycareer.base.BaseViewModel
 import com.example.polycareer.base.ValidationParamViewModel
 import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.usecase.AuthUseCase
@@ -91,10 +90,6 @@ class SingUpViewModel(
         return validateParam(AuthParam.ConfRule) {
             validateConf(isChecked)
         }
-    }
-
-    fun navigationComplete() {
-        state = AuthState()
     }
 
     override fun onDataSave() = state.copy(

@@ -1,13 +1,18 @@
 package com.example.polycareer.base
 
 import com.example.polycareer.domain.usecase.ValidateParam
+import com.example.polycareer.screens.auth.sign_up.SingUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 
 abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : ValidateParam>(
     private val useCase: UseCase,
-    initialState: ViewState
+    private val initialState: ViewState
 ) : BaseViewModel<ViewState, ValidationParamViewModel.ValidationAction>(initialState) {
+
+    fun navigationComplete() {
+        state = initialState
+    }
 
     protected fun CoroutineScope.checkParamAsync(block: suspend () -> ValidateParam.Result) =
         async { block() == ValidateParam.Result.DataCorrect }

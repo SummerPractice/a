@@ -113,10 +113,6 @@ class GradesViewModel(
         }
     }
 
-    fun navigationComplete() {
-        state = GradesState()
-    }
-
     override fun onDataSave(): GradesState = state.copy(
         isSaved = true,
         errorMessage = ""
