@@ -20,23 +20,3 @@ val databaseModule = module {
     single { provideDatabase(androidApplication()) }
     single { provideUserDao(get()) }
 }
-
-//    single {
-//        Room.databaseBuilder(androidContext(), UserDatabase::class.java, "user_database")
-//            .fallbackToDestructiveMigration()
-//            .build()
-//    }
-//    single { get<UserDatabase>().userDao }
-
-// fun provideDatabase(application: Application): CountriesDatabase {
-//       return Room.databaseBuilder(application, CountriesDatabase::class.java, "countries")
-//            .fallbackToDestructiveMigration()
-//            .build()
-//    }
-//
-//    fun provideCountriesDao(database: CountriesDatabase): CountriesDao {
-//        return  database.countriesDao
-//    }
-//
-//    single { provideDatabase(androidApplication()) }
-//    single { provideCountriesDao(get()) }

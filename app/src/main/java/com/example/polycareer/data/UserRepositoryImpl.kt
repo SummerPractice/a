@@ -18,7 +18,6 @@ class UserRepositoryImpl(
         } catch (e: Exception) {
             false
         }
-//        return true
     }
 
     override suspend fun saveUserGrades(userGrades: UserGrades): Boolean {
@@ -32,6 +31,5 @@ class UserRepositoryImpl(
         } catch (e: Exception) {
             return false
         }
-//        return true
     }
 }
