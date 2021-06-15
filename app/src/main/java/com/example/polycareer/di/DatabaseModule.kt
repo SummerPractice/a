@@ -7,7 +7,7 @@ import com.example.polycareer.data.database.UserDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
-val databaseModule = module {
+val databaseModule = module(createdAtStart = true) {
     fun provideDatabase(context: Context): UserDatabase {
         return Room.databaseBuilder(context, UserDatabase::class.java, "user_database")
             .build()
