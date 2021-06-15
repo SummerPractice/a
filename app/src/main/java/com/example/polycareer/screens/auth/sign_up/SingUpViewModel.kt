@@ -71,13 +71,13 @@ class SingUpViewModel(
 
     private suspend fun validateFirstName(firstName: String): ValidateParam.Result {
         return validateParam(AuthParam.FirstName) {
-            validateFirstName(firstName)
+            validateName(firstName)
         }
     }
 
     private suspend fun validateLastName(lastName: String): ValidateParam.Result {
         return validateParam(AuthParam.LastName) {
-            validateLastName(lastName)
+            validateName(lastName)
         }
     }
 
@@ -94,14 +94,7 @@ class SingUpViewModel(
     }
 
     fun navigationComplete() {
-        state = state.copy(
-            isSaved = false,
-            isNotValidFirstName = false,
-            isNotValidLastName = false,
-            isNotValidEmail = false,
-            isConfRuleNotExcepted = false,
-            errorMessage = ""
-        )
+        state = AuthState()
     }
 
     override fun onDataSave() = state.copy(

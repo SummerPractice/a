@@ -11,6 +11,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.example.polycareer.R
+import com.example.polycareer.utils.setValidateRule
+import com.example.polycareer.utils.setValueByCondition
+import com.example.polycareer.utils.value
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : Fragment(), View.OnClickListener {
@@ -25,14 +28,16 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 
     private val stateObserver = Observer<SingUpViewModel.AuthState> { state ->
         firstnameInput.error =
-            if (state.isNotValidFirstName) getString(R.string.invalid_name) else null
+            setValueByCondition(state.isNotValidFirstName, getString(R.string.invalid_name))
 
         lastnameInput.error =
-            if (state.isNotValidLastName) getString(R.string.invalid_name) else null
+            setValueByCondition(state.isNotValidLastName, getString(R.string.invalid_name))
 
-        emailInput.error = if (state.isNotValidEmail) getString(R.string.invalid_email) else null
+        emailInput.error =
+            setValueByCondition(state.isNotValidEmail, getString(R.string.invalid_email))
 
-        cbConf.error = if (state.isConfRuleNotExcepted) getString(R.string.terms_error) else null
+        cbConf.error =
+            setValueByCondition(state.isConfRuleNotExcepted, getString(R.string.terms_error))
 
         if (state.isSaved) nextFragment()
         if (state.errorMessage.isNotEmpty()) showError(state.errorMessage)
@@ -53,26 +58,26 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val rootView = inflater.inflate(R.layout.fragment__auth__sign_up, container, false)
+        firstnameInput = rootView.findViewById(R.id.fragment_auth__sign_up__firstname_et)
+        lastnameInput = rootView.findViewById(R.id.fragment_auth__sign_up__lastname_et)
+        emailInput = rootView.findViewById(R.id.fragment_auth__sign_up__email_et)
+        button = rootView.findViewById(R.id.fragment_auth__sign_up__next_btn)
+        cbConf = rootView.findViewById(R.id.fragment_auth__sign_up__terms_cb)
+        cbNews = rootView.findViewById(R.id.fragment_auth__sign_up__email_cb)
+
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
-        return inflater.inflate(R.layout.fragment__auth__sign_up, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        firstnameInput = view.findViewById(R.id.fragment_auth__sign_up__firstname_et)
-        lastnameInput = view.findViewById(R.id.fragment_auth__sign_up__lastname_et)
-        emailInput = view.findViewById(R.id.fragment_auth__sign_up__email_et)
-
-        button = view.findViewById(R.id.fragment_auth__sign_up__next_btn)
         button.setOnClickListener(this)
 
-        cbConf = view.findViewById(R.id.fragment_auth__sign_up__terms_cb)
-        cbNews = view.findViewById(R.id.fragment_auth__sign_up__email_cb)
-
-        firstnameInput.setValidateRule { onFirstNameChanged(firstnameInput.value) }
-        lastnameInput.setValidateRule { onLastNameChanged(lastnameInput.value) }
-        emailInput.setValidateRule { onEmailChanged(emailInput.value) }
+        firstnameInput.setValidateRule(viewModel) { onFirstNameChanged(firstnameInput.value) }
+        lastnameInput.setValidateRule(viewModel) { onLastNameChanged(lastnameInput.value) }
+        emailInput.setValidateRule(viewModel) { onEmailChanged(emailInput.value) }
 
         cbConf.setOnCheckedChangeListener { _: CompoundButton, state: Boolean ->
             viewModel.onConfCheckedChange(state)
@@ -87,11 +92,4 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 
         viewModel.saveUserDetail(firstname, lastname, email, isConfChecked)
     }
-
-    private fun EditText.setValidateRule(validator: SingUpViewModel.() -> Unit) {
-        this.doOnTextChanged { _, _, _, _ -> viewModel.validator() }
-    }
-
-    private val EditText.value: String
-        get() = this.text.toString()
 }

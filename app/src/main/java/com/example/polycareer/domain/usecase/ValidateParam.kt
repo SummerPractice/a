@@ -1,6 +1,10 @@
 package com.example.polycareer.domain.usecase
 
-interface ValidateParam {
+open class ValidateParam {
+    protected suspend fun validate(condition: Boolean): Result =
+        if (condition) Result.DataCorrect
+        else Result.WrongData
+
     sealed interface Result {
         object DataCorrect : Result
         object WrongData : Result

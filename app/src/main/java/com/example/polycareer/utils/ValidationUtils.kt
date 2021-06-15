@@ -2,11 +2,11 @@ package com.example.polycareer.utils
 
 import android.util.Patterns
 
-fun isValidExamGrade(text: String): Boolean =
-    text.isEmpty() || text.toInt() in 1..100
+fun String.isValidExamGrade(): Boolean =
+    this.isNotEmpty() && this.toInt() in 1..100
 
-fun isValidIdGrade(text: String): Boolean =
-    text.isEmpty() || text.toInt() <= 10
+fun String.isValidIdGrade(): Boolean =
+    this.isNotEmpty() && this.toInt() in 0..10
 
 fun String.isValidName(): Boolean = this.isNotEmpty() && this.all { it.isLetter() }
 
