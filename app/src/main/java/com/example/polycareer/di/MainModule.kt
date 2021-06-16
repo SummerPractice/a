@@ -11,13 +11,13 @@ import com.example.polycareer.screens.main.grades.GradesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val mainModule = module {
+val authModule = module {
     single<UserRepository> { UserRepositoryImpl(get()) }
     single<QuizItemsRepository> { QuizItemsRepositoryImpl() }
 
     single { AuthUseCase(get()) }
-    single { GradesUseCase(get()) }
-
     viewModel { SingUpViewModel(get()) }
+
+    single { GradesUseCase(get()) }
     viewModel { GradesViewModel(get()) }
 }
