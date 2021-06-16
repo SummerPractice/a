@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.polycareer.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -26,6 +28,8 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var btnNext: AppCompatButton
 
         private val viewModel: QuizItemViewModel by viewModel()
+
+    private var pressedTime = -1L
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
 //        if (state.toNextQuestion) nextQuestion()
@@ -56,6 +60,19 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         btnNext = rootView.findViewById(R.id.fragment__main__quiz_item__next_btn)
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
+            OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (pressedTime + 2000 > System.currentTimeMillis()) {
+                    findNavController().navigateUp()
+                } else {
+                    showError(getString(R.string.press_again))
+                }
+                pressedTime = System.currentTimeMillis();
+            }
+        })
+
         return rootView
     }
 

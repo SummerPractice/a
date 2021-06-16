@@ -30,7 +30,7 @@ data class UserGradesEntity(
                 grades.russian.toInt(),
                 grades.physics.toInt(),
                 grades.informatics.toInt(),
-                grades.individualAchievements.toInt()
+                if (grades.individualAchievements.isEmpty()) 0 else grades.individualAchievements.toInt()
             )
         }
     }
