@@ -6,7 +6,7 @@ fun String.isValidExamGrade(): Boolean =
     this.isNotEmpty() && this.toInt() in 1..100
 
 fun String.isValidIdGrade(): Boolean =
-    this.isNotEmpty() && this.toInt() in 0..10
+    this.isEmpty() || this.toInt() in 0..10
 
 fun String.isValidName(): Boolean = this.isNotEmpty() && this.all { it.isLetter() }
 

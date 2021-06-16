@@ -9,13 +9,17 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_item__head_tv"
         style="@style/headerText"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/fragment__main__quiz_iter__head_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__answers_rg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Текст вопроса" />
+        android:gravity="center_horizontal"
+        />
 
     <RadioGroup
         android:id="@+id/fragment__main__quiz_item__answers_rg"

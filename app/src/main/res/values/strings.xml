@@ -21,9 +21,10 @@
     <string name="fragment__main__quiz_results__gl_tv">Удачи!</string>
     <string name="fragment__main__grades__id_tv">ИД</string>
     <string name="invalid_exam_grade">Баллы за экзамен в диапазоне 1 – 100</string>
-    <string name="invalid_id_grade">Баллы за ИД не могут превышать 10</string>
+    <string name="invalid_id_grade">Баллы за ИД в диапазоне 0 – 10</string>
     <string name="alphabet">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="terms_error">Примите условия</string>
     <string name="invalid_name">Строка должна содержать буквы</string>
     <string name="invalid_email">Некорректный адрес</string>
+    <string name="fragment__main__quiz_iter__head_tv">Что из перечисленного больше Вас интересует?</string>
 </resources>

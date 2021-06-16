@@ -2,12 +2,12 @@ package com.example.polycareer.screens.auth.sign_up
 
 import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseState
-import com.example.polycareer.base.BaseViewModel
 import com.example.polycareer.base.ValidationParamViewModel
 import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.usecase.AuthUseCase
 import com.example.polycareer.domain.usecase.ValidateParam
 import kotlinx.coroutines.*
+import com.example.polycareer.domain.model.Result
 
 
 class SingUpViewModel(
@@ -19,10 +19,10 @@ class SingUpViewModel(
             if (!isParamsValid(firstName, lastName, email, isChecked)) return@launch
 
             authUseCase.saveUser(UserDetails(firstName, lastName, email)).also { result ->
-                if (result is ValidateParam.Result.DataCorrect)
+                if (result is Result.DataCorrect)
                     sendAction(ValidationAction.DataSaved)
 
-                if (result is ValidateParam.Result.Error)
+                if (result is Result.Error)
                     sendAction(ValidationAction.Error(result.message))
             }
         }
@@ -69,25 +69,25 @@ class SingUpViewModel(
         }
     }
 
-    private suspend fun validateFirstName(firstName: String): ValidateParam.Result {
+    private suspend fun validateFirstName(firstName: String): Result {
         return validateParam(AuthParam.FirstName) {
             validateName(firstName)
         }
     }
 
-    private suspend fun validateLastName(lastName: String): ValidateParam.Result {
+    private suspend fun validateLastName(lastName: String): Result {
         return validateParam(AuthParam.LastName) {
             validateName(lastName)
         }
     }
 
-    private suspend fun validateEmail(email: String): ValidateParam.Result {
+    private suspend fun validateEmail(email: String): Result {
         return validateParam(AuthParam.Email) {
             validateEmail(email)
         }
     }
 
-    private suspend fun validateConf(isChecked: Boolean): ValidateParam.Result {
+    private suspend fun validateConf(isChecked: Boolean): Result {
         return validateParam(AuthParam.ConfRule) {
             validateConf(isChecked)
         }

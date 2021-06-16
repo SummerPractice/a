@@ -5,9 +5,9 @@ import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.ValidationParamViewModel
 import com.example.polycareer.domain.model.UserGrades
 import com.example.polycareer.domain.usecase.GradesUseCase
-import com.example.polycareer.domain.usecase.ValidateParam
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.polycareer.domain.model.Result
 
 class GradesViewModel(
     private val useCase: GradesUseCase
@@ -24,10 +24,10 @@ class GradesViewModel(
             if (!isParamsValid(math, rus, phys, inf, id)) return@launch
 
             useCase.saveGrades(UserGrades(math, rus, phys, inf, id)).also { result ->
-                if (result is ValidateParam.Result.DataCorrect)
+                if (result is Result.DataCorrect)
                     sendAction(ValidationAction.DataSaved)
 
-                if (result is ValidateParam.Result.Error)
+                if (result is Result.Error)
                     sendAction(ValidationAction.Error(result.message))
             }
         }
@@ -83,31 +83,31 @@ class GradesViewModel(
         }
     }
 
-    private suspend fun validateMath(math: String): ValidateParam.Result {
+    private suspend fun validateMath(math: String): Result {
         return validateParam(GradesParam.Math) {
             validateExamGrade(math)
         }
     }
 
-    private suspend fun validateRus(rus: String): ValidateParam.Result {
+    private suspend fun validateRus(rus: String): Result {
         return validateParam(GradesParam.Rus) {
             validateExamGrade(rus)
         }
     }
 
-    private suspend fun validatePhys(phys: String): ValidateParam.Result {
+    private suspend fun validatePhys(phys: String): Result {
         return validateParam(GradesParam.Phys) {
             validateExamGrade(phys)
         }
     }
 
-    private suspend fun validateInf(inf: String): ValidateParam.Result {
+    private suspend fun validateInf(inf: String): Result {
         return validateParam(GradesParam.Inf) {
             validateExamGrade(inf)
         }
     }
 
-    private suspend fun validateId(id: String): ValidateParam.Result {
+    private suspend fun validateId(id: String): Result {
         return validateParam(GradesParam.Id) {
             validateIdGrade(id)
         }

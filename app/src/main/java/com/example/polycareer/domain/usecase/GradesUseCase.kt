@@ -4,6 +4,8 @@ import com.example.polycareer.domain.model.UserGrades
 import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.utils.isValidExamGrade
 import com.example.polycareer.utils.isValidIdGrade
+import com.example.polycareer.domain.model.Result
+
 
 class GradesUseCase(
     private val repository: UserRepository
