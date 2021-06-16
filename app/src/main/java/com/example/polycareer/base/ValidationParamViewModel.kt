@@ -3,22 +3,25 @@ package com.example.polycareer.base
 import com.example.polycareer.domain.usecase.ValidateParam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
-import com.example.polycareer.domain.model.Result
 
 abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : ValidateParam>(
     private val useCase: UseCase,
-    initialState: ViewState
+    private val initialState: ViewState
 ) : BaseViewModel<ViewState, ValidationParamViewModel.ValidationAction>(initialState) {
 
-    protected fun CoroutineScope.checkParamAsync(block: suspend () -> Result) =
-        async { block() == Result.DataCorrect }
+    fun navigationComplete() {
+        state = initialState
+    }
+
+    protected fun CoroutineScope.checkParamAsync(block: suspend () -> ValidateParam.Result) =
+        async { block() == ValidateParam.Result.DataCorrect }
 
     protected suspend fun validateParam(
         param: ValidationAction.Param,
-        validationFunction: suspend UseCase.() -> Result
-    ): Result {
+        validationFunction: suspend UseCase.() -> ValidateParam.Result
+    ): ValidateParam.Result {
         return useCase.validationFunction().also { result ->
-            if (result == Result.DataCorrect)
+            if (result == ValidateParam.Result.DataCorrect)
                 sendAction(ValidationAction.CorrectParam(param = param))
             else
                 sendAction(ValidationAction.WrongParam(param = param))

@@ -31,9 +31,4 @@ class HelloFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         navController.navigate(R.id.action_helloFragment_to_signUpFragment)
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = HelloFragment()
-    }
 }

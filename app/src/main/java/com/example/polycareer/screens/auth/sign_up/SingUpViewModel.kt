@@ -93,10 +93,6 @@ class SingUpViewModel(
         }
     }
 
-    fun navigationComplete() {
-        state = AuthState()
-    }
-
     override fun onDataSave() = state.copy(
         isSaved = true,
         errorMessage = ""
