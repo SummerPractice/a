@@ -2,6 +2,7 @@ package com.example.polycareer.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.polycareer.data.database.model.UserDetailsEntity
 import com.example.polycareer.data.database.model.UserGradesEntity
@@ -11,7 +12,7 @@ interface UserDao {
     @Insert
     suspend fun insertUser(user: UserDetailsEntity): Long
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGrades(grades: UserGradesEntity)
 
     @Query("SELECT * FROM user where id = :userId")

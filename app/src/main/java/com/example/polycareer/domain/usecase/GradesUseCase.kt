@@ -15,14 +15,19 @@ class GradesUseCase(
 
     suspend fun saveGrades(grades: UserGrades): Result {
         val userId = getCurrentUserId()
-        return if (repository.saveUserGrades(userId, grades)) Result.DataCorrect
-        else Result.Error("Failed to save data")
+        return if (userId != App.USER_ID_DEFAULT_VALUE
+            && repository.saveUserGrades(userId, grades)
+        ) {
+            Result.DataCorrect
+        } else {
+            Result.Error("Failed to save data")
+        }
     }
 
     private fun getCurrentUserId(): Long {
         val preferences =
             App.applicationContext().getSharedPreferences(App.CURRENT_USER_ID, Context.MODE_PRIVATE)
-        return preferences.getLong(App.USER_ID_KEY, -1)
+        return preferences.getLong(App.USER_ID_KEY, App.USER_ID_DEFAULT_VALUE)
     }
 
     suspend fun validateExamGrade(grade: String) = validate(grade.isValidExamGrade())

@@ -105,10 +105,10 @@ class SingUpViewModel(
 
     override fun changeStateByParam(param: ValidationAction.Param, isCorrect: Boolean): AuthState {
         return when (param as AuthParam) {
-            is AuthParam.FirstName -> state.copy(isNotValidFirstName = !isCorrect)
-            is AuthParam.LastName -> state.copy(isNotValidLastName = !isCorrect)
-            is AuthParam.Email -> state.copy(isNotValidEmail = !isCorrect)
-            is AuthParam.ConfRule -> state.copy(isConfRuleNotExcepted = !isCorrect)
+            is AuthParam.FirstName -> state.copy(isNotValidFirstName = !isCorrect, errorMessage = "")
+            is AuthParam.LastName -> state.copy(isNotValidLastName = !isCorrect, errorMessage = "")
+            is AuthParam.Email -> state.copy(isNotValidEmail = !isCorrect, errorMessage = "")
+            is AuthParam.ConfRule -> state.copy(isConfRuleNotExcepted = !isCorrect, errorMessage = "")
         }
     }
 
