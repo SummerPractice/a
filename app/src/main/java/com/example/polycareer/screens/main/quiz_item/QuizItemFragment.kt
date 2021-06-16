@@ -25,7 +25,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var rgAnswers: RadioGroup
     private lateinit var btnNext: AppCompatButton
 
-    private val viewModel: QuizItemViewModel by viewModel()
+        private val viewModel: QuizItemViewModel by viewModel()
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
 //        if (state.toNextQuestion) nextQuestion()
