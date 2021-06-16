@@ -4,9 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseAction
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.BaseViewModel
+import com.example.polycareer.domain.model.Result
 import com.example.polycareer.domain.usecase.QuizItemUseCase
 import kotlinx.coroutines.launch
-import com.example.polycareer.domain.model.Result
 
 class QuizItemViewModel(
     private val useCase: QuizItemUseCase
@@ -14,7 +14,7 @@ class QuizItemViewModel(
 
     private var answerId: Int = 0
 
-    private lateinit var questions: List<List<String>>
+    private var questions = listOf<List<String>>()
 
     fun saveUserAnswer(answerId: Int) {
         viewModelScope.launch {
@@ -49,7 +49,9 @@ class QuizItemViewModel(
 
     fun onFragmentCreated() {
         loadQuestions()
-        navigateForward()
+        if (questions.isNotEmpty()) {
+            navigateForward()
+        }
     }
 
     fun navigationComplete() {

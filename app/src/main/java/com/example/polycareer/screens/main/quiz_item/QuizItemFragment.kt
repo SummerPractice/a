@@ -73,13 +73,9 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         if (radioButton != null) {
             val selectedAnswer = rgAnswers.indexOfChild(radioButton)
 
-            viewModel.onNextButtonClicked(rgAnswers.checkedRadioButtonId)
+            viewModel.onNextButtonClicked(selectedAnswer)
         }
     }
-//
-//    private fun nextQuestion() {
-////      TODO()
-//    }
 
     private fun toResults() {
         val navController = NavHostFragment.findNavController(this)
@@ -95,15 +91,16 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 
 private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
+    val sp = context.resources.displayMetrics.scaledDensity
     setTextColor(ContextCompat.getColor(context, R.color.black))
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
-    setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-    setPadding(5 * dp, 5, 5, 5)
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 * sp)
+    setPadding(5 * dp, 5 * dp, 5 * dp, 5 * dp)
     setBackgroundColor(ContextCompat.getColor(context, R.color.splash_light))
 
-    val lp = FrameLayout.LayoutParams(450 * dp, FrameLayout.LayoutParams.WRAP_CONTENT)
+    val lp = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
     lp.gravity = Gravity.CENTER
-    lp.setMargins(30 * dp, 10 * dp, 10 * dp, 30 * dp)
+    lp.setMargins(25 * dp, 10 * dp, 30 * dp, 10 * dp)
     layoutParams = lp
     buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.btn_light_green))
 }
