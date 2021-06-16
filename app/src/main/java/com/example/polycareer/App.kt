@@ -15,8 +15,10 @@ class App : Application() {
 
     companion object {
         private var instance: App? = null
+
         const val CURRENT_USER_ID = "CURRENT_USER_ID"
         const val USER_ID_KEY = "user_id"
+        const val USER_ID_DEFAULT_VALUE: Long = -1
 
         fun applicationContext() : Context {
             return instance!!.applicationContext

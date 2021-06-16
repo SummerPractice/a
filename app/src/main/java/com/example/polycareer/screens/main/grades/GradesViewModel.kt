@@ -128,11 +128,11 @@ class GradesViewModel(
         isCorrect: Boolean
     ): GradesState {
         return when (param as GradesParam) {
-            is GradesParam.Math -> state.copy(isNotValidMath = !isCorrect)
-            is GradesParam.Rus -> state.copy(isNotValidRus = !isCorrect)
-            is GradesParam.Phys -> state.copy(isNotValidPhys = !isCorrect)
-            is GradesParam.Inf -> state.copy(isNotValidInf = !isCorrect)
-            is GradesParam.Id -> state.copy(isNotValidId = !isCorrect)
+            is GradesParam.Math -> state.copy(isNotValidMath = !isCorrect, errorMessage = "")
+            is GradesParam.Rus -> state.copy(isNotValidRus = !isCorrect, errorMessage = "")
+            is GradesParam.Phys -> state.copy(isNotValidPhys = !isCorrect, errorMessage = "")
+            is GradesParam.Inf -> state.copy(isNotValidInf = !isCorrect, errorMessage = "")
+            is GradesParam.Id -> state.copy(isNotValidId = !isCorrect, errorMessage = "")
         }
     }
 
