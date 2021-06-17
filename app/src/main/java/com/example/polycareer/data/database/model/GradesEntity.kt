@@ -9,13 +9,13 @@ import com.example.polycareer.domain.model.UserGrades
 @Entity(
     tableName = "grades",
     foreignKeys = [ForeignKey(
-        entity = UserDetailsEntity::class,
+        entity = UserEntity::class,
         parentColumns = ["id"],
         childColumns = ["user_id"]
     )]
 )
-data class UserGradesEntity(
-    @PrimaryKey @ColumnInfo(name = "user_id") val userId: Long = 0,
+data class GradesEntity(
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "user_id") val userId: Long = 0,
     val math: Int,
     val rus: Int,
     val phys: Int,
@@ -23,8 +23,8 @@ data class UserGradesEntity(
     val individual: Int
 ) {
     companion object {
-        operator fun invoke(userId: Long, grades: UserGrades): UserGradesEntity {
-            return UserGradesEntity(
+        operator fun invoke(userId: Long, grades: UserGrades): GradesEntity {
+            return GradesEntity(
                 userId,
                 grades.mathematics.toInt(),
                 grades.russian.toInt(),
