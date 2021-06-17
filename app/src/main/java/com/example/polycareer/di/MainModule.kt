@@ -1,8 +1,8 @@
 package com.example.polycareer.di
 
-import com.example.polycareer.data.QuizItemsRepositoryImpl
+import com.example.polycareer.data.QuizItemsLocalRepository
 import com.example.polycareer.data.UserRepositoryImpl
-import com.example.polycareer.domain.repository.QuizItemsRepository
+import com.example.polycareer.data.QuizItemsRemoteRepository
 import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.domain.usecase.AuthUseCase
 import com.example.polycareer.domain.usecase.GradesUseCase
@@ -15,7 +15,8 @@ import org.koin.dsl.module
 
 val authModule = module {
     single<UserRepository> { UserRepositoryImpl(get()) }
-    single<QuizItemsRepository> { QuizItemsRepositoryImpl() }
+    single { QuizItemsLocalRepository(get()) }
+    single { QuizItemsRemoteRepository() }
 
     single { AuthUseCase(get()) }
     viewModel { SingUpViewModel(get()) }
@@ -23,6 +24,6 @@ val authModule = module {
     single { GradesUseCase(get()) }
     viewModel { GradesViewModel(get()) }
 
-    single { QuizItemUseCase(get()) }
+    single { QuizItemUseCase(get(), get()) }
     viewModel { QuizItemViewModel(get()) }
 }

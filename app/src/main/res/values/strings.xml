@@ -27,4 +27,5 @@
     <string name="invalid_name">Строка должна содержать буквы</string>
     <string name="invalid_email">Некорректный адрес</string>
     <string name="fragment__main__quiz_iter__head_tv">Что из перечисленного больше Вас интересует?</string>
+    <string name="press_again">Нажмите назад еще раз чтобы закрыть тест</string>
 </resources>
