@@ -23,14 +23,4 @@ data class UsersAnswersEntity(
     @ColumnInfo(name = "user_id") val userId: Long,
     @ColumnInfo(name = "answer_id") val answerId: Long,
     @ColumnInfo(name = "try_number") val tryNumber: Int = 0
-    ) {
-    companion object {
-        operator fun invoke(userId: Long, answerId: Long, number: Int): UsersAnswersEntity {
-            return UsersAnswersEntity(
-                userId = userId,
-                answerId = answerId,
-                tryNumber = number
-            )
-        }
-    }
-}
+)

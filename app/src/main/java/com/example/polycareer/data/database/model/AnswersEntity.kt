@@ -10,14 +10,4 @@ data class AnswersEntity(
     @ColumnInfo(name = "answer_index") val answerIndex: Int,
     @ColumnInfo(name = "question_id") val questionId: Int,
     @ColumnInfo val text: String,
-) {
-    companion object {
-        operator fun invoke(questionId: Int, answerIndex: Int, text: String): AnswersEntity {
-            return AnswersEntity(
-                questionId = questionId,
-                answerIndex = answerIndex,
-                text = text
-            )
-        }
-    }
-}
+)

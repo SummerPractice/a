@@ -14,41 +14,14 @@ import androidx.room.PrimaryKey
     )])
 data class CoeffsEntity(
     @PrimaryKey(autoGenerate = true) val answerId: Long = 0,
-    val profession: Long,
-    val yk: Double,
-    val ytc: Double,
-    val inn: Double,
-    val pi1: Double,
-    val pi2: Double,
-    val cic: Double,
-    val ic: Double,
-    val fi: Double,
-    val mot: Double,
-) {
-    companion object {
-        operator fun invoke(answerId: Long,
-                            yk: Double = 0.0,
-                            ytc: Double = 0.0,
-                            inn: Double = 0.0,
-                            pi1: Double = 0.0,
-                            pi2: Double = 0.0,
-                            cic: Double = 0.0,
-                            ic: Double = 0.0,
-                            fi: Double = 0.0,
-                            mot: Double = 0.0)
-        : CoeffsEntity {
-            return CoeffsEntity(
-                answerId = answerId,
-                yk = yk,
-                ytc = ytc,
-                inn = inn,
-                pi1 = pi1,
-                pi2 = pi2,
-                cic = cic,
-                ic = ic,
-                fi = fi,
-                mot = mot,
-            )
-        }
-    }
-}
+    val profession: Long = -1,
+    val yk: Double = 0.0,
+    val ytc: Double = 0.0,
+    val inn: Double = 0.0,
+    val pi1: Double = 0.0,
+    val pi2: Double = 0.0,
+    val cic: Double = 0.0,
+    val ic: Double = 0.0,
+    val fi: Double = 0.0,
+    val mot: Double = 0.0,
+)
