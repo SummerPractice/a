@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.polycareer.di.databaseModule
 import com.example.polycareer.di.authModule
+import com.example.polycareer.di.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -33,7 +34,8 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 databaseModule,
-                authModule
+                authModule,
+                mainModule
             )
         }
     }

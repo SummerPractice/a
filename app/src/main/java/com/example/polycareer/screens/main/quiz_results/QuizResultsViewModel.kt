@@ -15,19 +15,18 @@ class QuizResultsViewModel(
 
     fun getData() {
         viewModelScope.launch {
-            val directions = mapOf(
-                "PI" to 1,
-                "Math" to 2,
-            )
-
-            val professions = mapOf(
-                "Проектирование" to 50,
-                "Искусственный интеллект" to 25,
-                "Big Data" to 10,
-                "Iot" to 15
-            )
-
-            sendAction(QuizResultAction.ShowResults(directions, professions))
+            useCase.getData().also { result ->
+                when (result) {
+                    is QuizResultUseCase.Result.Success -> sendAction(
+                        QuizResultAction.ShowResults(
+                            result.directions,
+                            result.professions
+                        )
+                    )
+                    is QuizResultUseCase.Result.Error ->
+                        sendAction(QuizResultAction.Error(result.message))
+                }
+            }
         }
     }
 

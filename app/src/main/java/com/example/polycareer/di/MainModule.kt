@@ -1,8 +1,9 @@
 package com.example.polycareer.di
 
-import com.example.polycareer.data.QuizItemsLocalRepository
-import com.example.polycareer.data.UserRepositoryImpl
-import com.example.polycareer.data.QuizItemsRemoteRepository
+import com.example.polycareer.data.*
+import com.example.polycareer.domain.model.UserAnswer
+import com.example.polycareer.domain.repository.ProfessionRepository
+import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.domain.usecase.AuthUseCase
 import com.example.polycareer.domain.usecase.GradesUseCase
@@ -25,10 +26,15 @@ val authModule = module {
 
     single { GradesUseCase(get()) }
     viewModel { GradesViewModel(get()) }
+}
+
+val mainModule = module {
+    single<ResultsRepository> { ResultRepositoryTest() }
+    single<ProfessionRepository> { ProfessionsRepositoryTest() }
 
     single { QuizItemUseCase(get(), get()) }
     viewModel { QuizItemViewModel(get()) }
 
-    single { QuizResultUseCase() }
+    single { QuizResultUseCase(get(), get()) }
     viewModel { QuizResultsViewModel(get()) }
 }
