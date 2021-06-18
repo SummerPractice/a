@@ -22,7 +22,11 @@ class QuizItemsLocalRepository(
             }
             result[question.questionId].add(question.text)
         }
-        QuestionsResponse(Result.DataCorrect, result)
+        if (result.isEmpty()) {
+            QuestionsResponse(Result.WrongData, null)
+        } else {
+            QuestionsResponse(Result.DataCorrect, result)
+        }
     } catch (e: Exception) {
         QuestionsResponse(Result.Error("Database error"), null)
     }

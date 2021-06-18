@@ -23,11 +23,6 @@ class QuizItemUseCase(
     }
 
     suspend fun getQuestions(): QuestionsResponse {
-        localRepository.setQuestions(listOf(
-            listOf("Печенье", "Пряники", "Вафли"),
-            listOf("Матобес", "Пи"),
-            listOf("Sprite", "7UP")
-        ))
         val localRepositoryData = localRepository.getAllQuestions()
         return if (localRepositoryData.result is Result.DataCorrect) {
             localRepositoryData
