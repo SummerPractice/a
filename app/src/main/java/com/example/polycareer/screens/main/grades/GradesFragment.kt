@@ -77,8 +77,8 @@ class GradesFragment : Fragment(), View.OnClickListener {
         btnNext.setOnClickListener(this)
         etMath.setValidateRule(viewModel) { onMathGradeChange(etMath.value) }
         etRus.setValidateRule(viewModel) { onRusGradeChange(etRus.value) }
-        etPhys.setValidateRule(viewModel) { onPhysGradeChange(etPhys.value) }
-        etInf.setValidateRule(viewModel) { onInfGradeChange(etInf.value) }
+        etPhys.setValidateRule(viewModel) { onPhysGradeChange(etPhys.value, etInf.value) }
+        etInf.setValidateRule(viewModel) { onInfGradeChange(etPhys.value, etInf.value) }
         etId.setValidateRule(viewModel) { onIdGradeChange(etId.value) }
     }
 

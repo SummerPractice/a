@@ -27,5 +27,8 @@ class GradesUseCase(
 
     suspend fun validateExamGrade(grade: String) = validate(grade.isValidExamGrade())
 
+    suspend fun validateExamGrade(firstGrade: String, secondGrade: String) =
+        validate(firstGrade.isValidExamGrade() || secondGrade.isValidExamGrade())
+
     suspend fun validateIdGrade(grade: String) = validate(grade.isValidIdGrade())
 }

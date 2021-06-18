@@ -42,14 +42,13 @@ class GradesViewModel(
     ) = withContext(viewModelScope.coroutineContext) {
         val isMathGradeCorrect = checkParamAsync { validateMath(math) }
         val isRusGradeCorrect = checkParamAsync { validateRus(rus) }
-        val isPhysGradeCorrect = checkParamAsync { validatePhys(phys) }
-        val isInfGradeCorrect = checkParamAsync { validateInf(inf) }
+        val isPhysGradeCorrect = checkParamAsync { validatePhys(phys, inf) }
+        val isInfGradeCorrect = checkParamAsync { validateInf(phys, inf) }
         val isIdGradeCorrect = checkParamAsync { validateId(id) }
 
         return@withContext isMathGradeCorrect.await()
                 && isRusGradeCorrect.await()
-                && isPhysGradeCorrect.await()
-                && isInfGradeCorrect.await()
+                && (isPhysGradeCorrect.await() || isInfGradeCorrect.await())
                 && isIdGradeCorrect.await()
     }
 
@@ -65,15 +64,15 @@ class GradesViewModel(
         }
     }
 
-    fun onPhysGradeChange(phys: String) {
+    fun onPhysGradeChange(phys: String, inf: String) {
         viewModelScope.launch {
-            validatePhys(phys)
+            validatePhys(phys, inf)
         }
     }
 
-    fun onInfGradeChange(inf: String) {
+    fun onInfGradeChange(phys: String, inf: String) {
         viewModelScope.launch {
-            validateInf(inf)
+            validateInf(phys, inf)
         }
     }
 
@@ -95,15 +94,15 @@ class GradesViewModel(
         }
     }
 
-    private suspend fun validatePhys(phys: String): Result {
-        return validateParam(GradesParam.Phys) {
-            validateExamGrade(phys)
+    private suspend fun validatePhys(phys: String, inf: String): Result {
+        return validateParam(GradesParam.Phys, GradesParam.Inf) {
+            validateExamGrade(phys, inf)
         }
     }
 
-    private suspend fun validateInf(inf: String): Result {
-        return validateParam(GradesParam.Inf) {
-            validateExamGrade(inf)
+    private suspend fun validateInf(phys: String, inf: String): Result {
+        return validateParam(GradesParam.Phys, GradesParam.Inf) {
+            validateExamGrade(phys, inf)
         }
     }
 

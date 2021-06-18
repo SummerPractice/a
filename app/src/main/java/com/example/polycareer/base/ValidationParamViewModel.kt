@@ -29,6 +29,23 @@ abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : Validat
         }
     }
 
+    protected suspend fun validateParam(
+        firstParam: ValidationAction.Param,
+        secondParam: ValidationAction.Param,
+        validationFunction: suspend UseCase.() -> Result
+    ): Result {
+        return useCase.validationFunction().also { result ->
+            if (result == Result.DataCorrect) {
+                sendAction(ValidationAction.CorrectParam(param = firstParam))
+                sendAction(ValidationAction.CorrectParam(param = secondParam))
+            }
+            else {
+                sendAction(ValidationAction.WrongParam(param = firstParam))
+                sendAction(ValidationAction.WrongParam(param = secondParam))
+            }
+        }
+    }
+
     override fun onReduceState(action: ValidationAction): ViewState = when (action) {
         is ValidationAction.DataSaved -> onDataSave()
         is ValidationAction.CorrectParam -> changeStateByParam(action.param, true)

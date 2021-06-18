@@ -28,8 +28,8 @@ data class GradesEntity(
                 userId,
                 grades.mathematics.toInt(),
                 grades.russian.toInt(),
-                grades.physics.toInt(),
-                grades.informatics.toInt(),
+                if (grades.physics.isEmpty()) 0 else grades.physics.toInt(),
+                if (grades.informatics.isEmpty()) 0 else grades.informatics.toInt(),
                 if (grades.individualAchievements.isEmpty()) 0 else grades.individualAchievements.toInt()
             )
         }
