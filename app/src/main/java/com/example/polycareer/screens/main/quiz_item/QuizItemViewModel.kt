@@ -12,13 +12,13 @@ class QuizItemViewModel(
     private val useCase: QuizItemUseCase
 ): BaseViewModel<QuizItemViewModel.QuizItemState, QuizItemViewModel.QuizItemAction>(QuizItemState()) {
 
-    private var answerId: Int = 0
+    private var questionId: Int = 0
 
     private var questions = listOf<List<String>>()
 
-    fun saveUserAnswer(answerId: Int) {
+    private fun saveUserAnswer(answerId: Int) {
         viewModelScope.launch {
-            useCase.saveUserAnswer(answerId).also { result ->
+            useCase.saveUserAnswer(questionId = questionId - 1, answerId = answerId).also { result ->
                 if (result is Result.DataCorrect)
                     navigateForward()
 
@@ -28,11 +28,15 @@ class QuizItemViewModel(
         }
     }
 
-    fun loadQuestions() {
+    private fun loadQuestions() {
         viewModelScope.launch {
             useCase.getQuestions().also { questionsResponse ->
-                if (questionsResponse.result is Result.DataCorrect)
+                if (questionsResponse.result is Result.DataCorrect) {
                     questions = questionsResponse.questions!!
+                    if (questions.isNotEmpty()) {
+                        navigateForward()
+                    }
+                }
 
                 if (questionsResponse.result is Result.Error)
                     sendAction(QuizItemAction.Error(questionsResponse.result.message))
@@ -40,18 +44,24 @@ class QuizItemViewModel(
         }
     }
 
-    fun isLastQuestion(): Boolean =
-        answerId == questions.size
+    fun clearUsersAttempt() {
+        viewModelScope.launch {
+            useCase.clearUserAnswers().also { result ->
+                if (result is Result.Error)
+                    sendAction(QuizItemAction.Error(result.message))
+            }
+        }
+    }
 
-    fun getNextQuestion(): List<String> {
-        return questions.get(answerId++)
+    private fun isLastQuestion(): Boolean =
+        questionId == questions.size
+
+    private fun getNextQuestion(): List<String> {
+        return questions[questionId++]
     }
 
     fun onFragmentCreated() {
         loadQuestions()
-        if (questions.isNotEmpty()) {
-            navigateForward()
-        }
     }
 
     fun navigationComplete() {
@@ -60,6 +70,7 @@ class QuizItemViewModel(
 
     fun onNextButtonClicked(answerId: Int) {
         saveUserAnswer(answerId)
+       // navigateForward()
     }
 
 

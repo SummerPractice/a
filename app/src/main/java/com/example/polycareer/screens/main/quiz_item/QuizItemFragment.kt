@@ -34,7 +34,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
 //        if (state.toNextQuestion) nextQuestion()
         if (state.toResults) toResults()
-        if (state.errorMessage.isNotEmpty()) showError(state.errorMessage)
+        showError(state.errorMessage)
         bindAnswers(state.answers)
     }
 
@@ -65,6 +65,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (pressedTime + 2000 > System.currentTimeMillis()) {
+                    viewModel.clearUsersAttempt()
                     findNavController().navigateUp()
                 } else {
                     showError(getString(R.string.press_again))

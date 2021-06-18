@@ -7,6 +7,7 @@ import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.utils.isValidExamGrade
 import com.example.polycareer.utils.isValidIdGrade
 import com.example.polycareer.domain.model.Result
+import com.example.polycareer.utils.getCurrentUserId
 
 
 class GradesUseCase(
@@ -22,12 +23,6 @@ class GradesUseCase(
         } else {
             Result.Error("Failed to save data")
         }
-    }
-
-    private fun getCurrentUserId(): Long {
-        val preferences =
-            App.applicationContext().getSharedPreferences(App.CURRENT_USER_ID, Context.MODE_PRIVATE)
-        return preferences.getLong(App.USER_ID_KEY, App.USER_ID_DEFAULT_VALUE)
     }
 
     suspend fun validateExamGrade(grade: String) = validate(grade.isValidExamGrade())

@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.polycareer.data.database.model.*
 
 @Database(entities = [UserEntity::class, GradesEntity::class,
-    AnswersEntity::class, UsersAnswersEntity::class], version = 1)
+    AnswersEntity::class, UsersAnswersEntity::class, CoeffsEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract val userDao: UserDao
     abstract val quizDao: QuizDao
