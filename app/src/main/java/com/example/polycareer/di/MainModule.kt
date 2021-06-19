@@ -1,7 +1,7 @@
 package com.example.polycareer.di
 
 import com.example.polycareer.data.*
-import com.example.polycareer.domain.model.UserAnswer
+import com.example.polycareer.data.api.ApiFactory
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserRepository
@@ -17,9 +17,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val authModule = module {
+    single { ApiFactory.retrofit }
+
     single<UserRepository> { UserRepositoryImpl(get()) }
-    single { QuizItemsLocalRepository(get()) }
-    single { QuizItemsRemoteRepository() }
 
     single { AuthUseCase(get()) }
     viewModel { SingUpViewModel(get()) }
@@ -31,6 +31,9 @@ val authModule = module {
 val mainModule = module {
     single<ResultsRepository> { ResultRepositoryTest() }
     single<ProfessionRepository> { ProfessionsRepositoryTest() }
+
+    single { QuizItemsLocalRepository(get()) }
+    single { QuizItemsRemoteRepository(get()) }
 
     single { QuizItemUseCase(get(), get()) }
     viewModel { QuizItemViewModel(get()) }

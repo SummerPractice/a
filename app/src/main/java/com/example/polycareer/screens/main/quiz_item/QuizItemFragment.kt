@@ -32,9 +32,8 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private var pressedTime = -1L
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
-//        if (state.toNextQuestion) nextQuestion()
         if (state.toResults) toResults()
-        showError(state.errorMessage)
+        showToast(state.errorMessage)
         bindAnswers(state.answers)
     }
 
@@ -68,7 +67,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
                     viewModel.clearUsersAttempt()
                     findNavController().navigateUp()
                 } else {
-                    showError(getString(R.string.press_again))
+                    showToast(getString(R.string.press_again))
                 }
                 pressedTime = System.currentTimeMillis();
             }
@@ -101,7 +100,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         viewModel.navigationComplete()
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showToast(errorMessage: String) {
         if (errorMessage.isEmpty()) return
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }

@@ -6,43 +6,52 @@ import com.example.polycareer.data.QuizItemsRemoteRepository
 import com.example.polycareer.domain.model.AnswersResponse
 import com.example.polycareer.domain.model.Result
 import com.example.polycareer.utils.getCurrentUserId
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class QuizItemUseCase(
     private val localRepository: QuizItemsLocalRepository,
     private val remoteRepository: QuizItemsRemoteRepository
 ) {
-    suspend fun saveUserAnswer(questionId: Int, answerId: Int): Result {
-        if (!localRepository.saveUserAnswer(
-                questionId = questionId.toLong(),
-                answerIndex = answerId.toLong(),
-                userId = getCurrentUserId())
-        ) {
-            return Result.Error("Failed to save data")
-        }
-        return Result.DataCorrect
-    }
-
-    suspend fun getQuestions(): QuestionsResponse {
-        val localRepositoryData = localRepository.getAllQuestions()
-        return if (localRepositoryData.result is Result.DataCorrect) {
-            localRepositoryData
-        } else {
-            val remoteRepositoryData = remoteRepository.getQuestions()
-            if (remoteRepositoryData.result is Result.DataCorrect) {
-                remoteRepositoryData.questions?.let { localRepository.setQuestions(it) }
+    suspend fun saveUserAnswer(questionId: Int, answerId: Int): Result =
+        withContext(Dispatchers.IO) {
+            if (!localRepository.saveUserAnswer(
+                    questionId = questionId.toLong(),
+                    answerIndex = answerId.toLong(),
+                    userId = getCurrentUserId())
+            ) {
+                 Result.Error("Failed to save data")
             }
-            remoteRepositoryData
+            Result.DataCorrect
         }
-    }
 
-    suspend fun clearUserAnswers(): Result {
-        if (!localRepository.clearUsersLastAttemptAnswers(getCurrentUserId())) {
-            return Result.Error("Failed to clear data")
+
+    suspend fun getQuestions(): QuestionsResponse =
+        withContext(Dispatchers.IO) {
+            val localRepositoryData = localRepository.getAllQuestions()
+            if (localRepositoryData.result is Result.DataCorrect) {
+                localRepositoryData
+            } else {
+                val remoteRepositoryData = remoteRepository.getQuestions()
+                if (remoteRepositoryData.result is Result.DataCorrect) {
+                    remoteRepositoryData.questions?.let { localRepository.setQuestions(it) }
+                }
+                remoteRepositoryData
+            }
         }
-        return Result.DataCorrect
-    }
+
+
+    suspend fun clearUserAnswers(): Result =
+        withContext(Dispatchers.IO) {
+            if (!localRepository.clearUsersLastAttemptAnswers(getCurrentUserId())) {
+                Result.Error("Failed to clear data")
+            }
+            Result.DataCorrect
+        }
+
 
     suspend fun getUserAnswers(): AnswersResponse =
-        localRepository.getUsersLastAttemptAnswers(getCurrentUserId())
-
+        withContext(Dispatchers.IO) {
+            localRepository.getUsersLastAttemptAnswers(getCurrentUserId())
+        }
 }
