@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -15,6 +16,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
@@ -26,6 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var rgAnswers: RadioGroup
     private lateinit var btnNext: AppCompatButton
+    private lateinit var progressBar: ProgressBar
 
         private val viewModel: QuizItemViewModel by viewModel()
 
@@ -48,6 +51,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
             newRadioButton.text = answer
             rgAnswers.addView(newRadioButton)
         }
+        progressBar.isVisible = false
     }
 
     override fun onCreateView(
@@ -57,6 +61,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         val rootView = inflater.inflate(R.layout.fragment__main__quiz_item, container, false)
         rgAnswers = rootView.findViewById(R.id.fragment__main__quiz_item__answers_rg)
         btnNext = rootView.findViewById(R.id.fragment__main__quiz_item__next_btn)
+        progressBar = rootView.findViewById(R.id.fragment__main__quiz_item__progress)
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
 

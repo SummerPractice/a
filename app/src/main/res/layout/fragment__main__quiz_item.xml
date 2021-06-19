@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.quiz_item.QuizItemFragment">
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/fragment__main__quiz_item__progress"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:visibility="visible"
+        />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_item__head_tv"
         style="@style/headerText"
