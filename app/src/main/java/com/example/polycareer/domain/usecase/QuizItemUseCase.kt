@@ -34,9 +34,19 @@ class QuizItemUseCase(
             } else {
                 val remoteRepositoryData = remoteRepository.getQuestions()
                 if (remoteRepositoryData.result is Result.DataCorrect) {
-                    remoteRepositoryData.questions?.let { localRepository.setQuestions(it) }
+                    remoteRepositoryData.let { localRepository.setQuestions(it) }
                 }
-                remoteRepositoryData
+                val result = mutableListOf<MutableList<String>>()
+                val source = remoteRepositoryData.quiz!!
+                for (list in source) {
+                    if (result.size - 1 < source.indexOf(list)) {
+                        result.add(mutableListOf())
+                    }
+                    for (entry in list) {
+                        result[source.indexOf(list)].add(entry.value)
+                    }
+                }
+                QuestionsResponse(Result.DataCorrect, result)
             }
         }
 

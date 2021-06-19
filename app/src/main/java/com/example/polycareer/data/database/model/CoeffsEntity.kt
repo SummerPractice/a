@@ -18,6 +18,7 @@ data class CoeffsEntity(
     val yk: Double = 0.0,
     val ytc: Double = 0.0,
     val inn: Double = 0.0,
+    val ivt: Double = 0.0,
     val pi1: Double = 0.0,
     val pi2: Double = 0.0,
     val cic: Double = 0.0,

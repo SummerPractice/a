@@ -1,7 +1,7 @@
 package com.example.polycareer.data
 
-import com.example.polycareer.data.api.ApiService
-import com.example.polycareer.domain.model.QuestionsResponse
+    import com.example.polycareer.data.api.ApiService
+import com.example.polycareer.domain.model.QuestionsApiResponse
 import com.example.polycareer.domain.model.Result
 import retrofit2.Retrofit
 
@@ -9,21 +9,20 @@ import retrofit2.Retrofit
 class QuizItemsRemoteRepository(
     private val retrofit: Retrofit
 ) {
-    suspend fun getQuestions(): QuestionsResponse {
+    suspend fun getQuestions(): QuestionsApiResponse {
         val response = retrofit.create(ApiService::class.java).getQuestionsList().execute()
-        when {
+        return when {
             response.isSuccessful -> {
-                val result = mutableListOf<List<String>>()
-                for (map in response.body()!!.questions) {
-                    result.add(map.values.toList())
-                }
-                return QuestionsResponse(Result.DataCorrect, result)
+                QuestionsApiResponse(
+                    Result.DataCorrect,
+                    response.body()!!.quiz,
+                    response.body()!!.matrix
+                )
             }
             else -> {
-                return QuestionsResponse(
-                    Result.Error(
-                        "Response is not successfull: ${response.message()}"
-                    ),
+                QuestionsApiResponse(
+                    Result.Error("Response is not successfull: ${response.message()}"),
+                    null,
                     null
                 )
             }

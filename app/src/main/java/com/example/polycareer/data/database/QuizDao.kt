@@ -3,6 +3,7 @@ package com.example.polycareer.data.database
 import androidx.room.*
 import com.example.polycareer.data.database.model.UsersAnswersEntity
 import com.example.polycareer.data.database.model.AnswersEntity
+import com.example.polycareer.data.database.model.CoeffsEntity
 
 @Dao
 interface QuizDao {
@@ -32,4 +33,10 @@ interface QuizDao {
 
     @Query("SELECT id FROM answers WHERE question_id = :questionId AND answer_index = :answerIndex")
     suspend fun getAnswerIdByQuestionIdAndAnswerIndex(questionId: Long, answerIndex: Long): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun setAllCoeffs(coeffs: List<CoeffsEntity>)
+
+    @Query("DELETE FROM coeffs")
+    suspend fun deleteAllCoeffs()
 }

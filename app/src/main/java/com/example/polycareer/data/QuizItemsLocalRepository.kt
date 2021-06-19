@@ -2,8 +2,10 @@ package com.example.polycareer.data
 
 import com.example.polycareer.data.database.QuizDao
 import com.example.polycareer.data.database.model.AnswersEntity
+import com.example.polycareer.data.database.model.CoeffsEntity
 import com.example.polycareer.data.database.model.UsersAnswersEntity
 import com.example.polycareer.domain.model.AnswersResponse
+import com.example.polycareer.domain.model.QuestionsApiResponse
 import com.example.polycareer.domain.model.QuestionsResponse
 import com.example.polycareer.domain.model.Result
 
@@ -31,16 +33,45 @@ class QuizItemsLocalRepository(
         QuestionsResponse(Result.Error("Database error"), null)
     }
 
-    suspend fun setQuestions(answers: List<List<String>>): Boolean = try {
+    suspend fun setQuestions(answers: QuestionsApiResponse): Boolean = try {
         quizDao.deleteAllQuestions()
-        val result = mutableListOf<AnswersEntity>()
-        for (answer in answers) {
-            val questionId = answers.indexOf(answer)
-            for (text in answer) {
-                result.add(AnswersEntity(questionId = questionId, answerIndex = answer.indexOf(text), text = text))
+        quizDao.deleteAllCoeffs()
+        val resultQuestions = mutableListOf<AnswersEntity>()
+        val answersSource = answers.quiz!!
+        for (answer in answersSource) {
+            val questionId = answersSource.indexOf(answer)
+            var answerIndex = 0
+            for (unit in answer.entries) {
+                resultQuestions.add(AnswersEntity(
+                    id = unit.key.toLong(),
+                    questionId = questionId,
+                    answerIndex = answerIndex,
+                    text = unit.value))
+                answerIndex++
             }
         }
-        quizDao.setAllQuestions(result)
+        quizDao.setAllQuestions(resultQuestions)
+
+        val coeffsSource = answers.matrix
+        val resultCoeffs = mutableListOf<CoeffsEntity>()
+        for (list in coeffsSource!!) {
+            resultCoeffs.add(
+                CoeffsEntity(
+                answerId = coeffsSource.indexOf(list).toLong(),
+                yk = list[0],
+                ytc = list[1],
+                inn = list[2],
+                ivt = list[3],
+                pi1 =list[4],
+                pi2 =list[5],
+                cic =list[6],
+                ic =list[7],
+                fi =list[8],
+                mot =list[9],
+                profession = 0       //  TODO(Заглушка пока сервер не отдает профессии)
+                ))
+        }
+        quizDao.setAllCoeffs(resultCoeffs)
         true
     } catch (e: Exception) {
         false
