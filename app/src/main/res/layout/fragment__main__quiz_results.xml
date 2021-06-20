@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="55dp"
+    android:paddingHorizontal="22dp"
     tools:context=".screens.main.quiz_results.QuizResultsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -11,21 +14,12 @@
         style="@style/headerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__head_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__graph_rc"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/fragment__main__quiz_results__head_tv" />
 
     <com.github.mikephil.charting.charts.RadarChart
         android:id="@+id/fragment__main__quiz_results__graph_rc"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__res_tv"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -34,37 +28,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fragment__main__quiz_results__res_tv"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__rv"
-        app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__graph_rc" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment__main__quiz_results__rv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__gl_tv"
-        app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__res_tv" />
+        tools:listitem="@layout/direction_item"
+        tools:itemCount="3"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_results__gl_tv"
         style="@style/headerText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__gl_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__rv" />
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/fragment__main__quiz_results__gl_tv"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__quiz_results__error_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
