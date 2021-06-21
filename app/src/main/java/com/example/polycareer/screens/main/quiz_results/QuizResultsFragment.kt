@@ -9,16 +9,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polycareer.App
 import com.example.polycareer.R
 import com.example.polycareer.domain.model.Direction
 import com.example.polycareer.domain.model.Profession
+import com.example.polycareer.screens.main.quiz_results.recycler.DirectionAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizResultsFragment : Fragment() {
     private lateinit var chart: Chart
-    private lateinit var recommendedDirections: RecyclerView
+    private lateinit var recommendedDirections: DirectionAdapter
     private lateinit var head: TextView
     private lateinit var res: TextView
     private lateinit var gl: TextView
@@ -36,6 +38,7 @@ class QuizResultsFragment : Fragment() {
 
     private fun showDirections(directions: List<Direction>) {
         Log.d(this::class.java.name, directions.toString())
+        recommendedDirections.showDirections(directions)
     }
 
     private fun showError(message: String) {
@@ -55,7 +58,12 @@ class QuizResultsFragment : Fragment() {
 
         chart =
             PieChartAdapter(rootView.findViewById(R.id.fragment__main__quiz_results__graph_rc))
-        recommendedDirections = rootView.findViewById(R.id.fragment__main__quiz_results__rv)
+
+        val directionsView = rootView.findViewById<RecyclerView>(R.id.fragment__main__quiz_results__rv)
+        directionsView.layoutManager = LinearLayoutManager(context)
+        this.recommendedDirections = DirectionAdapter(layoutInflater)
+        directionsView.adapter = this.recommendedDirections
+
         head = rootView.findViewById(R.id.fragment__main__quiz_results__head_tv)
         res = rootView.findViewById(R.id.fragment__main__quiz_results__res_tv)
         gl = rootView.findViewById(R.id.fragment__main__quiz_results__gl_tv)

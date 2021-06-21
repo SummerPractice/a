@@ -27,7 +27,7 @@ class QuizResultUseCase(
         }
 
         return directions.transform {
-            Direction(key, "Test description for direction", "", value)
+            Direction(key, "Test description for direction", "http://developer.android.com", value)
         }.sortedByDescending { it.value }.take(3)
     }
 
