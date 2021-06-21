@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseAction
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.BaseViewModel
+import com.example.polycareer.domain.model.Direction
+import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.usecase.QuizResultUseCase
 import kotlinx.coroutines.launch
 
@@ -38,24 +40,24 @@ class QuizResultsViewModel(
             error = ""
         )
         is QuizResultAction.Error -> state.copy(
-            directions = emptyMap(),
-            professions = emptyMap(),
+            directions = emptyList(),
+            professions = emptyList(),
             error = action.message
         )
     }
 
     sealed interface QuizResultAction : BaseAction {
         class ShowResults(
-            val directions: Map<String, Int>,
-            val professions: Map<String, Int>
+            val directions: List<Direction>,
+            val professions: List<Profession>
         ) : QuizResultAction
 
         class Error(val message: String) : QuizResultAction
     }
 
     data class QuizResultState(
-        val directions: Map<String, Int> = emptyMap(),
-        val professions: Map<String, Int> = emptyMap(),
+        val directions: List<Direction> = emptyList(),
+        val professions: List<Profession> = emptyList(),
         val error: String = ""
     ) : BaseState
 }

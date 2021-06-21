@@ -1,5 +1,7 @@
 package com.example.polycareer.domain.usecase
 
+import com.example.polycareer.domain.model.Direction
+import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.model.UserAnswer
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
@@ -18,12 +20,15 @@ class QuizResultUseCase(
         return Result.Success(directions, professions)
     }
 
-    private fun parseDirections(answers: List<UserAnswer>): Map<String, Int> {
+    private suspend fun parseDirections(answers: List<UserAnswer>): List<Direction> {
         val directions = mutableMapOf<String, Int>()
         answers.forEach { answer ->
             directions.addCoefficients(answer)
         }
-        return directions
+
+        return directions.transform {
+            Direction(key, "Test description for direction", "", value)
+        }.sortedByDescending { it.value }.take(3)
     }
 
     private fun MutableMap<String, Int>.addCoefficients(answer: UserAnswer) {
@@ -36,17 +41,18 @@ class QuizResultUseCase(
         }
     }
 
-    private suspend fun parseProfessions(answers: List<UserAnswer>): Map<String, Int> {
+    private suspend fun parseProfessions(answers: List<UserAnswer>): List<Profession> {
         val professions = mutableMapOf<Long, Int>()
         answers.forEach { answer ->
             professions.addProfession(answer)
         }
 
+        val commonCount = professions.values.fold(0) { acc, i -> acc + i }
         return professions.transform {
             val current = value
             val profession = professionsRepository.getProfession(key)
-            val score = current * 100 / profession.countOfAnswer
-            return@transform profession.name to score
+            val score = current * 100 / commonCount
+            Profession(profession.name, score)
         }
     }
 
@@ -55,19 +61,23 @@ class QuizResultUseCase(
         this[answer.professionNumber] = oldValue + 1
     }
 
-    private suspend fun MutableMap<Long, Int>.transform(
-        transformFunction: suspend MutableMap.MutableEntry<Long, Int>.() -> Pair<String, Int>
-    ): Map<String, Int> {
-        val result = mutableMapOf<String, Int>()
+    private suspend fun <T, K, V> MutableMap<K, V>.transform(
+        transformFunction: suspend MutableMap.MutableEntry<K, V>.() -> T
+    ): List<T> {
+        val result = mutableListOf<T>()
         this.entries.forEach {
-            val pair = it.transformFunction()
-            result[pair.first] = pair.second
+            val newValue = it.transformFunction()
+            result.add(newValue)
         }
         return result
     }
 
     sealed interface Result {
-        class Success(val directions: Map<String, Int>, val professions: Map<String, Int>) : Result
+        class Success(
+            val directions: List<Direction>,
+            val professions: List<Profession>
+        ) : Result
+
         class Error(val message: String) : Result
     }
 }

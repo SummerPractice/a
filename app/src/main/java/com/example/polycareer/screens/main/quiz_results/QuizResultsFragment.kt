@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polycareer.App
 import com.example.polycareer.R
+import com.example.polycareer.domain.model.Direction
+import com.example.polycareer.domain.model.Profession
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizResultsFragment : Fragment() {
@@ -32,7 +34,7 @@ class QuizResultsFragment : Fragment() {
         }
     }
 
-    private fun showDirections(directions: Map<String, Int>) {
+    private fun showDirections(directions: List<Direction>) {
         Log.d(this::class.java.name, directions.toString())
     }
 
@@ -40,7 +42,7 @@ class QuizResultsFragment : Fragment() {
         Log.d(this::class.java.name, message)
     }
 
-    private fun showChart(data1: Map<String, Int>) {
+    private fun showChart(data1: List<Profession>) {
         Log.d(this::class.java.name, data1.toString())
         chart.render(data1)
     }

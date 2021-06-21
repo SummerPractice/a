@@ -2,6 +2,7 @@ package com.example.polycareer.screens.main.quiz_results
 
 import android.graphics.Color
 import com.example.polycareer.R
+import com.example.polycareer.domain.model.Profession
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
@@ -16,7 +17,7 @@ class RadarChartAdapter(
     private val chart: RadarChart
 ) : Chart {
 
-    override fun render(professions: Map<String, Int>) {
+    override fun render(professions: List<Profession>) {
         chart.setBackgroundColor(Color.WHITE)
         chart.description.isEnabled = false
         chart.webLineWidth = 1.5f
@@ -27,8 +28,8 @@ class RadarChartAdapter(
 
         val entries1 = ArrayList<RadarEntry>()
 
-        for (i in professions.values) {
-            entries1.add(RadarEntry(i.toFloat()))
+        for (profession in professions) {
+            entries1.add(RadarEntry(profession.percent.toFloat()))
         }
 
         val set1 = RadarDataSet(entries1, "")
@@ -57,7 +58,7 @@ class RadarChartAdapter(
         xAxis.yOffset = 0f
         xAxis.xOffset = 0f
         xAxis.valueFormatter = object : ValueFormatter() {
-            private val mActivities = professions.keys
+            private val mActivities = professions.map { it.title }
 
             override fun getAxisLabel(value: Float, axis: AxisBase?): String {
                 return mActivities.elementAt(value.toInt() % mActivities.size)

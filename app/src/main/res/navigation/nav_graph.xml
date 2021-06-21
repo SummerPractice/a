@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/helloFragment">
+    app:startDestination="@id/quizResultsFragment">
     <fragment
         android:id="@+id/helloFragment"
         android:name="com.example.polycareer.screens.auth.hello.HelloFragment"
@@ -50,6 +50,7 @@
         tools:layout="@layout/fragment__main__quiz_results" >
         <argument
             android:name="try_number"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="1L" />
     </fragment>
 </navigation>

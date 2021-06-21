@@ -1,6 +1,7 @@
 package com.example.polycareer.screens.main.quiz_results
 
 import android.graphics.Color
+import com.example.polycareer.domain.model.Profession
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -13,7 +14,7 @@ import java.util.*
 class PieChartAdapter(
     private val chart: PieChart
 ) : Chart {
-    override fun render(professions: Map<String, Int>) {
+    override fun render(professions: List<Profession>) {
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
         chart.setExtraOffsets(5f, 10f, 40f, 0f)
@@ -52,14 +53,14 @@ class PieChartAdapter(
         chart.invalidate()
     }
 
-    private fun setData(data1: Map<String, Int>) {
+    private fun setData(data1: List<Profession>) {
         val entries = ArrayList<PieEntry>()
 
-        for (i in data1.entries) {
+        for (profession in data1) {
             entries.add(
                 PieEntry(
-                    (i).value.toFloat(),
-                    (i).key
+                    profession.percent.toFloat(),
+                    profession.title
                 )
             )
         }
