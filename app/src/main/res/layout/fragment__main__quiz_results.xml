@@ -16,7 +16,13 @@
         android:layout_height="wrap_content"
         android:text="@string/fragment__main__quiz_results__head_tv" />
 
-    <com.github.mikephil.charting.charts.RadarChart
+<!--    <com.github.mikephil.charting.charts.RadarChart-->
+<!--        android:id="@+id/fragment__main__quiz_results__graph_rc"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        />-->
+
+    <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/fragment__main__quiz_results__graph_rc"
         android:layout_width="match_parent"
         android:layout_height="300dp"
