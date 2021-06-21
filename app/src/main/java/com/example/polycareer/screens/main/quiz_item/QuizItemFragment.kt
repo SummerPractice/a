@@ -37,8 +37,11 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
         if (state.toResults != -1L) toResults(state.toResults)
-        showToast(state.errorMessage)
-        bindAnswers(state.answers)
+        if (state.errorMessage.isEmpty()) {
+            bindAnswers(state.answers)
+        } else {
+            showToast(state.errorMessage)
+        }
     }
 
     private fun bindAnswers(answers: List<String>) {
@@ -109,7 +112,6 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showToast(errorMessage: String) {
-        if (errorMessage.isEmpty()) return
         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
     }
 }
