@@ -52,7 +52,7 @@ class QuizResultsFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment__main__quiz_results, container, false)
 
         chart =
-            RadarChartAdapter(rootView.findViewById(R.id.fragment__main__quiz_results__graph_rc))
+            PieChartAdapter(rootView.findViewById(R.id.fragment__main__quiz_results__graph_rc))
         recommendedDirections = rootView.findViewById(R.id.fragment__main__quiz_results__rv)
         head = rootView.findViewById(R.id.fragment__main__quiz_results__head_tv)
         res = rootView.findViewById(R.id.fragment__main__quiz_results__res_tv)
