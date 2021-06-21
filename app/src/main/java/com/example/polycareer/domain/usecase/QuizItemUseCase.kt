@@ -36,20 +36,22 @@ class QuizItemUseCase(
                 val remoteRepositoryData = remoteRepository.getQuestions()
                 if (remoteRepositoryData.result is Result.DataCorrect) {
                     remoteRepositoryData.let { localRepository.setQuestions(it) }
-                }
-                val result = mutableListOf<MutableList<String>>()
-                val source = remoteRepositoryData.quiz!!
-                for (list in source) {
-                    if (result.size - 1 < source.indexOf(list)) {
-                        result.add(mutableListOf())
+                    val result = mutableListOf<MutableList<String>>()
+                    val source = remoteRepositoryData.quiz!!
+                    for (list in source) {
+                        if (result.size - 1 < source.indexOf(list)) {
+                            result.add(mutableListOf())
+                        }
+                        for (entry in list) {
+                            result[source.indexOf(list)].add(entry.value)
+                        }
                     }
-                    for (entry in list) {
-                        result[source.indexOf(list)].add(entry.value)
-                    }
+                    QuestionsResponse(Result.DataCorrect, result)
+                } else {
+                    QuestionsResponse(Result.Error("Lost connection to the server"), null)
                 }
-                QuestionsResponse(Result.DataCorrect, result)
             }
-        }
+}
 
 
     suspend fun clearUserAnswers(): Result =
