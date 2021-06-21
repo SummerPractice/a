@@ -3,13 +3,15 @@ package com.example.polycareer.domain.usecase
 import com.example.polycareer.domain.model.UserAnswer
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
+import com.example.polycareer.utils.getCurrentUserId
 
 class QuizResultUseCase(
     private val resultsRepository: ResultsRepository,
     private val professionsRepository: ProfessionRepository,
 ) {
-    suspend fun getData(): Result {
-        val answers = resultsRepository.getAnswers()
+    suspend fun getData(tryNumber: Long): Result {
+        val userId = getCurrentUserId()
+        val answers = resultsRepository.getAnswers(userId, tryNumber)
         val directions = parseDirections(answers)
         val professions = parseProfessions(answers)
 

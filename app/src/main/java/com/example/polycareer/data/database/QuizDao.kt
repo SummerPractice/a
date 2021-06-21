@@ -24,7 +24,7 @@ interface QuizDao {
 
     @Query("DELETE FROM users_answers WHERE try_number =:tryNumber AND user_id = :userId")
     suspend fun deleteAnswersByUsersTryNumber(tryNumber: Long, userId: Long)
-    
+
     @Query("SELECT COALESCE(MAX(try_number), 0) FROM users_answers WHERE user_id = :userId")
     suspend fun getCountOfUsersAttempts(userId: Long): Long
 
@@ -39,4 +39,10 @@ interface QuizDao {
 
     @Query("DELETE FROM coeffs")
     suspend fun deleteAllCoeffs()
+
+    @Query("SELECT * FROM coeffs WHERE answerId in (:answerIds)")
+    suspend fun getAnswerData(answerIds: List<Long>): List<CoeffsEntity>
+
+    @Query("SELECT answer_id FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
+    suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<Long>
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/gradesFragment">
+    app:startDestination="@id/helloFragment">
     <fragment
         android:id="@+id/helloFragment"
         android:name="com.example.polycareer.screens.auth.hello.HelloFragment"
@@ -47,5 +47,9 @@
         android:id="@+id/quizResultsFragment"
         android:name="com.example.polycareer.screens.main.quiz_results.QuizResultsFragment"
         android:label="fragment__main__quiz_results"
-        tools:layout="@layout/fragment__main__quiz_results" />
+        tools:layout="@layout/fragment__main__quiz_results" >
+        <argument
+            android:name="try_number"
+            app:argType="long" />
+    </fragment>
 </navigation>

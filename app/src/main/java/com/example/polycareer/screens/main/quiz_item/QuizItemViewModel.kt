@@ -76,28 +76,31 @@ class QuizItemViewModel(
 
     private fun navigateForward() {
         if (isLastQuestion()) {
-            sendAction(QuizItemAction.ToResults)
+            viewModelScope.launch {
+                val tryNumber = useCase.getTryNumber()
+                sendAction(QuizItemAction.ToResults(tryNumber))
+            }
         } else {
             sendAction(QuizItemAction.ToNextQuestion(getNextQuestion()))
         }
     }
 
     override fun onReduceState(action: QuizItemAction) = when (action) {
-        is QuizItemAction.ToResults -> state.copy(toResults = true)
+        is QuizItemAction.ToResults -> state.copy(toResults = action.tryNumber)
         is QuizItemAction.ToNextQuestion -> state.copy(answers = action.answers, toNextQuestion = true)
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
 
     sealed interface QuizItemAction : BaseAction {
         class ToNextQuestion(val answers: List<String>) : QuizItemAction
-        object ToResults : QuizItemAction
+        class ToResults(val tryNumber: Long) : QuizItemAction
         class Error(val message: String) : QuizItemAction
     }
 
     data class QuizItemState(
         val answers: List<String> = emptyList(),
         val toNextQuestion: Boolean = false,
-        val toResults: Boolean = false,
+        val toResults: Long = -1,
         val selectedAnswer: Int = -1,
         val errorMessage: String = ""
     ) : BaseState

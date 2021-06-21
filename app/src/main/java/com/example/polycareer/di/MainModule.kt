@@ -2,6 +2,7 @@ package com.example.polycareer.di
 
 import com.example.polycareer.data.*
 import com.example.polycareer.data.api.ApiFactory
+import com.example.polycareer.data.database.ResultRepositoryImpl
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserRepository
@@ -29,7 +30,7 @@ val authModule = module {
 }
 
 val mainModule = module {
-    single<ResultsRepository> { ResultRepositoryTest() }
+    single<ResultsRepository> { ResultRepositoryImpl(get()) }
     single<ProfessionRepository> { ProfessionsRepositoryTest() }
 
     single { QuizItemsLocalRepository(get()) }

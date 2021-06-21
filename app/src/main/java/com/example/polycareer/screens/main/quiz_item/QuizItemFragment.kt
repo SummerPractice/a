@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.polycareer.App
 import com.example.polycareer.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,7 +36,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private var pressedTime = -1L
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
-        if (state.toResults) toResults()
+        if (state.toResults != -1L) toResults(state.toResults)
         showToast(state.errorMessage)
         bindAnswers(state.answers)
     }
@@ -74,7 +75,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
                 } else {
                     showToast(getString(R.string.press_again))
                 }
-                pressedTime = System.currentTimeMillis();
+                pressedTime = System.currentTimeMillis()
             }
         })
 
@@ -99,9 +100,11 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun toResults() {
+    private fun toResults(tryNumber: Long) {
+        val bundle = Bundle()
+        bundle.putLong(App.TRY_NUMBER, tryNumber)
         val navController = NavHostFragment.findNavController(this)
-        navController.navigate(R.id.action_quizItemFragment_to_quizResultsFragment)
+        navController.navigate(R.id.action_quizItemFragment_to_quizResultsFragment, bundle)
         viewModel.navigationComplete()
     }
 

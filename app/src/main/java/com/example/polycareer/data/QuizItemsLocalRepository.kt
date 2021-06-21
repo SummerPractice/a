@@ -8,12 +8,12 @@ import com.example.polycareer.domain.model.AnswersResponse
 import com.example.polycareer.domain.model.QuestionsApiResponse
 import com.example.polycareer.domain.model.QuestionsResponse
 import com.example.polycareer.domain.model.Result
+import kotlin.random.Random
 
 class QuizItemsLocalRepository(
     private val quizDao: QuizDao
 ) {
-
-    private var currentTryNumber = 0L
+    var currentTryNumber = 0L
 
     suspend fun getAllQuestions(): QuestionsResponse = try {
         val questions = quizDao.getAllQuestions()
@@ -68,7 +68,7 @@ class QuizItemsLocalRepository(
                 ic =list[7],
                 fi =list[8],
                 mot =list[9],
-                profession = 0       //  TODO(Заглушка пока сервер не отдает профессии)
+                profession = Random.nextLong(1, 8)
                 ))
         }
         quizDao.setAllCoeffs(resultCoeffs)
@@ -116,5 +116,4 @@ class QuizItemsLocalRepository(
     } catch (e: Exception) {
         AnswersResponse(Result.Error("Database error"), null)
     }
-
 }

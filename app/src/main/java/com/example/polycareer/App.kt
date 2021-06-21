@@ -21,6 +21,8 @@ class App : Application() {
         const val USER_ID_KEY = "user_id"
         const val USER_ID_DEFAULT_VALUE: Long = -1
 
+        const val TRY_NUMBER = "try_number"
+
         fun applicationContext() : Context {
             return instance!!.applicationContext
         }

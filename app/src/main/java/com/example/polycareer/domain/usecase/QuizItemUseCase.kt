@@ -18,9 +18,10 @@ class QuizItemUseCase(
             if (!localRepository.saveUserAnswer(
                     questionId = questionId.toLong(),
                     answerIndex = answerId.toLong(),
-                    userId = getCurrentUserId())
+                    userId = getCurrentUserId()
+                )
             ) {
-                 Result.Error("Failed to save data")
+                Result.Error("Failed to save data")
             }
             Result.DataCorrect
         }
@@ -64,4 +65,8 @@ class QuizItemUseCase(
         withContext(Dispatchers.IO) {
             localRepository.getUsersLastAttemptAnswers(getCurrentUserId())
         }
+
+    fun getTryNumber(): Long {
+        return localRepository.currentTryNumber
+    }
 }

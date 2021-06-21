@@ -12,10 +12,11 @@ class QuizResultsViewModel(
 ) : BaseViewModel<QuizResultsViewModel.QuizResultState, QuizResultsViewModel.QuizResultAction>(
     QuizResultState()
 ) {
+    var tryNumber: Long = -1
 
     fun getData() {
         viewModelScope.launch {
-            useCase.getData().also { result ->
+            useCase.getData(tryNumber).also { result ->
                 when (result) {
                     is QuizResultUseCase.Result.Success -> sendAction(
                         QuizResultAction.ShowResults(
