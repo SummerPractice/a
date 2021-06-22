@@ -17,7 +17,7 @@ class PieChartAdapter(
     override fun render(professions: List<Profession>) {
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
-        chart.setExtraOffsets(5f, 10f, 40f, 0f)
+        chart.setExtraOffsets(5f, 10f, 40f, 50f)
 
         chart.dragDecelerationFrictionCoef = 1f
 
@@ -38,13 +38,13 @@ class PieChartAdapter(
         chart.animateY(1100, Easing.EaseInOutQuad)
 
         val l = chart.legend
-        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.VERTICAL
         l.setDrawInside(false)
         l.xEntrySpace = 1f
         l.yEntrySpace = 0f
-        l.yOffset = 0f
+        l.yOffset = -50f
 
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelTextSize(12f)
