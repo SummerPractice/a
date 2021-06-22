@@ -14,10 +14,16 @@ import java.util.*
 class PieChartAdapter(
     private val chart: PieChart
 ) : Chart {
+    private val pastelColors = listOf(
+        Color.rgb(242, 158, 76), Color.rgb(241, 196, 83), Color.rgb(239, 234, 90),
+        Color.rgb(185, 231, 105), Color.rgb(22, 219, 147), Color.rgb(136, 212, 171),
+        Color.rgb(131, 227, 119), Color.rgb(242, 232, 207)
+    )
+
     override fun render(professions: List<Profession>) {
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
-        chart.setExtraOffsets(5f, 10f, 40f, 50f)
+        chart.setExtraOffsets(20f, 10f, 20f, 50f)
 
         chart.dragDecelerationFrictionCoef = 1f
 
@@ -26,8 +32,8 @@ class PieChartAdapter(
         chart.setTransparentCircleColor(Color.GRAY)
         chart.setTransparentCircleAlpha(110)
 
-        chart.holeRadius = 61f
-        chart.transparentCircleRadius = 61f
+        chart.holeRadius = 45f
+        chart.transparentCircleRadius = 45f
 
         chart.setDrawCenterText(true)
 
@@ -44,7 +50,7 @@ class PieChartAdapter(
         l.setDrawInside(false)
         l.xEntrySpace = 1f
         l.yEntrySpace = 0f
-        l.yOffset = -50f
+        l.yOffset = -40f
 
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelTextSize(12f)
@@ -78,11 +84,4 @@ class PieChartAdapter(
 
         chart.highlightValues(null)
     }
-
-    private val pastelColors = listOf(
-        Color.rgb(242, 158, 76), Color.rgb(241, 196, 83), Color.rgb(239, 234, 90),
-        Color.rgb(185, 231, 105), Color.rgb(22, 219, 147), Color.rgb(136, 212, 171),
-        Color.rgb(131, 227, 119), Color.rgb(242, 232, 207)
-    )
-
 }
