@@ -3,7 +3,7 @@ package com.example.polycareer.data.repository
 import com.example.polycareer.domain.model.DirectionInfo
 import com.example.polycareer.domain.repository.DirectionRepository
 
-class DirectionRepositoryTest : DirectionRepository {
+class DirectionRepositoryImpl : DirectionRepository {
     private val directionsList = listOf(
         DirectionInfo(
             1,

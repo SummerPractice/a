@@ -11,6 +11,6 @@ val quizModule = module {
     single { QuizItemUseCase(get(), get(), get()) }
     viewModel { QuizItemViewModel(get()) }
 
-    single { QuizResultUseCase(get(), get(), get()) }
+    single { QuizResultUseCase(get(), get(), get(), get()) }
     viewModel { QuizResultsViewModel(get()) }
 }
