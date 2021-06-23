@@ -42,18 +42,17 @@ class QuizResultUseCase(
     }
 
     private suspend fun parseProfessions(answers: List<UserAnswer>): List<Profession> {
-        val professions = mutableMapOf<Long, Int>()
-        answers.forEach { answer ->
-            professions.addProfession(answer)
-        }
+        val countProfessions = mutableMapOf<Long, Int>()
+        answers.forEach { answer -> countProfessions.addProfession(answer) }
 
-        val commonCount = professions.values.fold(0) { acc, i -> acc + i }
-        return professions.transform {
-            val current = value
+        val professions = countProfessions.transform {
             val profession = professionsRepository.getProfession(key)
-            val score = current * 100 / commonCount
+            val score = value * 100 / profession.countOfAnswer
             Profession(profession.name, score)
-        }
+        }.sortedByDescending { it.percent }.take(3)
+
+        val commonScore = professions.fold(0) { acc, profession -> acc + profession.percent }
+        return professions.map { Profession(it.title, it.percent * 100 / commonScore) }
     }
 
     private fun MutableMap<Long, Int>.addProfession(answer: UserAnswer) {
