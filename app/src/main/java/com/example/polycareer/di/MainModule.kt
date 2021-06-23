@@ -31,7 +31,7 @@ val authModule = module {
 
 val mainModule = module {
     single<ResultsRepository> { ResultRepositoryImpl(get()) }
-    single<ProfessionRepository> { ProfessionsRepositoryTest() }
+    single<ProfessionRepository> { ProfessionsRepositoryImpl() }
 
     single { QuizItemsLocalRepository(get()) }
     single { QuizItemsRemoteRepository(get()) }
