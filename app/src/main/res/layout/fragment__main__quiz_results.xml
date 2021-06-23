@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="22dp"
-    android:paddingHorizontal="22dp"
     tools:context=".screens.main.quiz_results.QuizResultsFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__head_tv"
-        style="@style/headerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__head_tv" />
-
-<!--    <com.github.mikephil.charting.charts.RadarChart-->
-<!--        android:id="@+id/fragment__main__quiz_results__graph_rc"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="300dp"-->
-<!--        />-->
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/fragment__main__quiz_results__graph_rc"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__res_tv"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="@string/fragment__main__quiz_results__res_tv"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment__main__quiz_results__rv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/direction_item"
-        tools:itemCount="3"/>
+        android:orientation="vertical"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="22dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__gl_tv"
-        style="@style/headerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/fragment__main__quiz_results__gl_tv"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment__main__quiz_results__head_tv"
+            style="@style/headerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment__main__quiz_results__head_tv" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__error_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/fragment__main__quiz_results__graph_rc"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment__main__quiz_results__res_tv"
+            style="@style/boldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:text="@string/fragment__main__quiz_results__res_tv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment__main__quiz_results__rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="3"
+            tools:listitem="@layout/direction_item"
+            android:nestedScrollingEnabled="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment__main__quiz_results__gl_tv"
+            style="@style/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/fragment__main__quiz_results__gl_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment__main__quiz_results__error_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
