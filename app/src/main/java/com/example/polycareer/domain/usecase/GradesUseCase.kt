@@ -1,13 +1,11 @@
 package com.example.polycareer.domain.usecase
 
-import android.content.Context
 import com.example.polycareer.App
 import com.example.polycareer.domain.model.UserGrades
 import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.utils.isValidExamGrade
 import com.example.polycareer.utils.isValidIdGrade
 import com.example.polycareer.domain.model.Result
-import com.example.polycareer.utils.getCurrentUserId
 
 
 class GradesUseCase(
@@ -15,7 +13,7 @@ class GradesUseCase(
 ) : ValidateParam() {
 
     suspend fun saveGrades(grades: UserGrades): Result {
-        val userId = getCurrentUserId()
+        val userId = repository.getCurrentUserId()
         return if (userId != App.USER_ID_DEFAULT_VALUE
             && repository.saveUserGrades(userId, grades)
         ) {

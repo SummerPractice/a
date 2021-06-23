@@ -5,7 +5,6 @@ import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.repository.UserRepository
 import com.example.polycareer.utils.isValidEmail
 import com.example.polycareer.utils.isValidName
-import com.example.polycareer.utils.setCurrentUser
 
 class AuthUseCase(
     private val repository: UserRepository
@@ -15,7 +14,7 @@ class AuthUseCase(
             ?: repository.saveUserDetail(user)
             ?: return Result.Error("Failed to save data")
 
-        setCurrentUser(userId)
+        repository.setCurrentUser(userId)
         return Result.DataCorrect
     }
 

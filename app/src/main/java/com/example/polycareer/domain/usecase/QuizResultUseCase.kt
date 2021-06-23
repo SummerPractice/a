@@ -5,14 +5,15 @@ import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.model.UserAnswer
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
-import com.example.polycareer.utils.getCurrentUserId
+import com.example.polycareer.domain.repository.UserCache
 
 class QuizResultUseCase(
     private val resultsRepository: ResultsRepository,
     private val professionsRepository: ProfessionRepository,
+    private val userCache: UserCache
 ) {
     suspend fun getData(tryNumber: Long): Result {
-        val userId = getCurrentUserId()
+        val userId = userCache.getCurrentUserId()
         val answers = resultsRepository.getAnswers(userId, tryNumber)
         val directions = parseDirections(answers)
         val professions = parseProfessions(answers)

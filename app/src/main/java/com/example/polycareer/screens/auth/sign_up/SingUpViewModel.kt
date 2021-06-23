@@ -3,11 +3,10 @@ package com.example.polycareer.screens.auth.sign_up
 import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.ValidationParamViewModel
+import com.example.polycareer.domain.model.Result
 import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.usecase.AuthUseCase
-import com.example.polycareer.domain.usecase.ValidateParam
 import kotlinx.coroutines.*
-import com.example.polycareer.domain.model.Result
 
 
 class SingUpViewModel(

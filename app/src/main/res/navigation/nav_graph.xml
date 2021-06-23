@@ -6,7 +6,7 @@
     app:startDestination="@id/helloFragment">
     <fragment
         android:id="@+id/helloFragment"
-        android:name="com.example.polycareer.screens.auth.hello.HelloFragment"
+        android:name="com.example.polycareer.screens.hello.HelloFragment"
         android:label="fragment__auth__hello"
         tools:layout="@layout/fragment__auth__hello" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/gradesFragment"
-        android:name="com.example.polycareer.screens.main.grades.GradesFragment"
+        android:name="com.example.polycareer.screens.auth.grades.GradesFragment"
         android:label="fragment__main__grades"
         tools:layout="@layout/fragment__main__grades">
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizItemFragment"
-        android:name="com.example.polycareer.screens.main.quiz_item.QuizItemFragment"
+        android:name="com.example.polycareer.screens.quiz.quiz_item.QuizItemFragment"
         android:label="fragment__main__quiz_item"
         tools:layout="@layout/fragment__main__quiz_item" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizResultsFragment"
-        android:name="com.example.polycareer.screens.main.quiz_results.QuizResultsFragment"
+        android:name="com.example.polycareer.screens.quiz.quiz_results.QuizResultsFragment"
         android:label="fragment__main__quiz_results"
         tools:layout="@layout/fragment__main__quiz_results" >
         <argument
