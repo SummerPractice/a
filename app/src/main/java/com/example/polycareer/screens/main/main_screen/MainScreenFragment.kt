@@ -2,14 +2,12 @@ package com.example.polycareer.screens.main.main_screen
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
 import com.example.polycareer.App
 import com.example.polycareer.R
 import com.example.polycareer.utils.openScreen
@@ -38,10 +36,7 @@ class MainScreenFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment__main__main_screen, container, false)
 
         newTestButton = rootView.findViewById(R.id.fragment__main__main_screen__new_test_bt)
-        newTestButton.setOnClickListener {
-            viewModel.createDefaultUser()
-            openTest()
-        }
+        newTestButton.setOnClickListener { openTest() }
 
         oldResultsButton = rootView.findViewById(R.id.fragment__main__main_screen__show_results_bt)
         oldResultsButton.setOnClickListener { showResults() }

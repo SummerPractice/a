@@ -13,6 +13,7 @@ class QuizItemsLocalRepository(
     private val quizDao: QuizDao
 ) {
     var currentTryNumber = 0L
+    var startTime = 0L
 
     suspend fun getAllQuestions(): QuestionsResponse {
         val questions = runSafety { getAllQuestions() }
@@ -89,6 +90,7 @@ class QuizItemsLocalRepository(
     suspend fun saveUserAnswer(questionId: Long, answerIndex: Long, userId: Long): Boolean = try {
         if (questionId == 0L) {
             currentTryNumber = quizDao.getCountOfUsersAttempts(userId) + 1
+            startTime = System.currentTimeMillis()
         }
         val answerId = quizDao.getAnswerIdByQuestionIdAndAnswerIndex(
             questionId = questionId,
@@ -100,7 +102,7 @@ class QuizItemsLocalRepository(
                 userId = userId,
                 answerId = answerId,
                 tryNumber = currentTryNumber,
-                time = System.currentTimeMillis()
+                time = startTime
             )
         )
         true
