@@ -5,6 +5,7 @@ import com.example.polycareer.di.core.databaseModule
 import com.example.polycareer.di.core.networkModule
 import com.example.polycareer.di.core.repositoryModule
 import com.example.polycareer.di.screen.authModule
+import com.example.polycareer.di.screen.mainModule
 import com.example.polycareer.di.screen.quizModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -30,7 +31,8 @@ class App : Application() {
                 networkModule,
                 repositoryModule,
                 authModule,
-                quizModule
+                quizModule,
+                mainModule
             )
         }
     }
