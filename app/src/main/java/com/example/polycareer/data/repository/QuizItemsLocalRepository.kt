@@ -99,7 +99,8 @@ class QuizItemsLocalRepository(
             UsersAnswersEntity(
                 userId = userId,
                 answerId = answerId,
-                tryNumber = currentTryNumber
+                tryNumber = currentTryNumber,
+                time = System.currentTimeMillis()
             )
         )
         true

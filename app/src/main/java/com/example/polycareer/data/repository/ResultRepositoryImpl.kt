@@ -10,7 +10,7 @@ class ResultRepositoryImpl(
 
     override suspend fun getAnswers(userId: Long, tryNumber: Long): List<UserAnswer> {
         val answers = quizDao.getUserAnswers(userId, tryNumber)
-        val data = quizDao.getAnswerData(answers)
+        val data = quizDao.getAnswerData(answers.map { it.answerId })
         return data.map { UserAnswer(it) }
     }
 }

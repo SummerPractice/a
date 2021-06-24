@@ -1,9 +1,12 @@
 package com.example.polycareer.data.database.dao
 
-import androidx.room.*
-import com.example.polycareer.data.database.model.UsersAnswersEntity
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.polycareer.data.database.model.AnswersEntity
 import com.example.polycareer.data.database.model.CoeffsEntity
+import com.example.polycareer.data.database.model.UsersAnswersEntity
 
 @Dao
 interface QuizDao {
@@ -40,6 +43,6 @@ interface QuizDao {
     @Query("SELECT * FROM coeffs WHERE answerId in (:answerIds)")
     suspend fun getAnswerData(answerIds: List<Long>): List<CoeffsEntity>
 
-    @Query("SELECT answer_id FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
-    suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<Long>
+    @Query("SELECT * FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
+    suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<UsersAnswersEntity>
 }
