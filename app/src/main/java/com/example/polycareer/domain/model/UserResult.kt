@@ -1,4 +1,8 @@
 package com.example.polycareer.domain.model
 
-class UserResult {
-}
+import java.util.*
+
+data class UserResult(
+    val id: Long,
+    val date: Date
+)
