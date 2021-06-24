@@ -1,5 +1,6 @@
 package com.example.polycareer.screens.quiz.quiz_item
 
+import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
@@ -23,15 +24,17 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.polycareer.App
 import com.example.polycareer.R
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var rgAnswers: RadioGroup
     private lateinit var btnNext: AppCompatButton
-    private lateinit var progressBar: ProgressBar
+    private lateinit var pbLoading: ProgressBar
+    private lateinit var pbTest: LinearProgressIndicator
 
-        private val viewModel: QuizItemViewModel by viewModel()
+    private val viewModel: QuizItemViewModel by viewModel()
 
     private var pressedTime = -1L
 
@@ -39,13 +42,20 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         if (state.toResults != -1L) toResults(state.toResults)
         if (state.errorMessage.isEmpty()) {
             bindAnswers(state.answers)
+            bindProgress(state.progress)
         } else {
             showToast(state.errorMessage)
         }
     }
 
+    private fun bindProgress(progress: Int) {
+        val progressAnimator = ObjectAnimator.ofInt(pbTest, "progress", pbTest.progress, progress)
+        progressAnimator.duration = 1000
+        progressAnimator.start()
+        pbTest.progress = progress
+    }
+
     private fun bindAnswers(answers: List<String>) {
-        LayoutInflater.from(context)
         rgAnswers.removeAllViews()
         for (answer in answers) {
             val newRadioButton = AppCompatRadioButton(context)
@@ -55,7 +65,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
             newRadioButton.text = answer
             rgAnswers.addView(newRadioButton)
         }
-        progressBar.isVisible = false
+        pbLoading.isVisible = false
     }
 
     override fun onCreateView(
@@ -65,7 +75,8 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         val rootView = inflater.inflate(R.layout.fragment__main__quiz_item, container, false)
         rgAnswers = rootView.findViewById(R.id.fragment__main__quiz_item__answers_rg)
         btnNext = rootView.findViewById(R.id.fragment__main__quiz_item__next_btn)
-        progressBar = rootView.findViewById(R.id.fragment__main__quiz_item__progress)
+        pbLoading = rootView.findViewById(R.id.fragment__main__quiz_item__loading_pb)
+        pbTest = rootView.findViewById(R.id.fragment__main__quiz_item__test_pb)
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
 

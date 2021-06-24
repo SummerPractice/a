@@ -90,7 +90,8 @@ class QuizItemViewModel(
         is QuizItemAction.ToResults -> state.copy(toResults = action.tryNumber)
         is QuizItemAction.ToNextQuestion -> state.copy(
             answers = action.answers,
-            toNextQuestion = true
+            toNextQuestion = true,
+            progress = 100 / questions.size * questionId
         )
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
@@ -106,6 +107,7 @@ class QuizItemViewModel(
         val toNextQuestion: Boolean = false,
         val toResults: Long = -1,
         val selectedAnswer: Int = -1,
-        val errorMessage: String = ""
+        val errorMessage: String = "",
+        val progress: Int = 0,
     ) : BaseState
 }

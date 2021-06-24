@@ -87,4 +87,10 @@
         <item name="android:buttonTint">@color/btn_light_green</item>
     </style>
 
+    <style name="horizontalProgress" >
+        <item name="color">@color/splash_light</item>
+        <item name="android:progress">0</item>
+        <item name="android:max">100</item>
+    </style>
+
 </resources>

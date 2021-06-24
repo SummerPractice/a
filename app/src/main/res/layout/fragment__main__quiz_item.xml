@@ -6,8 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".screens.quiz.quiz_item.QuizItemFragment">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/fragment__main__quiz_item__test_pb"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        style="@style/horizontalProgress"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__head_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
     <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/fragment__main__quiz_item__progress"
+        android:id="@+id/fragment__main__quiz_item__loading_pb"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
