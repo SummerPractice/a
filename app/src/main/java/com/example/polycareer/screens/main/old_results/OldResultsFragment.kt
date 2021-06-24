@@ -1,7 +1,6 @@
 package com.example.polycareer.screens.main.old_results
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ class OldResultsFragment : Fragment() {
     private lateinit var adapter: OldResultsAdapter
 
     private val stateObserver = Observer<OldResultsViewModel.OldResultsState> { state ->
-        adapter.results.addAll(state.oldResults)
+        adapter.resultsInfo.addAll(state.resultsInfo)
         adapter.notifyDataSetChanged()
     }
 

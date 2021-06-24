@@ -4,18 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polycareer.R
-import com.example.polycareer.domain.model.UserResult
+import com.example.polycareer.domain.model.UserResultInfo
 
 class OldResultsAdapter(private val inflater: LayoutInflater) : RecyclerView.Adapter<OldResultsViewHolder>() {
-    val results: MutableList<UserResult> = mutableListOf()
+    val resultsInfo: MutableList<UserResultInfo> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OldResultsViewHolder {
         return OldResultsViewHolder(inflater.inflate(R.layout.simple_rv_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: OldResultsViewHolder, position: Int) {
-        holder.bind(results[position])
+        holder.bind(resultsInfo[position])
     }
 
-    override fun getItemCount() = results.count()
+    override fun getItemCount() = resultsInfo.count()
 }
