@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screens.main.main_screen.MainFragment">
+    tools:context=".screens.main.main_screen.MainScreenFragment">
 
     <TextView
         android:id="@+id/fragment__main__main_screen__title_tv"

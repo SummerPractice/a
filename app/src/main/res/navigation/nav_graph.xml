@@ -14,7 +14,7 @@
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_helloFragment_to_quizItemFragment"
-            app:destination="@id/quizItemFragment" />
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment__main__grades">
         <action
             android:id="@+id/action_gradesMarksFragment_to_quizItemFragment"
-            app:destination="@id/quizItemFragment" />
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizItemFragment"
@@ -52,5 +52,14 @@
             android:name="try_number"
             app:argType="long"
             android:defaultValue="1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.polycareer.screens.main.main_screen.MainScreenFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment__main__main_screen" >
+        <action
+            android:id="@+id/action_mainFragment_to_quizItemFragment"
+            app:destination="@id/quizItemFragment" />
     </fragment>
 </navigation>

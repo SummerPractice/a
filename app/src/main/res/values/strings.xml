@@ -33,4 +33,5 @@
     <string name="old_results">Прошлые результаты</string>
     <string name="main_screen_title">Что далее?)</string>
     <string name="register">Пройти регистрацию</string>
+    <string name="old_results_title">Предыдующие результаты</string>
 </resources>
