@@ -29,4 +29,8 @@
     <string name="fragment__main__quiz_iter__head_tv">Что из перечисленного больше Вас интересует?</string>
     <string name="press_again">Нажмите назад еще раз чтобы закрыть тест</string>
     <string name="next_text_button"><![CDATA[Подробнее >]]></string>
+    <string name="new_test">Начнём новый тест</string>
+    <string name="old_results">Прошлые результаты</string>
+    <string name="main_screen_title">Что далее?)</string>
+    <string name="register">Пройти регистрацию</string>
 </resources>
