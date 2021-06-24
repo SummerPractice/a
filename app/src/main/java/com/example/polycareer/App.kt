@@ -17,6 +17,9 @@ class App : Application() {
         const val USER_ID_KEY = "user_id"
         const val USER_ID_DEFAULT_VALUE: Long = -1
 
+        const val IS_FIRST_OPEN = "FIRST_OPEN"
+        const val FIRST_OPEN_KEY = "first_open"
+
         const val TRY_NUMBER = "try_number"
     }
 

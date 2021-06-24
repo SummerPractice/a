@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:fontFamily="@font/opensans_regular"
-        android:text="@string/next_text_button"
+        android:text="@string/fragment__quiz__quiz_results__next_text_button"
         android:textColor="#8FEB9D"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/dir_item__tv_dest"

@@ -23,7 +23,7 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/fragment_auth__sign_up__firstname_et"
         style="@style/editText"
-        android:hint="@string/fragment_auth__sign_up__firstname_et"
+        android:hint="@string/fragment__auth__sign_up__firstname_et"
         app:layout_constraintBottom_toTopOf="@id/fragment_auth__sign_up__lastname_et"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

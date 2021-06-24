@@ -2,16 +2,16 @@ package com.example.polycareer.screens.hello
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.polycareer.App
 import com.example.polycareer.R
+import com.example.polycareer.utils.openScreen
 
-class HelloFragment : Fragment(), View.OnClickListener {
+class HelloFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,24 +21,31 @@ class HelloFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val button = view.findViewById<Button>(R.id.fragment__auth__hello_start_btn)
-        button.setOnClickListener(this)
+
+        firstOpen()
+
+        val beginButton = view.findViewById<Button>(R.id.fragment__auth__hello_start_btn)
+        beginButton.setOnClickListener { begin() }
+
+        val registerButton = view.findViewById<Button>(R.id.fragment__auth__hello_register_btn)
+        registerButton.setOnClickListener { register() }
     }
 
-    override fun onClick(v: View?) {
-        val navController = findNavController(this)
-        if (isUserExist()) {
-            navController.navigate(R.id.action_helloFragment_to_quizItemFragment)
-        } else {
-            navController.navigate(R.id.action_helloFragment_to_signUpFragment)
+    private fun register() {
+        openScreen(R.id.action_helloFragment_to_signUpFragment)
+    }
+
+    private fun begin() {
+        openScreen(R.id.action_helloFragment_to_mainFragment)
+    }
+
+    private fun firstOpen() {
+        val preferences =
+            activity?.getSharedPreferences(App.IS_FIRST_OPEN, Context.MODE_PRIVATE) ?: return
+
+        with(preferences.edit()) {
+            putBoolean(App.FIRST_OPEN_KEY, false)
+            apply()
         }
-    }
-
-    private fun isUserExist(): Boolean {
-        val preferences = activity?.getSharedPreferences(App.CURRENT_USER_ID, Context.MODE_PRIVATE)
-            ?: return false
-
-        val userId = preferences.getLong(App.USER_ID_KEY, App.USER_ID_DEFAULT_VALUE)
-        return userId != App.USER_ID_DEFAULT_VALUE
     }
 }

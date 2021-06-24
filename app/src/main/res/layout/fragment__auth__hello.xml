@@ -21,7 +21,7 @@
         style="@style/headerText"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="@string/fragment__auth__hello__welcome_tv"
+        android:text="@string/fragment__hello_welcome_tv"
         app:layout_constraintBottom_toTopOf="@id/fragment__auth__hello_desc_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -33,7 +33,7 @@
         style="@style/lightText"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:text="@string/fragment__auth__hello_desc_tv"
+        android:text="@string/fragment__hello_desc_tv"
         app:layout_constraintBottom_toTopOf="@id/fragment__auth__hello_start_btn"
         app:layout_constraintStart_toStartOf="@id/fragment__auth__hello__head_tv"
         app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello__head_tv" />
@@ -41,10 +41,21 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragment__auth__hello_start_btn"
         style="@style/button"
-        android:text="@string/fragment__auth__hello_start_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="300dp"
+        android:text="@string/fragment__hello_start_btn"
+        app:layout_constraintBottom_toTopOf="@id/fragment__auth__hello_register_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello_desc_tv" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment__auth__hello_register_btn"
+        style="@style/button"
+        android:layout_width="300dp"
+        android:text="@string/fragment__hello_register_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment__auth__hello_start_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
