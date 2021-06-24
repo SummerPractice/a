@@ -6,7 +6,7 @@ import com.example.polycareer.data.database.model.CoeffsEntity
 import com.example.polycareer.data.database.model.UsersAnswersEntity
 import com.example.polycareer.domain.model.QuestionsApiResponse
 import com.example.polycareer.domain.model.QuestionsResponse
-import com.example.polycareer.domain.model.Result
+import com.example.polycareer.exception.DatabaseException
 import kotlin.random.Random
 
 class QuizItemsLocalRepository(
@@ -14,8 +14,9 @@ class QuizItemsLocalRepository(
 ) {
     var currentTryNumber = 0L
 
-    suspend fun getAllQuestions(): QuestionsResponse = try {
-        val questions = quizDao.getAllQuestions()
+    suspend fun getAllQuestions(): QuestionsResponse {
+        val questions = runSafety { getAllQuestions() }
+
         val result = mutableListOf<MutableList<String>>()
         for (question in questions) {
             if (result.size - 1 < question.questionId) {
@@ -23,20 +24,25 @@ class QuizItemsLocalRepository(
             }
             result[question.questionId].add(question.text)
         }
-        if (result.isEmpty()) {
-            QuestionsResponse(Result.WrongData, null)
+
+        if (result.isNotEmpty()) {
+            return QuestionsResponse(result)
         } else {
-            QuestionsResponse(Result.DataCorrect, result)
+            throw DatabaseException()
         }
+    }
+
+    private suspend fun <T> runSafety(daoFunction: suspend QuizDao.() -> T): T = try {
+        quizDao.daoFunction()
     } catch (e: Exception) {
-        QuestionsResponse(Result.Error("Database error"), null)
+        throw DatabaseException()
     }
 
     suspend fun setQuestions(answers: QuestionsApiResponse): Boolean = try {
         quizDao.deleteAllQuestions()
         quizDao.deleteAllCoeffs()
         val resultQuestions = mutableListOf<AnswersEntity>()
-        val answersSource = answers.quiz!!
+        val answersSource = answers.quiz
         for (answer in answersSource) {
             val questionId = answersSource.indexOf(answer)
             var answerIndex = 0
@@ -56,7 +62,7 @@ class QuizItemsLocalRepository(
 
         val coeffsSource = answers.matrix
         val resultCoeffs = mutableListOf<CoeffsEntity>()
-        for (list in coeffsSource!!) {
+        for (list in coeffsSource) {
             resultCoeffs.add(
                 CoeffsEntity(
                     answerId = coeffsSource.indexOf(list).toLong(),

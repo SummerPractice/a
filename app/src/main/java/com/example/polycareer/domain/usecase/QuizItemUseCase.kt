@@ -3,8 +3,10 @@ package com.example.polycareer.domain.usecase
 import com.example.polycareer.data.repository.QuizItemsLocalRepository
 import com.example.polycareer.domain.model.QuestionsResponse
 import com.example.polycareer.data.repository.QuizItemsRemoteRepository
-import com.example.polycareer.domain.model.Result
 import com.example.polycareer.domain.repository.UserCache
+import com.example.polycareer.exception.DatabaseException
+import com.example.polycareer.exception.LostConnectionException
+import com.example.polycareer.exception.WrongResponseException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -23,42 +25,52 @@ class QuizItemUseCase(
             ) {
                 Result.Error("Failed to save data")
             }
-            Result.DataCorrect
+            Result.Success
         }
 
-    suspend fun getQuestions(): QuestionsResponse = withContext(Dispatchers.IO) {
-        val localRepositoryData = localRepository.getAllQuestions()
-        if (localRepositoryData.result is Result.DataCorrect) {
-            localRepositoryData
-        } else {
-            val remoteRepositoryData = remoteRepository.getQuestions()
-            if (remoteRepositoryData.result is Result.DataCorrect) {
-                remoteRepositoryData.let { localRepository.setQuestions(it) }
-                val result = mutableListOf<MutableList<String>>()
-                val source = remoteRepositoryData.quiz!!
-                for (list in source) {
-                    if (result.size - 1 < source.indexOf(list)) {
-                        result.add(mutableListOf())
-                    }
-                    for (entry in list) {
-                        result[source.indexOf(list)].add(entry.value)
-                    }
-                }
-                QuestionsResponse(Result.DataCorrect, result)
-            } else {
-                QuestionsResponse(Result.Error("Lost connection to the server"), null)
+    suspend fun getQuestions(): Result = withContext(Dispatchers.IO) {
+        try {
+            return@withContext Result.DataCorrect(localRepository.getAllQuestions())
+        } catch (e: DatabaseException) {
+
+            val remoteRepositoryData = try {
+                remoteRepository.getQuestions()
+            } catch (e: LostConnectionException) {
+                return@withContext Result.Error("Lost connection with server")
+            } catch (e: WrongResponseException) {
+                return@withContext Result.Error(e.message)
             }
+
+            if (!localRepository.setQuestions(remoteRepositoryData))
+                return@withContext Result.Error("Database error")
+
+            val result = mutableListOf<MutableList<String>>()
+            val source = remoteRepositoryData.quiz
+            for (list in source) {
+                if (result.size - 1 < source.indexOf(list)) {
+                    result.add(mutableListOf())
+                }
+                for (entry in list) {
+                    result[source.indexOf(list)].add(entry.value)
+                }
+            }
+            return@withContext Result.DataCorrect(QuestionsResponse(result))
         }
     }
 
     suspend fun clearUserAnswers(): Result = withContext(Dispatchers.IO) {
-        if (!localRepository.clearUsersLastAttemptAnswers(userCache.getCurrentUserId())) {
+        val userId = userCache.getCurrentUserId()
+        if (!localRepository.clearUsersLastAttemptAnswers(userId)) {
             Result.Error("Failed to clear data")
         }
-        Result.DataCorrect
+        Result.Success
     }
 
-    fun getTryNumber(): Long {
-        return localRepository.currentTryNumber
+    fun getTryNumber(): Long = localRepository.currentTryNumber
+
+    sealed interface Result {
+        class DataCorrect(val questionsResponse: QuestionsResponse) : Result
+        object Success : Result
+        class Error(val message: String) : Result
     }
 }

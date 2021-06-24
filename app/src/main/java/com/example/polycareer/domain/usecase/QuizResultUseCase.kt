@@ -3,6 +3,7 @@ package com.example.polycareer.domain.usecase
 import com.example.polycareer.domain.model.Direction
 import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.model.UserAnswer
+import com.example.polycareer.domain.repository.DirectionRepository
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserCache
@@ -10,6 +11,7 @@ import com.example.polycareer.domain.repository.UserCache
 class QuizResultUseCase(
     private val resultsRepository: ResultsRepository,
     private val professionsRepository: ProfessionRepository,
+    private val directionRepository: DirectionRepository,
     private val userCache: UserCache
 ) {
     suspend fun getData(tryNumber: Long): Result {
@@ -22,17 +24,18 @@ class QuizResultUseCase(
     }
 
     private suspend fun parseDirections(answers: List<UserAnswer>): List<Direction> {
-        val directions = mutableMapOf<String, Int>()
+        val directions = mutableMapOf<Long, Int>()
         answers.forEach { answer ->
             directions.addCoefficients(answer)
         }
 
         return directions.transform {
-            Direction(key, "Test description for direction", "http://developer.android.com", value)
+            val directionInfo = directionRepository.getDirection(key)
+            Direction(directionInfo.name, directionInfo.description, directionInfo.url, value)
         }.sortedByDescending { it.value }.take(3)
     }
 
-    private fun MutableMap<String, Int>.addCoefficients(answer: UserAnswer) {
+    private fun MutableMap<Long, Int>.addCoefficients(answer: UserAnswer) {
         answer.score.entries.forEach { score ->
             if (score.value != 0.0) {
                 val oldValue = this[score.key] ?: 0

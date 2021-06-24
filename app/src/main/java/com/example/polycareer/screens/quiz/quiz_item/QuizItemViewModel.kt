@@ -4,13 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseAction
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.BaseViewModel
-import com.example.polycareer.domain.model.Result
 import com.example.polycareer.domain.usecase.QuizItemUseCase
 import kotlinx.coroutines.launch
 
 class QuizItemViewModel(
     private val useCase: QuizItemUseCase
-): BaseViewModel<QuizItemViewModel.QuizItemState, QuizItemViewModel.QuizItemAction>(QuizItemState()) {
+) : BaseViewModel<QuizItemViewModel.QuizItemState, QuizItemViewModel.QuizItemAction>(QuizItemState()) {
 
     private var questionId: Int = 0
 
@@ -18,28 +17,30 @@ class QuizItemViewModel(
 
     private fun saveUserAnswer(answerId: Int) {
         viewModelScope.launch {
-            useCase.saveUserAnswer(questionId = questionId - 1, answerId = answerId).also { result ->
-                if (result is Result.DataCorrect)
-                    navigateForward()
+            useCase
+                .saveUserAnswer(questionId = questionId - 1, answerId = answerId)
+                .also { result ->
+                    if (result is QuizItemUseCase.Result.Success)
+                        navigateForward()
 
-                if (result is Result.Error)
-                    sendAction(QuizItemAction.Error(result.message))
-            }
+                    if (result is QuizItemUseCase.Result.Error)
+                        sendAction(QuizItemAction.Error(result.message))
+                }
         }
     }
 
     private fun loadQuestions() {
         viewModelScope.launch {
-            useCase.getQuestions().also { questionsResponse ->
-                if (questionsResponse.result is Result.DataCorrect) {
-                    questions = questionsResponse.questions!!
+            useCase.getQuestions().also { result ->
+                if (result is QuizItemUseCase.Result.DataCorrect) {
+                    questions = result.questionsResponse.questions
                     if (questions.isNotEmpty()) {
                         navigateForward()
                     }
                 }
 
-                if (questionsResponse.result is Result.Error)
-                    sendAction(QuizItemAction.Error(questionsResponse.result.message))
+                if (result is QuizItemUseCase.Result.Error)
+                    sendAction(QuizItemAction.Error(result.message))
             }
         }
     }
@@ -47,7 +48,7 @@ class QuizItemViewModel(
     fun clearUsersAttempt() {
         viewModelScope.launch {
             useCase.clearUserAnswers().also { result ->
-                if (result is Result.Error)
+                if (result is QuizItemUseCase.Result.Error)
                     sendAction(QuizItemAction.Error(result.message))
             }
         }
@@ -70,7 +71,7 @@ class QuizItemViewModel(
 
     fun onNextButtonClicked(answerId: Int) {
         saveUserAnswer(answerId)
-       // navigateForward()
+        // navigateForward()
     }
 
 
@@ -87,7 +88,10 @@ class QuizItemViewModel(
 
     override fun onReduceState(action: QuizItemAction) = when (action) {
         is QuizItemAction.ToResults -> state.copy(toResults = action.tryNumber)
-        is QuizItemAction.ToNextQuestion -> state.copy(answers = action.answers, toNextQuestion = true)
+        is QuizItemAction.ToNextQuestion -> state.copy(
+            answers = action.answers,
+            toNextQuestion = true
+        )
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
 
