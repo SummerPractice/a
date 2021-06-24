@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/helloFragment">
+    app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/helloFragment"
         android:name="com.example.polycareer.screens.hello.HelloFragment"
@@ -13,7 +13,7 @@
             android:id="@+id/action_helloFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_helloFragment_to_quizItemFragment"
+            android:id="@+id/action_helloFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
@@ -61,5 +61,23 @@
         <action
             android:id="@+id/action_mainFragment_to_quizItemFragment"
             app:destination="@id/quizItemFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_oldResultsFragment"
+            app:destination="@id/oldResultsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_helloFragment"
+            app:destination="@id/helloFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/oldResultsFragment"
+        android:name="com.example.polycareer.screens.main.old_results.OldResultsFragment"
+        android:label="fragment_old_results"
+        tools:layout="@layout/fragment_old_results" >
+        <action
+            android:id="@+id/action_oldResultsFragment2_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment" />
     </fragment>
 </navigation>

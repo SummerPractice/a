@@ -17,7 +17,7 @@
             style="@style/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment__main__quiz_results__head_tv" />
+            android:text="@string/fragment__quiz__quiz_results__head_tv" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/fragment__main__quiz_results__graph_rc"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="@string/fragment__main__quiz_results__res_tv" />
+            android:text="@string/fragment__quiz__quiz_results__res_tv" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment__main__quiz_results__rv"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@string/fragment__main__quiz_results__gl_tv" />
+            android:text="@string/fragment__quiz__quiz_results__gl_tv" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/fragment__main__quiz_results__error_tv"
