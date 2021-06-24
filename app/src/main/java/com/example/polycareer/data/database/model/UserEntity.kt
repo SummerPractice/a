@@ -7,9 +7,9 @@ import com.example.polycareer.domain.model.UserDetails
 @Entity(tableName = "user")
 data class UserEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val firstname: String,
-    val lastname: String,
-    val email: String
+    val firstname: String = "",
+    val lastname: String = "",
+    val email: String = ""
 ) {
     companion object {
         operator fun invoke(user: UserDetails): UserEntity {

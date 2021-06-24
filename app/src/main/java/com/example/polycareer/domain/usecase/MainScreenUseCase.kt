@@ -2,21 +2,32 @@ package com.example.polycareer.domain.usecase
 
 import com.example.polycareer.App
 import com.example.polycareer.domain.repository.UserCache
+import com.example.polycareer.domain.repository.UserRepository
+import com.example.polycareer.domain.model.Result
 
 class MainScreenUseCase(
-    private val userCache: UserCache
+    private val userCache: UserCache,
+    private val repository: UserRepository
 ) {
-    fun checkRegister(): Result {
+    fun checkRegister(): RegisterResult {
         return if (userCache.getCurrentUserId() != App.USER_ID_DEFAULT_VALUE) {
-            Result.Registered
+            RegisterResult.Registered
         } else {
-            Result.NotRegistered
+            RegisterResult.NotRegistered
         }
     }
 
+    suspend fun saveDefaultUser(): Result {
+        return if (repository.saveDefaultUser()) {
+            repository.setCurrentUser(App.USER_ID_DEFAULT_VALUE)
+            Result.DataCorrect
+        } else {
+            Result.WrongData
+        }
+    }
 
-    sealed interface Result {
-        object Registered : Result
-        object NotRegistered : Result
+    sealed interface RegisterResult {
+        object Registered : RegisterResult
+        object NotRegistered : RegisterResult
     }
 }

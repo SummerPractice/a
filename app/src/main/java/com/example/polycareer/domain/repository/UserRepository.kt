@@ -9,4 +9,6 @@ interface UserRepository : UserCache {
     suspend fun saveUserGrades(userId: Long, userGrades: UserGrades): Boolean
 
     suspend fun checkUserEmail(email: String): Long?
+
+    suspend fun saveDefaultUser(): Boolean
 }

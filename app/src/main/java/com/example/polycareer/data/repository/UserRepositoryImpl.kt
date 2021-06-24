@@ -19,6 +19,17 @@ class UserRepositoryImpl(
         const val USER_REPOSITORY_TAG = "user_repository"
     }
 
+    override suspend fun saveDefaultUser(): Boolean {
+        return try {
+            val userEntity = UserEntity(id = App.USER_ID_DEFAULT_VALUE)
+            userDao.insertUser(userEntity)
+            true
+        } catch (e: Exception) {
+            Log.e(USER_REPOSITORY_TAG, e.toString())
+            false
+        }
+    }
+
     override suspend fun saveUserDetail(userDetails: UserDetails): Long? {
         return try {
             val userEntity = UserEntity(userDetails)

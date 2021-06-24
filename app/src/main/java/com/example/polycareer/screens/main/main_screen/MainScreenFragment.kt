@@ -38,7 +38,10 @@ class MainScreenFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment__main__main_screen, container, false)
 
         newTestButton = rootView.findViewById(R.id.fragment__main__main_screen__new_test_bt)
-        newTestButton.setOnClickListener { openTest() }
+        newTestButton.setOnClickListener {
+            viewModel.createDefaultUser()
+            openTest()
+        }
 
         oldResultsButton = rootView.findViewById(R.id.fragment__main__main_screen__show_results_bt)
         oldResultsButton.setOnClickListener { showResults() }
