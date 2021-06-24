@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fragment__main__old_results_title"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="22dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment__main__old__result__rv"
@@ -24,6 +25,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="6"
         tools:layout_editor_absoluteX="22dp"
-        tools:listitem="@layout/old_result_item" />
+        tools:listitem="@layout/simple_rv_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

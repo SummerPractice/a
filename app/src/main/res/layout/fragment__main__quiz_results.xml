@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:itemCount="3"
-            tools:listitem="@layout/direction_item"
+            tools:listitem="@layout/simple_rv_item"
             android:nestedScrollingEnabled="true"/>
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -10,7 +10,7 @@ class DirectionAdapter(private val inflater: LayoutInflater) : RecyclerView.Adap
     private val directions: MutableList<Direction> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DirectionItemViewHolder {
-        return DirectionItemViewHolder(inflater.inflate(R.layout.direction_item, parent, false))
+        return DirectionItemViewHolder(inflater.inflate(R.layout.simple_rv_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: DirectionItemViewHolder, position: Int) {
