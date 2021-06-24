@@ -4,7 +4,7 @@ import com.example.polycareer.data.database.model.ResultInfo
 import java.util.*
 
 data class UserResultInfo(
-    val id: Long,
+    val tryNumber: Long,
     val date: Date
 ) {
     companion object {
