@@ -11,10 +11,14 @@
         tools:layout="@layout/fragment__auth__hello" >
         <action
             android:id="@+id/action_helloFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_helloFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -23,7 +27,9 @@
         tools:layout="@layout/fragment__auth__sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_gradesMarksFragment"
-            app:destination="@id/gradesFragment" />
+            app:destination="@id/gradesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gradesFragment"
@@ -32,7 +38,9 @@
         tools:layout="@layout/fragment__main__grades">
         <action
             android:id="@+id/action_gradesMarksFragment_to_quizItemFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/quizItemFragment"
@@ -42,6 +50,8 @@
         <action
             android:id="@+id/action_quizItemFragment_to_quizResultsFragment"
             app:destination="@id/quizResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
@@ -61,16 +71,24 @@
         tools:layout="@layout/fragment__main__main_screen" >
         <action
             android:id="@+id/action_mainFragment_to_quizItemFragment"
-            app:destination="@id/quizItemFragment" />
+            app:destination="@id/quizItemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainFragment_to_oldResultsFragment"
-            app:destination="@id/oldResultsFragment" />
+            app:destination="@id/oldResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainFragment_to_helloFragment"
-            app:destination="@id/helloFragment" />
+            app:destination="@id/helloFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/oldResultsFragment"
@@ -79,6 +97,8 @@
         tools:layout="@layout/fragment_old_results" >
         <action
             android:id="@+id/action_oldResultsFragment2_to_quizResultsFragment"
-            app:destination="@id/quizResultsFragment" />
+            app:destination="@id/quizResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 </navigation>
