@@ -52,6 +52,6 @@ interface QuizDao {
     @Query("SELECT * FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
     suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<UsersAnswersEntity>
 
-    @Query("SELECT DISTINCT try_number, time FROM users_answers")
+    @Query("SELECT try_number, time FROM users_answers GROUP BY try_number HAVING max(time)")
     suspend fun getTries(): List<ResultInfo>
 }
