@@ -15,9 +15,9 @@ class PieChartAdapter(
     private val chart: PieChart
 ) : Chart {
     private val pastelColors = listOf(
-        Color.rgb(242, 158, 76), Color.rgb(241, 196, 83), Color.rgb(239, 234, 90),
-        Color.rgb(185, 231, 105), Color.rgb(22, 219, 147), Color.rgb(136, 212, 171),
-        Color.rgb(131, 227, 119), Color.rgb(242, 232, 207)
+        Color.rgb(0, 185, 197),
+        Color.rgb(0, 174, 132),
+        Color.rgb(240, 86, 35)
     )
 
     override fun render(professions: List<Profession>) {
@@ -79,7 +79,7 @@ class PieChartAdapter(
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
         data.setValueTextSize(12f)
-        data.setValueTextColor(Color.rgb(112, 112, 112))
+        data.setValueTextColor(Color.WHITE)
         chart.data = data
 
         chart.highlightValues(null)
