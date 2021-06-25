@@ -13,6 +13,7 @@ class QuizItemsLocalRepository(
     private val quizDao: QuizDao
 ) {
     var currentTryNumber = 0L
+    var startTime = 0L
 
     suspend fun deleteUnfinishedTests(): Boolean =
         try {
@@ -98,6 +99,7 @@ class QuizItemsLocalRepository(
         if (questionId == 0L) {
             deleteUnfinishedTests()
             currentTryNumber = quizDao.getCountOfUsersAttempts(userId) + 1
+            startTime = System.currentTimeMillis()
         }
         val answerId = quizDao.getAnswerIdByQuestionIdAndAnswerIndex(
             questionId = questionId,
@@ -109,7 +111,7 @@ class QuizItemsLocalRepository(
                 userId = userId,
                 answerId = answerId,
                 tryNumber = currentTryNumber,
-                time = System.currentTimeMillis()
+                time = startTime
             )
         )
         true

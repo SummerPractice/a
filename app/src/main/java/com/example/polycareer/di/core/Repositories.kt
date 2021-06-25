@@ -13,7 +13,7 @@ val repositoryModule = module {
         UserCache::class
     )
 
-    single<OldResultsRepository> { ResultsRepositoryTest() }
+    single<ResultsInfoRepository> { ResultsInfoRepositoryImpl(get()) }
 
     single<ResultsRepository> { ResultRepositoryImpl(get()) }
 

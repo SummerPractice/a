@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.polycareer.data.database.model.AnswersEntity
 import com.example.polycareer.data.database.model.CoeffsEntity
+import com.example.polycareer.data.database.model.ResultInfo
 import com.example.polycareer.data.database.model.UsersAnswersEntity
 
 @Dao
@@ -50,4 +51,7 @@ interface QuizDao {
 
     @Query("SELECT * FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
     suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<UsersAnswersEntity>
+
+    @Query("SELECT DISTINCT try_number, time FROM users_answers")
+    suspend fun getTries(): List<ResultInfo>
 }

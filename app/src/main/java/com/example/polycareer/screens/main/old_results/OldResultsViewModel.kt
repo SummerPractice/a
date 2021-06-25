@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseAction
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.BaseViewModel
-import com.example.polycareer.domain.model.UserResult
+import com.example.polycareer.domain.model.UserResultInfo
 import com.example.polycareer.domain.usecase.OldResultsUseCase
 import kotlinx.coroutines.launch
 
@@ -31,25 +31,25 @@ class OldResultsViewModel(
 
     override fun onReduceState(action: OldResultsAction): OldResultsState = when (action) {
         is OldResultsAction.ShowResults -> state.copy(
-            oldResults = action.oldResults,
+            resultsInfo = action.resultsInfo,
             error = ""
         )
         is OldResultsAction.Error -> state.copy(
-            oldResults = emptyList(),
+            resultsInfo = emptyList(),
             error = action.message
         )
     }
 
     sealed interface OldResultsAction : BaseAction {
         class ShowResults(
-            val oldResults: List<UserResult>
+            val resultsInfo: List<UserResultInfo>
         ) : OldResultsAction
 
         class Error(val message: String) : OldResultsAction
     }
 
     data class OldResultsState(
-        val oldResults: List<UserResult> = emptyList(),
+        val resultsInfo: List<UserResultInfo> = emptyList(),
         val error: String = ""
     ) : BaseState
 }

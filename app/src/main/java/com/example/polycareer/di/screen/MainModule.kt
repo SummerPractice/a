@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val mainModule = module {
-    single { MainScreenUseCase(get(), get()) }
+    single { MainScreenUseCase(get()) }
     viewModel { MainScreenViewModel(get()) }
 
     single { OldResultsUseCase(get()) }

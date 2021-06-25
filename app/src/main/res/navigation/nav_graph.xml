@@ -41,7 +41,8 @@
         tools:layout="@layout/fragment__main__quiz_item" >
         <action
             android:id="@+id/action_quizItemFragment_to_quizResultsFragment"
-            app:destination="@id/quizResultsFragment" />
+            app:destination="@id/quizResultsFragment"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizResultsFragment"
