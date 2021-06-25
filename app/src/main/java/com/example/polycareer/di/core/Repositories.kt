@@ -17,8 +17,6 @@ val repositoryModule = module {
 
     single<ResultsRepository> { ResultRepositoryImpl(get()) }
 
-    single<ProfessionRepository> { ProfessionsRepositoryImpl() }
-
     single { QuizItemsLocalRepository(get()) }
 
     single { QuizItemsRemoteRepository(get()) }
@@ -26,4 +24,8 @@ val repositoryModule = module {
     single { DirectionsLocalRepository(get()) }
 
     single { DirectionsRemoteRepository(get()) }
+
+    single { ProfessionsLocalRepository(get()) }
+
+    single { ProfessionsRemoteRepository(get()) }
 }

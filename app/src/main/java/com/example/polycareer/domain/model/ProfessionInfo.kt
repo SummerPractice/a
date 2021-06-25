@@ -1,7 +1,9 @@
 package com.example.polycareer.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class ProfessionInfo(
     val id: Long,
-    val name: String,
-    val countOfAnswer: Int
+    @SerializedName("value")
+    val name: String
 )

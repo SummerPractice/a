@@ -4,7 +4,7 @@ import com.example.polycareer.data.repository.DirectionsUseCase
 import com.example.polycareer.domain.model.Direction
 import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.model.UserAnswer
-import com.example.polycareer.domain.repository.ProfessionRepository
+import com.example.polycareer.data.repository.ProfessionsUseCase
 import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserCache
 import com.example.polycareer.exception.DatabaseException
@@ -12,7 +12,7 @@ import com.example.polycareer.exception.LostConnectionException
 
 class QuizResultUseCase(
     private val resultsRepository: ResultsRepository,
-    private val professionsRepository: ProfessionRepository,
+    private val professionsUseCase: ProfessionsUseCase,
     private val directionsUseCase: DirectionsUseCase,
     private val userCache: UserCache
 ) {
@@ -56,8 +56,8 @@ class QuizResultUseCase(
         answers.forEach { answer -> countProfessions.addProfession(answer) }
 
         val professions = countProfessions.transform {
-            val profession = professionsRepository.getProfession(key)
-            val score = value * 100 / profession.countOfAnswer
+            val profession = professionsUseCase.getProfession(key)
+            val score = value * 100 / 1 // TODO(вытащить profession.countOfAnswer из локальной базы)
             Profession(profession.name, score)
         }.sortedByDescending { it.percent }.take(3)
 

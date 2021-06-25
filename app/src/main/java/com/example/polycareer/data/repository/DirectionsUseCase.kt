@@ -1,7 +1,6 @@
 package com.example.polycareer.data.repository
 
 import com.example.polycareer.domain.model.DirectionInfo
-import com.example.polycareer.domain.repository.DirectionRepository
 import com.example.polycareer.exception.DatabaseException
 import com.example.polycareer.exception.LostConnectionException
 import com.example.polycareer.exception.WrongResponseException
@@ -28,6 +27,7 @@ class DirectionsUseCase(
         } catch (e: DatabaseException) {
             try {
                 val remoteRepositoryData = remoteRepository.getAllDirections()
+                directionsList = remoteRepositoryData.directions
                 if (!localRepository.setAllDirections(remoteRepositoryData))
                     throw DatabaseException()
             } catch (e: LostConnectionException) {

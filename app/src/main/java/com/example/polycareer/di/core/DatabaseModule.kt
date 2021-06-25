@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.polycareer.data.database.AppDatabase
 import com.example.polycareer.data.database.dao.DirectionsDao
+import com.example.polycareer.data.database.dao.ProfessionsDao
 import com.example.polycareer.data.database.dao.QuizDao
 import com.example.polycareer.data.database.dao.UserDao
 import org.koin.android.ext.koin.androidApplication
@@ -27,8 +28,13 @@ val databaseModule = module(createdAtStart = true) {
         return database.directionsDao
     }
 
+    fun provideProfessionsDao(database: AppDatabase): ProfessionsDao {
+        return database.professionsDao
+    }
+
     single { provideDatabase(androidApplication()) }
     single { provideUserDao(get()) }
     single { provideQuizDao(get()) }
     single { provideDirectionsDao(get()) }
+    single { provideProfessionsDao(get()) }
 }
