@@ -10,6 +10,7 @@ class ResultsInfoRepositoryImpl(
 ) : ResultsInfoRepository {
 
     override suspend fun getResults(): List<UserResultInfo> {
+        dao.deleteUnfinishedTests()
         return dao.getTries().map { UserResultInfo(it) }
     }
 }
