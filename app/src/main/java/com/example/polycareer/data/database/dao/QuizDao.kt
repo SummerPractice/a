@@ -16,6 +16,11 @@ interface QuizDao {
     @Query("DELETE FROM answers")
     suspend fun deleteAllQuestions()
 
+    @Query("DELETE FROM users_answers WHERE try_number IN (" +
+            "SELECT try_number FROM users_answers GROUP BY try_number HAVING count(*) < (" +
+            "SELECT max(question_id) + 1 FROM answers))")
+    suspend fun deleteUnfinishedTests()
+
     @Query("SELECT * FROM answers ORDER BY question_id, answer_index")
     suspend fun getAllQuestions(): List<AnswersEntity>
 

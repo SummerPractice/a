@@ -11,9 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         style="@style/horizontalProgress"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__head_tv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/fragment__main__quiz_item__loading_pb"

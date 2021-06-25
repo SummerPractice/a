@@ -14,6 +14,14 @@ class QuizItemsLocalRepository(
 ) {
     var currentTryNumber = 0L
 
+    suspend fun deleteUnfinishedTests(): Boolean =
+        try {
+            quizDao.deleteUnfinishedTests()
+            true
+        } catch (e: Exception) {
+            false
+        }
+
     suspend fun getAllQuestions(): QuestionsResponse {
         val questions = runSafety { getAllQuestions() }
 
@@ -88,6 +96,7 @@ class QuizItemsLocalRepository(
 
     suspend fun saveUserAnswer(questionId: Long, answerIndex: Long, userId: Long): Boolean = try {
         if (questionId == 0L) {
+            deleteUnfinishedTests()
             currentTryNumber = quizDao.getCountOfUsersAttempts(userId) + 1
         }
         val answerId = quizDao.getAnswerIdByQuestionIdAndAnswerIndex(
