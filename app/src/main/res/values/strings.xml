@@ -42,4 +42,5 @@
     <string name="fragment__main__main_screen_register">Пройти регистрацию</string>
 
     <string name="fragment__main__old_results_title">Предыдующие результаты</string>
+    <string name="try_title">Попытка №%1$d</string>
 </resources>
