@@ -12,8 +12,8 @@ import androidx.room.PrimaryKey
         childColumns = ["answerId"]
     )])
 data class CoeffsEntity(
-    @PrimaryKey(autoGenerate = true) val answerId: Long = 0,
-    val profession: Long = -1,
+    @PrimaryKey val answerId: Long = 0,
+    val profession: Long = 0,
     val yk: Double = 0.0,
     val ytc: Double = 0.0,
     val inn: Double = 0.0,

@@ -15,7 +15,8 @@ class QuizItemsRemoteRepository(
         if (response.isSuccessful) {
             return QuestionsApiResponse(
                 response.body()!!.quiz,
-                response.body()!!.matrix
+                response.body()!!.matrix,
+                response.body()!!.prof
             )
         } else throw WrongResponseException(response.message())
     }

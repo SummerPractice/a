@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET(".") // TODO(questions)
+    @GET("v2") // TODO(questions)
     fun getQuestionsList() : Call<QuestionsApiResponse>
 
     @GET("directions")

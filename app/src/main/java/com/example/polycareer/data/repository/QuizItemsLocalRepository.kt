@@ -70,11 +70,13 @@ class QuizItemsLocalRepository(
         quizDao.setAllQuestions(resultQuestions)
 
         val coeffsSource = answers.matrix
+        val profSource = answers.prof
         val resultCoeffs = mutableListOf<CoeffsEntity>()
+        var i = 0
         for (list in coeffsSource) {
             resultCoeffs.add(
                 CoeffsEntity(
-                    answerId = coeffsSource.indexOf(list).toLong(),
+                    answerId = resultCoeffs.size.toLong(),
                     yk = list[0],
                     ytc = list[1],
                     inn = list[2],
@@ -85,9 +87,10 @@ class QuizItemsLocalRepository(
                     ic = list[7],
                     fi = list[8],
                     mot = list[9],
-                    profession = Random.nextLong(1, 8)
+                    profession = profSource[i]
                 )
             )
+            i++
         }
         quizDao.setAllCoeffs(resultCoeffs)
         true
