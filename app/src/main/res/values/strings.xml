@@ -2,8 +2,8 @@
     <string name="app_name">PolyCareer</string>
     <string name="alphabet">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
-    <string name="fragment__hello_welcome_tv">Приветствую, абитуриент!</string>
-    <string name="fragment__hello_desc_tv">Это приложение поможет тебе определиться с выбором направления в ИКТН, узнать больше об образовательных программах, которые тебе подходят</string>
+    <string name="fragment__hello_welcome_tv">Приветствуем, абитуриент!</string>
+    <string name="fragment__hello_desc_tv">Это приложение поможет тебе определиться с выбором специальности в IT и узнать об образовательных программах ИКНТ, которые подходят именно тебе.</string>
     <string name="fragment__hello_start_btn">Начать</string>
     <string name="fragment__hello_register_btn">Зарегистрироваться</string>
 
@@ -11,8 +11,8 @@
     <string name="fragment__auth__sign_up__firstname_et">Имя</string>
     <string name="fragment_auth__sign_up__lastname_et">Фамилия</string>
     <string name="fragment_auth__sign_up__email_et">Email</string>
-    <string name="fragment_auth__sign_up__terms_cb">Принимаю условия конфиденциальности</string>
-    <string name="fragment_auth__sign_up__email_cb">Хочу получать новости университета на указанную почту</string>
+    <string name="fragment_auth__sign_up__terms_cb">Согласен на обработку персональных данных</string>
+    <string name="fragment_auth__sign_up__email_cb">Хочу быть в курсе последних новостей университета</string>
     <string name="fragment_auth__sign_up__next_btn">Далее</string>
     <string name="terms_error">Примите условия</string>
     <string name="invalid_name">Строка должна содержать буквы</string>
@@ -33,11 +33,11 @@
     <string name="fragment__quiz__quiz_results__gl_tv">Удачи!</string>
     <string name="fragment__quiz__quiz_results__next_text_button"><![CDATA[Подробнее >]]></string>
 
-    <string name="fragment__quiz__quiz_item__head_tv">Что из перечисленного больше Вас интересует?</string>
+    <string name="fragment__quiz__quiz_item__head_tv">Что из перечисленного тебя больше интересует?</string>
     <string name="press_again">Нажмите назад еще раз чтобы закрыть тест</string>
 
-    <string name="fragment__main__main_screen_title">Что далее?)</string>
-    <string name="fragment__main__main_screen_new_test">Начнём новый тест</string>
+    <string name="fragment__main__main_screen_title">Что далее?</string>
+    <string name="fragment__main__main_screen_new_test">Начать новый тест</string>
     <string name="fragment__main__main_screen_old_results">Прошлые результаты</string>
     <string name="fragment__main__main_screen_register">Пройти регистрацию</string>
 
