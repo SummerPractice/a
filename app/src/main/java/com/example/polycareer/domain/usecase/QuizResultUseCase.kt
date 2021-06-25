@@ -1,26 +1,32 @@
 package com.example.polycareer.domain.usecase
 
+import com.example.polycareer.data.repository.DirectionsUseCase
 import com.example.polycareer.domain.model.Direction
 import com.example.polycareer.domain.model.Profession
 import com.example.polycareer.domain.model.UserAnswer
-import com.example.polycareer.domain.repository.DirectionRepository
 import com.example.polycareer.domain.repository.ProfessionRepository
 import com.example.polycareer.domain.repository.ResultsRepository
 import com.example.polycareer.domain.repository.UserCache
+import com.example.polycareer.exception.DatabaseException
+import com.example.polycareer.exception.LostConnectionException
 
 class QuizResultUseCase(
     private val resultsRepository: ResultsRepository,
     private val professionsRepository: ProfessionRepository,
-    private val directionRepository: DirectionRepository,
+    private val directionsUseCase: DirectionsUseCase,
     private val userCache: UserCache
 ) {
-    suspend fun getData(tryNumber: Long): Result {
+    suspend fun getData(tryNumber: Long): Result = try {
         val userId = userCache.getCurrentUserId()
         val answers = resultsRepository.getAnswers(userId, tryNumber)
         val directions = parseDirections(answers)
         val professions = parseProfessions(answers)
 
-        return Result.Success(directions, professions)
+        Result.Success(directions, professions)
+    } catch (e: LostConnectionException) {
+        Result.Error("Lost connection with server")
+    } catch (e: DatabaseException) {
+        Result.Error("No data in internal storage")
     }
 
     private suspend fun parseDirections(answers: List<UserAnswer>): List<Direction> {
@@ -30,7 +36,7 @@ class QuizResultUseCase(
         }
 
         return directions.transform {
-            val directionInfo = directionRepository.getDirection(key)
+            val directionInfo = directionsUseCase.getDirection(key)
             Direction(directionInfo.name, directionInfo.description, directionInfo.url, value)
         }.sortedByDescending { it.value }.take(3)
     }
