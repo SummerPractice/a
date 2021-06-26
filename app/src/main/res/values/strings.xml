@@ -18,6 +18,7 @@
     <string name="invalid_name">Строка должна содержать буквы</string>
     <string name="invalid_email">Некорректный адрес</string>
 
+
     <string name="fragment__auth__grades_choose">Баллы ЕГЭ</string>
     <string name="fragment__auth__grades__desc_tv">Укажите Ваши баллы, так нам будет проще оценить вероятность прохождения на то или иное направление.</string>
     <string name="fragment__auth__grades__math_tv">Математика</string>
@@ -28,18 +29,25 @@
     <string name="invalid_exam_grade">Баллы за экзамен в диапазоне 1 – 100</string>
     <string name="invalid_id_grade">Баллы за ИД в диапазоне 0 – 10</string>
 
+
     <string name="fragment__quiz__quiz_results__head_tv">Результаты</string>
     <string name="fragment__quiz__quiz_results__res_tv">Рекомендуемые направления</string>
     <string name="fragment__quiz__quiz_results__gl_tv">Удачи!</string>
     <string name="fragment__quiz__quiz_results__next_text_button"><![CDATA[Подробнее >]]></string>
 
+    <string name="screen_result_error_message">Произошла ошибка! <br/>Попробуйте ещё раз</string>
+    <string name="screen__result_error_button">Перезагрузить</string>
+
+
     <string name="fragment__quiz__quiz_item__head_tv">Что из перечисленного тебя больше интересует?</string>
     <string name="press_again">Нажмите назад еще раз чтобы закрыть тест</string>
+
 
     <string name="fragment__main__main_screen_title">Что далее?</string>
     <string name="fragment__main__main_screen_new_test">Начать новый тест</string>
     <string name="fragment__main__main_screen_old_results">Прошлые результаты</string>
     <string name="fragment__main__main_screen_register">Пройти регистрацию</string>
+
 
     <string name="fragment__main__old_results_title">Предыдующие результаты</string>
     <string name="try_title">Попытка №%1$d</string>

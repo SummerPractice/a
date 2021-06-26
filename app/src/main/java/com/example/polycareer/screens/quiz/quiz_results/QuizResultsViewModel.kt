@@ -18,6 +18,8 @@ class QuizResultsViewModel(
 
     fun getData() {
         viewModelScope.launch {
+            sendAction(QuizResultAction.ShowLoader)
+
             useCase.getData(tryNumber).also { result ->
                 when (result) {
                     is QuizResultUseCase.Result.Success -> sendAction(
@@ -26,27 +28,34 @@ class QuizResultsViewModel(
                             result.professions
                         )
                     )
+
                     is QuizResultUseCase.Result.Error ->
                         sendAction(QuizResultAction.Error(result.message))
                 }
             }
+
         }
     }
 
     override fun onReduceState(action: QuizResultAction): QuizResultState = when (action) {
         is QuizResultAction.ShowResults -> state.copy(
+            isLoad = false,
             directions = action.directions,
-            professions = action.professions,
-            error = ""
+            professions = action.professions
         )
         is QuizResultAction.Error -> state.copy(
-            directions = emptyList(),
-            professions = emptyList(),
+            isLoad = false,
             error = action.message
+        )
+
+        QuizResultAction.ShowLoader -> state.copy(
+            isLoad = true
         )
     }
 
     sealed interface QuizResultAction : BaseAction {
+        object ShowLoader : QuizResultAction
+
         class ShowResults(
             val directions: List<Direction>,
             val professions: List<Profession>
@@ -56,6 +65,7 @@ class QuizResultsViewModel(
     }
 
     data class QuizResultState(
+        val isLoad: Boolean = true,
         val directions: List<Direction> = emptyList(),
         val professions: List<Profession> = emptyList(),
         val error: String = ""

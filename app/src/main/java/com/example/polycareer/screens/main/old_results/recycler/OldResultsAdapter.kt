@@ -18,7 +18,7 @@ class OldResultsAdapter(private val inflater: LayoutInflater, private val listen
         holder.bind(resultsInfo[position])
     }
 
-    override fun getItemCount() = resultsInfo.count()
+    override fun getItemCount() = resultsInfo.size
 
     interface OnResultItemClickListener {
         fun onItemClick(tryNumber: Long)

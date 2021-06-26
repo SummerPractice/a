@@ -1,59 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.quiz.quiz_results.QuizResultsFragment">
 
-    <LinearLayout
+    <include
+        android:id="@+id/result_screen"
+        layout="@layout/screen__result_correct"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/error_screen"
+        layout="@layout/screen__result_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/fragment__quiz__quiz_results_progress_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="22dp"
-        android:paddingTop="22dp">
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment__main__quiz_results__head_tv"
-            style="@style/headerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment__quiz__quiz_results__head_tv" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/fragment__main__quiz_results__graph_rc"
-            android:layout_width="match_parent"
-            android:layout_height="350dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment__main__quiz_results__res_tv"
-            style="@style/boldText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="@string/fragment__quiz__quiz_results__res_tv" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment__main__quiz_results__rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="3"
-            tools:listitem="@layout/simple_rv_item"
-            android:nestedScrollingEnabled="true"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment__main__quiz_results__gl_tv"
-            style="@style/headerText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/fragment__quiz__quiz_results__gl_tv" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment__main__quiz_results__error_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-    </LinearLayout>
-</ScrollView>
+</FrameLayout>

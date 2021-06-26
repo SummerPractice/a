@@ -50,7 +50,6 @@
         app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__head_tv">
     </RadioGroup>
 
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/fragment__main__quiz_item__next_btn"
         style="@style/button"
@@ -59,5 +58,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__answers_rg" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

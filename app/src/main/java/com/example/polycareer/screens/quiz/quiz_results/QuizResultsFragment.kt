@@ -1,12 +1,13 @@
 package com.example.polycareer.screens.quiz.quiz_results
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,16 +24,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class QuizResultsFragment : Fragment() {
     private lateinit var chart: Chart
     private lateinit var recommendedDirections: DirectionAdapter
-    private lateinit var head: TextView
-    private lateinit var res: TextView
-    private lateinit var gl: TextView
-    private lateinit var error: TextView
+
+    private lateinit var correctScreen: View
+    private lateinit var errorScreen: View
+    private lateinit var loader: ProgressBar
 
     private val viewModel: QuizResultsViewModel by viewModel()
 
     private val stateObserver = Observer<QuizResultsViewModel.QuizResultState> { state ->
-        if (state.error.isNotEmpty()) showError(state.error)
-        else {
+        loader.isVisible = state.isLoad
+        errorScreen.isVisible = state.error.isNotEmpty()
+
+        if (state.error.isEmpty() && !state.isLoad) {
+            correctScreen.isVisible = true
             showChart(state.professions)
             showDirections(state.directions)
         }
@@ -41,10 +45,6 @@ class QuizResultsFragment : Fragment() {
     private fun showDirections(directions: List<Direction>) {
         Log.d(this::class.java.name, directions.toString())
         recommendedDirections.showDirections(directions)
-    }
-
-    private fun showError(message: String) {
-        Log.d(this::class.java.name, message)
     }
 
     private fun showChart(data1: List<Profession>) {
@@ -58,18 +58,14 @@ class QuizResultsFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment__main__quiz_results, container, false)
 
+        correctScreen = rootView.findViewById(R.id.result_screen)
+        errorScreen = rootView.findViewById(R.id.error_screen)
+        setReloadButton()
+        loader = rootView.findViewById(R.id.fragment__quiz__quiz_results_progress_bar)
+
         chart =
-            PieChartAdapter(rootView.findViewById(R.id.fragment__main__quiz_results__graph_rc))
-
-        val directionsView = rootView.findViewById<RecyclerView>(R.id.fragment__main__quiz_results__rv)
-        directionsView.layoutManager = LinearLayoutManager(context)
-        this.recommendedDirections = DirectionAdapter(layoutInflater)
-        directionsView.adapter = this.recommendedDirections
-
-        head = rootView.findViewById(R.id.fragment__main__quiz_results__head_tv)
-        res = rootView.findViewById(R.id.fragment__main__quiz_results__res_tv)
-        gl = rootView.findViewById(R.id.fragment__main__quiz_results__gl_tv)
-        error = rootView.findViewById(R.id.fragment__main__quiz_results__error_tv)
+            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc))
+        createRecyclerView()
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
         viewModel.tryNumber = arguments?.getLong(App.TRY_NUMBER) ?: return null
@@ -77,9 +73,23 @@ class QuizResultsFragment : Fragment() {
         return rootView
     }
 
+    private fun setReloadButton() {
+        val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
+        button.setOnClickListener {
+            viewModel.getData()
+        }
+    }
+
+    private fun createRecyclerView() {
+        val directionsView =
+            correctScreen.findViewById<RecyclerView>(R.id.fragment__main__quiz_results__rv)
+        directionsView.layoutManager = LinearLayoutManager(context)
+        this.recommendedDirections = DirectionAdapter(layoutInflater)
+        directionsView.adapter = this.recommendedDirections
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.getData()
     }
 }
