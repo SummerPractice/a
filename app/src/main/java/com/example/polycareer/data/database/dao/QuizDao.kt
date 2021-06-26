@@ -40,7 +40,7 @@ interface QuizDao {
     @Query("SELECT id FROM answers WHERE question_id = :questionId AND answer_index = :answerIndex")
     suspend fun getAnswerIdByQuestionIdAndAnswerIndex(questionId: Long, answerIndex: Long): Long
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setAllCoeffs(coeffs: List<CoeffsEntity>)
 
     @Query("DELETE FROM coeffs")

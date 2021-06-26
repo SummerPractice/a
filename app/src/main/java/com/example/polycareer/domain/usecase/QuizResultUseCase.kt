@@ -57,7 +57,8 @@ class QuizResultUseCase(
 
         val professions = countProfessions.transform {
             val profession = professionsUseCase.getProfession(key)
-            val score = value * 100 / 1 // TODO(вытащить profession.countOfAnswer из локальной базы)
+            val countOfAnswer = professionsUseCase.getCountOfAnswer(key)
+            val score = value * 100 / countOfAnswer
             Profession(profession.name, score)
         }.sortedByDescending { it.percent }.take(3)
 

@@ -9,7 +9,7 @@ import com.example.polycareer.data.database.model.ProfessionEntity
 
 @Dao
 interface ProfessionsDao {
-    @Query("SELECT * FROM professions")
+    @Query("SELECT * FROM professions ORDER BY id")
     suspend fun getAllProfessions(): List<ProfessionEntity>
 
     @Query("DELETE FROM professions")
@@ -17,4 +17,7 @@ interface ProfessionsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setAllProfessions(directions: List<ProfessionEntity>)
+
+    @Query("SELECT count(*) FROM coeffs GROUP BY profession ORDER BY profession")
+    suspend fun getAllCountOfAnswers(): List<Int>
 }

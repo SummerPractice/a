@@ -1,11 +1,7 @@
 package com.example.polycareer.data.repository
 
-import com.example.polycareer.data.database.dao.DirectionsDao
 import com.example.polycareer.data.database.dao.ProfessionsDao
-import com.example.polycareer.data.database.model.DirectionEntity
 import com.example.polycareer.data.database.model.ProfessionEntity
-import com.example.polycareer.domain.model.DirectionInfo
-import com.example.polycareer.domain.model.DirectionsApiResponse
 import com.example.polycareer.domain.model.ProfessionInfo
 import com.example.polycareer.exception.DatabaseException
 
@@ -16,12 +12,24 @@ class ProfessionsLocalRepository(
         val resultEntities = professionsDao.getAllProfessions()
 
         if (resultEntities.isNotEmpty()) {
-            val result =  mutableListOf<ProfessionInfo>()
+            val result = mutableListOf<ProfessionInfo>()
             for (entity in resultEntities) {
-                result.add(ProfessionInfo(
+                result.add(
+                    ProfessionInfo(
                         id = entity.id,
-                        name = entity.title))
+                        name = entity.title
+                    )
+                )
             }
+            return result
+        } else {
+            throw DatabaseException()
+        }
+    }
+
+    suspend fun getAllCountOfAnswers(): List<Int> {
+        val result = professionsDao.getAllCountOfAnswers()
+        if (result.isNotEmpty()) {
             return result
         } else {
             throw DatabaseException()

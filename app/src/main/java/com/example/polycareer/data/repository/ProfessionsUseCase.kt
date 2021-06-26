@@ -13,11 +13,20 @@ class ProfessionsUseCase(
 ) {
     private var professionsList: List<ProfessionInfo>? = null
 
+    private var countOfAnswerList: List<Int>? = null
+
     suspend fun getProfession(id: Long): ProfessionInfo {
         if (professionsList == null) {
             getAllProfessions()
         }
-        return professionsList!!.first { it.id == id }
+        return professionsList!![id.toInt()]
+    }
+
+    suspend fun getCountOfAnswer(id: Long): Int {
+        if (countOfAnswerList == null) {
+            getAllCountOfAnswers()
+        }
+        return countOfAnswerList!![id.toInt()]
     }
 
     private suspend fun getAllProfessions() = withContext(Dispatchers.IO) {
@@ -36,4 +45,13 @@ class ProfessionsUseCase(
             }
         }
     }
+
+    private suspend fun getAllCountOfAnswers() = withContext(Dispatchers.IO) {
+        try {
+            countOfAnswerList = localRepository.getAllCountOfAnswers()
+        } catch (e: DatabaseException) {
+            throw DatabaseException()
+        }
+    }
+
 }
