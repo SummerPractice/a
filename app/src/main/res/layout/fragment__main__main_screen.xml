@@ -6,30 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.main.main_screen.MainScreenFragment">
 
-    <TextView
-        android:id="@+id/fragment__main__main_screen__title_tv"
-        style="@style/headerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/fragment__main__main_screen_title"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment__main__main_screen__new_test_bt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.AppCompatButton
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_margin="20dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/fragment__main__main_screen__new_test_bt"
         style="@style/button"
         android:text="@string/fragment__main__main_screen_new_test"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment__main__main_screen__show_results_bt"
+        app:layout_constraintBottom_toTopOf="@+id/fragment__main__main_screen__show_results_bt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__main_screen__title_tv" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="20dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/fragment__main__main_screen__show_results_bt"
@@ -38,9 +29,12 @@
         android:layout_marginTop="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__main_screen__new_test_bt" />
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__main_screen__new_test_bt"
+        app:layout_constraintBottom_toTopOf="@id/fragment__main__main_screen__register_bt"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_margin="20dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/fragment__main__main_screen__register_bt"
@@ -49,6 +43,7 @@
         android:layout_marginTop="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__main_screen__show_results_bt" />
+        app:layout_constraintTop_toBottomOf="@id/fragment__main__main_screen__show_results_bt"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

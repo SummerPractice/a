@@ -12,7 +12,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import java.util.*
 
 class PieChartAdapter(
-    private val chart: PieChart
+    private val chart: PieChart,
+    private val sp: Float
 ) : Chart {
     private val pastelColors = listOf(
         Color.rgb(0, 185, 197),
@@ -47,16 +48,16 @@ class PieChartAdapter(
         l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
         l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.VERTICAL
+        l.isWordWrapEnabled = true
         l.setDrawInside(false)
         l.xEntrySpace = 1f
         l.yEntrySpace = 0f
         l.yOffset = -40f
-
+        l.textSize = 6 * sp
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
-        chart.setEntryLabelTextSize(12f)
         chart.setEntryLabelColor(Color.alpha(1))
-        setData(professions)
         chart.invalidate()
+        setData(professions)
     }
 
     private fun setData(data1: List<Profession>) {
@@ -78,7 +79,7 @@ class PieChartAdapter(
 
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(12f)
+        data.setValueTextSize(6 * sp)
         data.setValueTextColor(Color.WHITE)
         chart.data = data
 

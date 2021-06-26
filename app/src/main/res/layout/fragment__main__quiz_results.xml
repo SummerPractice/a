@@ -19,12 +19,13 @@
         android:layout_height="match_parent"
         android:visibility="visible"/>
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/fragment__quiz__quiz_results_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminate="true"
-        android:visibility="gone" />
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:visibility="gone"
+        />
 
 </FrameLayout>

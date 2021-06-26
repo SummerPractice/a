@@ -2,6 +2,7 @@ package com.example.polycareer.screens.quiz.quiz_item
 
 import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -130,15 +131,16 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
     val sp = context.resources.displayMetrics.scaledDensity
+    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button_inset)
     setTextColor(ContextCompat.getColor(context, R.color.black))
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
     setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 * sp)
-    setPadding(5 * dp, 5 * dp, 5 * dp, 5 * dp)
-    setBackgroundColor(ContextCompat.getColor(context, R.color.splash_light))
+    setPadding(15 * dp, 15 * dp, 15 * dp, 15 * dp)
+    background = ContextCompat.getDrawable(context, R.drawable.radio_button_background)
 
     val lp = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
     lp.gravity = Gravity.CENTER
-    lp.setMargins(25 * dp, 10 * dp, 30 * dp, 10 * dp)
+    lp.setMargins(25 * dp, 15 * dp, 30 * dp, 15 * dp)
     layoutParams = lp
     buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.btn_light_green))
 }

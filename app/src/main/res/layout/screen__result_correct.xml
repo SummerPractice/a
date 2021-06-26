@@ -16,10 +16,14 @@
             style="@style/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment__quiz__quiz_results__head_tv" />
+            android:text="@string/fragment__quiz__quiz_results__head_tv"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="15dp"
+            />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/fragment__main__quiz_results__graph_rc"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="350dp" />
 
@@ -28,6 +32,8 @@
             style="@style/boldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
             android:paddingTop="16dp"
             android:text="@string/fragment__quiz__quiz_results__res_tv" />
 
@@ -35,6 +41,7 @@
             android:id="@+id/fragment__main__quiz_results__rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:nestedScrollingEnabled="true"
             tools:itemCount="3"
             tools:listitem="@layout/simple_rv_item" />
@@ -44,7 +51,8 @@
             style="@style/headerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:gravity="center"
             android:text="@string/fragment__quiz__quiz_results__gl_tv" />
     </LinearLayout>

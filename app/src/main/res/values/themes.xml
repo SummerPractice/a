@@ -32,7 +32,7 @@
     <style name="boldText" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/opensans_bold</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="button" parent="Widget.AppCompat.Button">
@@ -74,23 +74,12 @@
         <item name="android:paddingStart">5dp</item>
     </style>
 
-    <style name="radioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <!--<item name="android:button">@drawable/cornered_button</item>-->
-        <item name="android:fontFamily">@font/opensans_regular</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">300dp</item>
-        <item name="android:paddingStart">5dp</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:background">@color/splash_light</item>
-        <item name="android:buttonTint">@color/btn_light_green</item>
-    </style>
-
     <style name="horizontalProgress" >
-        <item name="color">@color/splash_light</item>
+        <item name="trackColor">@color/splash_light</item>
         <item name="android:progress">0</item>
         <item name="android:max">100</item>
+        <item name="trackThickness">30dp</item>
+        <item name="indicatorColor">@color/btn_light_green</item>
     </style>
 
 </resources>

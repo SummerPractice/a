@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">PolyCareer</string>
-    <string name="alphabet">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
     <string name="fragment__hello_welcome_tv">Приветствуем, абитуриент!</string>
-    <string name="fragment__hello_desc_tv">Это приложение поможет тебе определиться с выбором специальности в IT и узнать об образовательных программах ИКНТ, которые подходят именно тебе.</string>
+    <string name="fragment__hello_desc_tv">Это приложение поможет определиться с выбором специальности в IT и узнать об образовательных программах ИКНТ, которые подходят именно тебе.</string>
     <string name="fragment__hello_start_btn">Начать</string>
     <string name="fragment__hello_register_btn">Зарегистрироваться</string>
 
@@ -32,7 +31,7 @@
 
     <string name="fragment__quiz__quiz_results__head_tv">Результаты</string>
     <string name="fragment__quiz__quiz_results__res_tv">Рекомендуемые направления</string>
-    <string name="fragment__quiz__quiz_results__gl_tv">Удачи!</string>
+    <string name="fragment__quiz__quiz_results__gl_tv">Успехов!</string>
     <string name="fragment__quiz__quiz_results__next_text_button"><![CDATA[Подробнее >]]></string>
 
     <string name="screen_result_error_message">Произошла ошибка! <br/>Попробуйте ещё раз</string>
@@ -40,15 +39,13 @@
 
 
     <string name="fragment__quiz__quiz_item__head_tv">Что из перечисленного тебя больше интересует?</string>
-    <string name="press_again">Нажмите назад еще раз чтобы закрыть тест</string>
+    <string name="press_again">Нажмите назад еще раз, чтобы закрыть тест</string>
 
 
     <string name="fragment__main__main_screen_title">Что далее?</string>
-    <string name="fragment__main__main_screen_new_test">Начать новый тест</string>
-    <string name="fragment__main__main_screen_old_results">Прошлые результаты</string>
-    <string name="fragment__main__main_screen_register">Пройти регистрацию</string>
+    <string name="fragment__main__main_screen_new_test">Новый тест</string>
+    <string name="fragment__main__main_screen_old_results">Результаты</string>
+    <string name="fragment__main__main_screen_register">Регистрация</string>
 
-
-    <string name="fragment__main__old_results_title">Предыдующие результаты</string>
     <string name="try_title">Попытка №%1$d</string>
 </resources>
