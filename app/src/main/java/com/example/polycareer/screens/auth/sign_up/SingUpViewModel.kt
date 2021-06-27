@@ -13,11 +13,11 @@ class SingUpViewModel(
     private val authUseCase: AuthUseCase
 ) : ValidationParamViewModel<SingUpViewModel.AuthState, AuthUseCase>(authUseCase, AuthState()) {
 
-    fun saveUserDetail(firstName: String, lastName: String, email: String, isChecked: Boolean) {
+    fun saveUserDetail(firstName: String, lastName: String, email: String, isConfChecked: Boolean, isNewsChecked: Boolean) {
         viewModelScope.launch {
-            if (!isParamsValid(firstName, lastName, email, isChecked)) return@launch
+            if (!isParamsValid(firstName, lastName, email, isConfChecked)) return@launch
 
-            authUseCase.saveUser(UserDetails(firstName, lastName, email)).also { result ->
+            authUseCase.saveUser(UserDetails(firstName, lastName, email), isNewsChecked).also { result ->
                 if (result is Result.DataCorrect)
                     sendAction(ValidationAction.DataSaved)
 

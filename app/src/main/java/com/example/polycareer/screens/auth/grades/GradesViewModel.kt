@@ -4,14 +4,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseState
 import com.example.polycareer.base.ValidationParamViewModel
 import com.example.polycareer.domain.model.UserGrades
-import com.example.polycareer.domain.usecase.GradesUseCase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.polycareer.domain.model.Result
+import com.example.polycareer.domain.usecase.AuthUseCase
 
 class GradesViewModel(
-    private val useCase: GradesUseCase
-) : ValidationParamViewModel<GradesViewModel.GradesState, GradesUseCase>(useCase, GradesState()) {
+    private val useCase: AuthUseCase
+) : ValidationParamViewModel<GradesViewModel.GradesState, AuthUseCase>(useCase, GradesState()) {
 
     fun saveGrades(
         math: String,
@@ -23,13 +23,22 @@ class GradesViewModel(
         viewModelScope.launch {
             if (!isParamsValid(math, rus, phys, inf, id)) return@launch
 
-            useCase.saveGrades(UserGrades(math, rus, phys, inf, id)).also { result ->
-                if (result is Result.DataCorrect)
-                    sendAction(ValidationAction.DataSaved)
+            useCase.sendUserInfo(UserGrades(math, rus, phys, inf, id)).also { result ->
+                if (result is Result.Error) {
+                    sendAction(ValidationAction.Error(result.message))
+                    return@launch
+                }
+            }
 
+            useCase.saveGrades(UserGrades(math, rus, phys, inf, id)).also { result ->
                 if (result is Result.Error)
                     sendAction(ValidationAction.Error(result.message))
+
+                if (result is Result.DataCorrect)
+                    sendAction(ValidationAction.DataSaved)
             }
+
+
         }
     }
 

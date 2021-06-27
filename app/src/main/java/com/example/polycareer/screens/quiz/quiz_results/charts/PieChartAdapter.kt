@@ -13,7 +13,6 @@ import java.util.*
 
 class PieChartAdapter(
     private val chart: PieChart,
-    private val sp: Float
 ) : Chart {
     private val pastelColors = listOf(
         Color.rgb(0, 185, 197),
@@ -53,7 +52,7 @@ class PieChartAdapter(
         l.xEntrySpace = 1f
         l.yEntrySpace = 0f
         l.yOffset = -40f
-        l.textSize = 6 * sp
+        l.textSize = 16f
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelColor(Color.alpha(1))
         chart.invalidate()
@@ -79,7 +78,7 @@ class PieChartAdapter(
 
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(6 * sp)
+        data.setValueTextSize(16f)
         data.setValueTextColor(Color.WHITE)
         chart.data = data
 

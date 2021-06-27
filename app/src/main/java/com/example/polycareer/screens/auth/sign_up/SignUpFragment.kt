@@ -88,7 +88,8 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         val lastname = lastnameInput.value
         val email = emailInput.value
         val isConfChecked = cbConf.isChecked
+        val isNewsChecked = cbNews.isChecked
 
-        viewModel.saveUserDetail(firstname, lastname, email, isConfChecked)
+        viewModel.saveUserDetail(firstname, lastname, email, isConfChecked, isNewsChecked)
     }
 }

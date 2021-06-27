@@ -8,10 +8,12 @@ import org.koin.dsl.binds
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { UserRepositoryImpl(get(), androidContext()) } binds arrayOf(
+    single { UserLocalRepository(get(), androidContext()) } binds arrayOf(
         UserRepository::class,
         UserCache::class
     )
+
+    single { UserRemoteRepository(get()) }
 
     single<ResultsInfoRepository> { ResultsInfoRepositoryImpl(get()) }
 

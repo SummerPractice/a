@@ -11,7 +11,7 @@ import com.example.polycareer.domain.model.UserGrades
 import com.example.polycareer.domain.repository.UserRepository
 
 
-class UserRepositoryImpl(
+class UserLocalRepository(
     private val userDao: UserDao,
     private val applicationContext: Context
 ) : UserRepository {

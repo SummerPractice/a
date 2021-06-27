@@ -64,8 +64,7 @@ class QuizResultsFragment : Fragment() {
         loader = rootView.findViewById(R.id.fragment__quiz__quiz_results_progress_bar)
 
         chart =
-            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
-                requireContext().resources.displayMetrics.scaledDensity)
+            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc))
         createRecyclerView()
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
