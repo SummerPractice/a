@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="?attr/bgColor"
     tools:context=".screens.auth.sign_up.SignUpFragment">
 
     <androidx.appcompat.widget.AppCompatTextView

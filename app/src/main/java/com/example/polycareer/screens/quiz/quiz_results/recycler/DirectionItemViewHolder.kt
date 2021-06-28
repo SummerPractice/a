@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polycareer.R
 import com.example.polycareer.domain.model.Direction
@@ -18,6 +19,9 @@ class DirectionItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     fun bind(number: Int, direction: Direction) {
         this.number.text = number.toString()
         title.text = direction.title
+        if (direction.description.isEmpty()) {
+            description.visibility = View.GONE
+        }
         description.text = direction.description
         itemView.setOnClickListener { openUrl(direction.url) }
     }

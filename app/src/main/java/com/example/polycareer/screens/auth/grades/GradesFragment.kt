@@ -62,7 +62,7 @@ class GradesFragment : Fragment(), View.OnClickListener {
 
     private fun nextFragment() {
         val navController = NavHostFragment.findNavController(this)
-        navController.navigate(R.id.action_gradesMarksFragment_to_quizItemFragment)
+        navController.navigate(R.id.action_gradesMarksFragment_to_mainFragment)
         viewModel.navigationComplete()
     }
 

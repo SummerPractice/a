@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/bgColor"
     android:layout_marginVertical="10dp">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/rect"
+        android:textColor="?attr/bgColor"
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -23,15 +25,14 @@
         android:id="@+id/dir_item__tv_dest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
         android:ellipsize="end"
         android:gravity="top"
         android:maxLines="1"
-        android:textColor="@color/black"
+        style="@style/boldText"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dir_item__tv_num1"
+        app:layout_constraintStart_toStartOf="@id/dir_item__tv_link"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Название направления" />
 
@@ -43,8 +44,9 @@
         android:fontFamily="@font/opensans_regular"
         android:maxLines="3"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/dir_item__tv_dest"
+        app:layout_constraintStart_toStartOf="@id/dir_item__tv_link"
         app:layout_constraintTop_toBottomOf="@id/dir_item__tv_dest"
+        app:layout_constraintBottom_toTopOf="@id/dir_item__tv_link"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Тестовое описание направления" />
 
@@ -54,11 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/opensans_regular"
         android:text="@string/fragment__quiz__quiz_results__next_text_button"
         android:textColor="#8FEB9D"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/dir_item__tv_dest"
+        app:layout_constraintStart_toEndOf="@id/dir_item__tv_num1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dir_item__tv_descr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 package com.example.polycareer.screens.quiz.quiz_results.charts
 
+import android.content.Context
 import android.graphics.Color
+import android.util.TypedValue
+import com.example.polycareer.R
 import com.example.polycareer.domain.model.Profession
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -13,6 +16,7 @@ import java.util.*
 
 class PieChartAdapter(
     private val chart: PieChart,
+    private val context: Context?
 ) : Chart {
     private val pastelColors = listOf(
         Color.rgb(0, 185, 197),
@@ -29,7 +33,11 @@ class PieChartAdapter(
 
         chart.isDrawHoleEnabled = true
 
-        chart.setTransparentCircleColor(Color.GRAY)
+        val typedValue = TypedValue()
+        val theme = context?.theme
+        theme?.resolveAttribute(R.attr.bgColor, typedValue, true)
+
+        chart.setHoleColor(typedValue.data)
         chart.setTransparentCircleAlpha(110)
 
         chart.holeRadius = 45f
@@ -53,6 +61,8 @@ class PieChartAdapter(
         l.yEntrySpace = 0f
         l.yOffset = -40f
         l.textSize = 16f
+        theme?.resolveAttribute(R.attr.textColor, typedValue, true)
+        l.textColor = typedValue.data
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelColor(Color.alpha(1))
         chart.invalidate()

@@ -66,7 +66,8 @@ class MainScreenFragment : Fragment() {
         val preferences = activity?.getSharedPreferences(App.IS_FIRST_OPEN, Context.MODE_PRIVATE) ?: return
         val isFirstOpen = preferences.getBoolean(App.FIRST_OPEN_KEY, true)
 
-        if (isFirstOpen)
+        if (isFirstOpen) {
             openScreen(R.id.action_mainFragment_to_helloFragment)
+        }
     }
 }

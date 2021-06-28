@@ -37,6 +37,7 @@ class HelloFragment : Fragment() {
 
     private fun begin() {
         openScreen(R.id.action_helloFragment_to_mainFragment)
+        openScreen(R.id.action_mainFragment_to_quizItemFragment)
     }
 
     private fun firstOpen() {

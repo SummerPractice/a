@@ -4,10 +4,9 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-
     <style name="Theme.PolyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/splash_dark</item>
+        <item name="colorPrimary">@color/splash_light</item>
         <item name="colorPrimaryVariant">@color/btn_light_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -17,6 +16,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="bgColor">@color/white</item>
+        <item name="textColor">@color/black</item>
+        <item name="answerColor">@color/splash_dark</item>
+        <item name="btnColor">@color/btn_light_green</item>
     </style>
 
     <style name="headerText" parent="Widget.AppCompat.TextView">
@@ -75,11 +78,11 @@
     </style>
 
     <style name="horizontalProgress" >
-        <item name="trackColor">@color/splash_light</item>
+        <item name="trackColor">?attr/bgColor</item>
         <item name="android:progress">0</item>
         <item name="android:max">100</item>
         <item name="trackThickness">30dp</item>
-        <item name="indicatorColor">@color/btn_light_green</item>
+        <item name="indicatorColor">?attr/btnColor</item>
     </style>
 
 </resources>

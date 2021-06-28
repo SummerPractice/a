@@ -13,7 +13,7 @@ class OldResultsViewHolder(itemView: View, private val listener : OldResultsAdap
 
     fun bind(result: UserResultInfo) {
         number.text = result.tryNumber.toString()
-        title.text = itemView.context.getString(R.string.try_title, result.tryNumber)
+        title.visibility = View.GONE
         dateOfTry.text = result.date
         itemView.setOnClickListener { listener.onItemClick(result.tryNumber) }
     }

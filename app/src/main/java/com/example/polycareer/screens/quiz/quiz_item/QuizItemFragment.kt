@@ -132,9 +132,14 @@ private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
     val sp = context.resources.displayMetrics.scaledDensity
     buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button_inset)
-    setTextColor(ContextCompat.getColor(context, R.color.black))
+
+    val typedValue = TypedValue()
+    val theme = context.theme
+    theme.resolveAttribute(R.attr.textColor, typedValue, true)
+    setTextColor(typedValue.data)
+
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
-    setTextSize(TypedValue.COMPLEX_UNIT_SP, 8 * sp)
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, 7 * sp)
     setPadding(15 * dp, 15 * dp, 15 * dp, 15 * dp)
     background = ContextCompat.getDrawable(context, R.drawable.radio_button_background)
 
@@ -142,6 +147,7 @@ private fun AppCompatRadioButton.setStyle() {
     lp.gravity = Gravity.CENTER
     lp.setMargins(25 * dp, 15 * dp, 30 * dp, 15 * dp)
     layoutParams = lp
-    buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.btn_light_green))
+    theme.resolveAttribute(R.attr.btnColor, typedValue, true)
+    buttonTintList = ColorStateList.valueOf(typedValue.data)
 }
 
