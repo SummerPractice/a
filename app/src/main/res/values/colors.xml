@@ -11,4 +11,5 @@
     <color name="answer_dark">#373737</color>
     <color name="splash_dark">#373737</color>
     <color name="splash_light">#3C3F41</color>
+    <color name="answer_light">#FFBEF9BF</color>
 </resources>

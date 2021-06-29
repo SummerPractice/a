@@ -53,9 +53,9 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    implementation "org.koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+//    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
 
     implementation "com.github.PhilJay:MPAndroidChart:$chart_version"
 

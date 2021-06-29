@@ -7,7 +7,6 @@ import com.example.polycareer.data.database.model.UsersAnswersEntity
 import com.example.polycareer.domain.model.QuestionsApiResponse
 import com.example.polycareer.domain.model.QuestionsResponse
 import com.example.polycareer.exception.DatabaseException
-import kotlin.random.Random
 
 class QuizItemsLocalRepository(
     private val quizDao: QuizDao
