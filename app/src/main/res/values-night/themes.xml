@@ -61,13 +61,11 @@
         <item name="android:textColorHint">@color/text_gray</item>
         <item name="android:background">@drawable/edit_text_frame</item>
         <item name="android:height">20dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 

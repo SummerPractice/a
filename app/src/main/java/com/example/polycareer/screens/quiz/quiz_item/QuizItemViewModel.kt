@@ -57,6 +57,15 @@ class QuizItemViewModel(
         }
     }
 
+    fun clearUsersAttempt() {
+        viewModelScope.launch {
+            useCase.clearUserAnswers().also { result ->
+                if (result is QuizItemUseCase.Result.Error)
+                    sendAction(QuizItemAction.Error(result.message))
+            }
+        }
+    }
+
     private fun isLastQuestion(): Boolean =
         questionId == questions.size - 1
 
