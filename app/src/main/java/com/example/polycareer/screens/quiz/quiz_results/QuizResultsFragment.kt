@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polycareer.App
@@ -21,13 +23,14 @@ import com.example.polycareer.screens.quiz.quiz_results.charts.PieChartAdapter
 import com.example.polycareer.screens.quiz.quiz_results.recycler.DirectionAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class QuizResultsFragment : Fragment() {
+class QuizResultsFragment : Fragment(), View.OnClickListener {
     private lateinit var chart: Chart
     private lateinit var recommendedDirections: DirectionAdapter
 
     private lateinit var correctScreen: View
     private lateinit var errorScreen: View
     private lateinit var loader: ProgressBar
+    private lateinit var toMenuBtn: AppCompatButton
 
     private val viewModel: QuizResultsViewModel by viewModel()
 
@@ -62,6 +65,7 @@ class QuizResultsFragment : Fragment() {
         errorScreen = rootView.findViewById(R.id.error_screen)
         setReloadButton()
         loader = rootView.findViewById(R.id.fragment__quiz__quiz_results_progress_bar)
+        toMenuBtn = rootView.findViewById(R.id.fragment__main__quiz_results__main_btn)
 
         chart =
             PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
@@ -91,6 +95,12 @@ class QuizResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toMenuBtn.setOnClickListener(this)
         viewModel.getData()
+    }
+
+    override fun onClick(v: View?) {
+        val navController = NavHostFragment.findNavController(this)
+        navController.popBackStack(R.id.mainFragment, false)
     }
 }

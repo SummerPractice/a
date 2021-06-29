@@ -1,10 +1,12 @@
 package com.example.polycareer.screens.auth.sign_up
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.Observer
@@ -15,7 +17,7 @@ import com.example.polycareer.utils.setValueByCondition
 import com.example.polycareer.utils.value
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SignUpFragment : Fragment(), View.OnClickListener {
+class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListener {
     private lateinit var button: Button
     private lateinit var firstnameInput: EditText
     private lateinit var lastnameInput: EditText
@@ -78,6 +80,8 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         lastnameInput.setValidateRule(viewModel) { onLastNameChanged(lastnameInput.value) }
         emailInput.setValidateRule(viewModel) { onEmailChanged(emailInput.value) }
 
+        firstnameInput.onFocusChangeListener = this
+
         cbConf.setOnCheckedChangeListener { _: CompoundButton, state: Boolean ->
             viewModel.onConfCheckedChange(state)
         }
@@ -91,5 +95,12 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         val isNewsChecked = cbNews.isChecked
 
         viewModel.saveUserDetail(firstname, lastname, email, isConfChecked, isNewsChecked)
+    }
+
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+        if (!hasFocus) {
+            val imm : InputMethodManager? = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        }
     }
 }

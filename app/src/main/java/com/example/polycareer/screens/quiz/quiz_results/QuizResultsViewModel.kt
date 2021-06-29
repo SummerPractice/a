@@ -37,6 +37,10 @@ class QuizResultsViewModel(
         }
     }
 
+    fun navigationComplete() {
+        state = QuizResultState()
+    }
+
     override fun onReduceState(action: QuizResultAction): QuizResultState = when (action) {
         is QuizResultAction.ShowResults -> state.copy(
             isLoad = false,

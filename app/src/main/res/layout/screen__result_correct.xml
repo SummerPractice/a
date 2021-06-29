@@ -47,14 +47,14 @@
             tools:itemCount="3"
             tools:listitem="@layout/simple_rv_item" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment__main__quiz_results__gl_tv"
-            style="@style/headerText"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment__main__quiz_results__main_btn"
+            style="@style/button"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
             android:gravity="center"
-            android:text="@string/fragment__quiz__quiz_results__gl_tv" />
+            android:text="@string/fragment__main__quiz_results__main_btn" />
     </LinearLayout>
 </ScrollView>

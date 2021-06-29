@@ -1,12 +1,15 @@
 package com.example.polycareer.screens.auth.grades
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
@@ -14,7 +17,7 @@ import com.example.polycareer.R
 import com.example.polycareer.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GradesFragment : Fragment(), View.OnClickListener {
+class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListener {
     private lateinit var etMath: AppCompatEditText
     private lateinit var etRus: AppCompatEditText
     private lateinit var etPhys: AppCompatEditText
@@ -62,8 +65,7 @@ class GradesFragment : Fragment(), View.OnClickListener {
 
     private fun nextFragment() {
         val navController = NavHostFragment.findNavController(this)
-        navController.navigate(R.id.action_gradesMarksFragment_to_mainFragment)
-        viewModel.navigationComplete()
+        navController.popBackStack(R.id.mainFragment, false)
     }
 
     private fun showError(errorMessage: String) {
@@ -80,6 +82,11 @@ class GradesFragment : Fragment(), View.OnClickListener {
         etPhys.setValidateRule(viewModel) { onPhysGradeChange(etPhys.value, etInf.value) }
         etInf.setValidateRule(viewModel) { onInfGradeChange(etPhys.value, etInf.value) }
         etId.setValidateRule(viewModel) { onIdGradeChange(etId.value) }
+        etMath.onFocusChangeListener = this
+        etRus.onFocusChangeListener = this
+        etPhys.onFocusChangeListener = this
+        etInf.onFocusChangeListener = this
+        etId.onFocusChangeListener = this
     }
 
     override fun onClick(v: View?) {
@@ -90,5 +97,12 @@ class GradesFragment : Fragment(), View.OnClickListener {
         val id = etId.value
 
         viewModel.saveGrades(math, rus, phys, inf, id)
+    }
+
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+        if (!hasFocus) {
+            val imm : InputMethodManager? = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        }
     }
 }

@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/bgColor"
-    tools:context=".screens.auth.grades.GradesFragment">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".screens.auth.grades.GradesFragment"
+    android:focusable="true">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fragment__main__grades__head_tv"
@@ -143,6 +146,4 @@
         app:layout_constraintBottom_toBottomOf="@id/fragment__main__grades__id_tv"
         app:layout_constraintStart_toStartOf="@id/fragment__main__grades__math_ev"
         app:layout_constraintTop_toTopOf="@id/fragment__main__grades__id_tv" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
