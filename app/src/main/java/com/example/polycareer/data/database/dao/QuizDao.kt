@@ -25,7 +25,7 @@ interface QuizDao {
     @Query("SELECT * FROM answers ORDER BY question_id, answer_index")
     suspend fun getAllQuestions(): List<AnswersEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNewAnswer(answerId: UsersAnswersEntity)
 
     @Query("DELETE FROM users_answers")
@@ -33,6 +33,9 @@ interface QuizDao {
 
     @Query("DELETE FROM users_answers WHERE try_number =:tryNumber AND user_id = :userId")
     suspend fun deleteAnswersByUsersTryNumber(tryNumber: Long, userId: Long)
+
+    @Query("DELETE FROM users_answers WHERE user_id = :userId AND time = (SELECT max(time) FROM users_answers)")
+    suspend fun deleteUsersLastAnswer(userId: Long)
 
     @Query("SELECT COALESCE(MAX(try_number), 0) FROM users_answers WHERE user_id = :userId")
     suspend fun getCountOfUsersAttempts(userId: Long): Long

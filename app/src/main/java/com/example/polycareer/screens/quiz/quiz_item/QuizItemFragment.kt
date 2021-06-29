@@ -37,10 +37,9 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 
     private val viewModel: QuizItemViewModel by viewModel()
 
-    private var pressedTime = -1L
-
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
         if (state.toResults != -1L) toResults(state.toResults)
+        if (state.toMenu) toMenu()
         if (state.errorMessage.isEmpty()) {
             bindAnswers(state.answers)
             bindProgress(state.progress)
@@ -84,13 +83,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (pressedTime + 2000 > System.currentTimeMillis()) {
-                    viewModel.clearUsersAttempt()
-                    findNavController().navigateUp()
-                } else {
-                    showToast(getString(R.string.press_again))
-                }
-                pressedTime = System.currentTimeMillis()
+                viewModel.toPreviousQuestion()
             }
         })
 
@@ -121,6 +114,10 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         val navController = NavHostFragment.findNavController(this)
         navController.navigate(R.id.action_quizItemFragment_to_quizResultsFragment, bundle)
         viewModel.navigationComplete()
+    }
+
+    private fun toMenu() {
+        findNavController().navigateUp()
     }
 
     private fun showToast(errorMessage: String) {

@@ -66,7 +66,15 @@ class QuizItemUseCase(
         Result.Success
     }
 
-    fun getTryNumber(): Long = localRepository.currentTryNumber
+    suspend fun getTryNumber(): Long = localRepository.currentTryNumber
+
+    suspend fun clearUserLastAnswer() : Result = withContext(Dispatchers.IO) {
+        val userId = userCache.getCurrentUserId()
+        if (!localRepository.clearUsersLastAnswer(userId)) {
+            Result.Error("Failed to clear data")
+        }
+        Result.Success
+    }
 
     sealed interface Result {
         class DataCorrect(val questionsResponse: QuestionsResponse) : Result

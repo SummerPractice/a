@@ -11,14 +11,14 @@ class QuizItemViewModel(
     private val useCase: QuizItemUseCase
 ) : BaseViewModel<QuizItemViewModel.QuizItemState, QuizItemViewModel.QuizItemAction>(QuizItemState()) {
 
-    private var questionId: Int = 0
+    private var questionId: Int = -1
 
     private var questions = listOf<List<String>>()
 
     private fun saveUserAnswer(answerId: Int) {
         viewModelScope.launch {
             useCase
-                .saveUserAnswer(questionId = questionId - 1, answerId = answerId)
+                .saveUserAnswer(questionId = questionId, answerId = answerId)
                 .also { result ->
                     if (result is QuizItemUseCase.Result.Success)
                         navigateForward()
@@ -26,6 +26,18 @@ class QuizItemViewModel(
                     if (result is QuizItemUseCase.Result.Error)
                         sendAction(QuizItemAction.Error(result.message))
                 }
+        }
+    }
+
+    private fun deleteLastAnswer() {
+        viewModelScope.launch {
+            useCase.clearUserLastAnswer().also { result ->
+                if (result is QuizItemUseCase.Result.Success)
+                    navigateBackward()
+
+                if (result is QuizItemUseCase.Result.Error)
+                    sendAction(QuizItemAction.Error(result.message))
+            }
         }
     }
 
@@ -55,14 +67,27 @@ class QuizItemViewModel(
     }
 
     private fun isLastQuestion(): Boolean =
-        questionId == questions.size
+        questionId == questions.size - 1
 
-    private fun getNextQuestion(): List<String> {
-        return questions[questionId++]
-    }
+
+    private fun isFirstQuestion(): Boolean =
+        questionId == 0
+
+    private fun getNextQuestion(): List<String> = questions[++questionId]
+
+
+    private fun getPreviousQuestion(): List<String> = questions[--questionId]
 
     fun onFragmentCreated() {
         loadQuestions()
+    }
+
+    fun toPreviousQuestion() {
+        if (isFirstQuestion()) {
+            sendAction(QuizItemAction.ToMenu)
+        } else {
+            deleteLastAnswer()
+        }
     }
 
     fun navigationComplete() {
@@ -71,9 +96,7 @@ class QuizItemViewModel(
 
     fun onNextButtonClicked(answerId: Int) {
         saveUserAnswer(answerId)
-        // navigateForward()
     }
-
 
     private fun navigateForward() {
         if (isLastQuestion()) {
@@ -86,6 +109,10 @@ class QuizItemViewModel(
         }
     }
 
+    private fun navigateBackward() {
+        sendAction(QuizItemAction.ToNextQuestion(getPreviousQuestion()))
+    }
+
     override fun onReduceState(action: QuizItemAction) = when (action) {
         is QuizItemAction.ToResults -> state.copy(toResults = action.tryNumber)
         is QuizItemAction.ToNextQuestion -> state.copy(
@@ -93,19 +120,24 @@ class QuizItemViewModel(
             toNextQuestion = true,
             progress = 100 / questions.size * questionId
         )
+        is QuizItemAction.ToMenu -> state.copy(toMenu = true)
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
+
+
 
     sealed interface QuizItemAction : BaseAction {
         class ToNextQuestion(val answers: List<String>) : QuizItemAction
         class ToResults(val tryNumber: Long) : QuizItemAction
         class Error(val message: String) : QuizItemAction
+        object ToMenu : QuizItemAction
     }
 
     data class QuizItemState(
         val answers: List<String> = emptyList(),
         val toNextQuestion: Boolean = false,
         val toResults: Long = -1,
+        val toMenu: Boolean = false,
         val selectedAnswer: Int = -1,
         val errorMessage: String = "",
         val progress: Int = 0,
