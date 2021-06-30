@@ -36,7 +36,7 @@ class PieChartAdapter(
         val typedValue = TypedValue()
         val theme = context?.theme
         theme?.resolveAttribute(R.attr.bgColor, typedValue, true)
-
+        //TODO(ATTRIBUTE)
         chart.setHoleColor(typedValue.data)
         chart.setTransparentCircleAlpha(110)
 

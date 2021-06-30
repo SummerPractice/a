@@ -6,7 +6,7 @@
 
     <style name="Theme.PolyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/splash_dark</item>
+        <item name="colorPrimary">@color/splash_dark_d</item>
         <item name="colorPrimaryVariant">@color/dark_background</item>
         <item name="colorOnPrimary">@color/dark_background</item>
         <!-- Secondary brand color. -->
