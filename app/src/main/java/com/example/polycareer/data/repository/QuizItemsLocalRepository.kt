@@ -13,11 +13,12 @@ class QuizItemsLocalRepository(
 ) {
     var currentTryNumber = 0L
 
-    private suspend fun deleteUnfinishedTests(): Boolean =
+    suspend fun deleteUnfinishedTests(): Boolean =
         try {
             quizDao.deleteUnfinishedTests()
             true
         } catch (e: Exception) {
+            e.printStackTrace()
             false
         }
 

@@ -66,6 +66,13 @@ class QuizItemUseCase(
         Result.Success
     }
 
+    suspend fun deleteUnfinishedTests(): Result = withContext(Dispatchers.IO) {
+        if (!localRepository.deleteUnfinishedTests()) {
+            Result.Error("Failed to clear data")
+        }
+        Result.Success
+    }
+
     suspend fun getTryNumber(): Long = localRepository.currentTryNumber
 
     suspend fun clearUserLastAnswer() : Result = withContext(Dispatchers.IO) {

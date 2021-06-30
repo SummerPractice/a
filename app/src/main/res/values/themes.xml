@@ -11,7 +11,7 @@
         <item name="colorPrimaryVariant">@color/btn_light_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/dark_green</item>
+        <item name="colorSecondary">@color/btn_light_green</item>
         <item name="colorSecondaryVariant">@color/text_gray</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -52,6 +52,8 @@
         <item name="android:fontFamily">@font/opensans_regular</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">30</item>
         <item name="android:inputType">text</item>
@@ -62,7 +64,7 @@
         <item name="android:paddingEnd">20dp</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
@@ -72,6 +74,12 @@
         <item name="android:textSize">14sp</item>
         <item name="android:height">20dp</item>
         <item name="android:paddingStart">5dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="buttonTint">@color/btn_light_green</item>
     </style>
 
     <style name="horizontalProgress" >

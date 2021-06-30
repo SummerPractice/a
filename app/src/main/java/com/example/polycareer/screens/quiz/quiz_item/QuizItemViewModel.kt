@@ -15,6 +15,16 @@ class QuizItemViewModel(
 
     private var questions = listOf<List<String>>()
 
+    private fun deleteUnfinishedTests() {
+        viewModelScope.launch {
+            useCase.deleteUnfinishedTests()
+                .also { result ->
+                    if (result is QuizItemUseCase.Result.Error)
+                        sendAction(QuizItemAction.Error(result.message))
+                }
+        }
+    }
+
     private fun saveUserAnswer(answerId: Int) {
         viewModelScope.launch {
             useCase
@@ -70,7 +80,10 @@ class QuizItemViewModel(
     private fun getPreviousQuestion(): List<String> = questions[--questionId]
 
     fun onFragmentCreated() {
-        loadQuestions()
+        if (questions.isEmpty()) {
+            deleteUnfinishedTests()
+            loadQuestions()
+        }
     }
 
     fun toPreviousQuestion() {
@@ -115,6 +128,11 @@ class QuizItemViewModel(
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
 
+    fun onFragmentDestroyed() {
+        if (questionId > 0) {
+            deleteUnfinishedTests()
+        }
+    }
 
 
     sealed interface QuizItemAction : BaseAction {

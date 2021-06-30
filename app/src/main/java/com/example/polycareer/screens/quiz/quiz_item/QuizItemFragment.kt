@@ -98,6 +98,12 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         viewModel.onFragmentCreated()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel.onFragmentDestroyed()
+    }
+
     override fun onClick(v: View?) {
         val radioButtonID: Int = rgAnswers.checkedRadioButtonId
         val radioButton: View? = rgAnswers.findViewById(radioButtonID)
@@ -129,6 +135,7 @@ private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
     val sp = context.resources.displayMetrics.scaledDensity
     buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button_inset)
+
 
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
     setTextSize(TypedValue.COMPLEX_UNIT_SP, 7 * sp)

@@ -18,7 +18,7 @@ interface QuizDao {
     suspend fun deleteAllQuestions()
 
     @Query("DELETE FROM users_answers WHERE try_number IN (" +
-            "SELECT try_number FROM users_answers GROUP BY try_number HAVING count(*) < (" +
+            "SELECT try_number FROM users_answers GROUP BY user_id, try_number HAVING count(*) < (" +
             "SELECT max(question_id) + 1 FROM answers))")
     suspend fun deleteUnfinishedTests()
 
@@ -55,6 +55,6 @@ interface QuizDao {
     @Query("SELECT * FROM users_answers WHERE user_id = :userId AND try_number = :tryNumber")
     suspend fun getUserAnswers(userId: Long, tryNumber: Long): List<UsersAnswersEntity>
 
-    @Query("SELECT try_number, time FROM users_answers GROUP BY try_number HAVING max(time)")
+    @Query("SELECT try_number, time FROM users_answers GROUP BY user_id, try_number HAVING max(time)")
     suspend fun getTries(): List<ResultInfo>
 }
