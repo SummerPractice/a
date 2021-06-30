@@ -7,14 +7,14 @@
     <style name="Theme.PolyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <!-- Primary brand color. -->
         <item name="colorPrimary">@color/splash_dark</item>
-        <item name="colorPrimaryVariant">?attr/bgColor</item>
+        <item name="colorPrimaryVariant">@color/dark_background</item>
         <item name="colorOnPrimary">@color/dark_background</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dark_green</item>
         <item name="colorSecondaryVariant">@color/text_gray</item>
         <item name="colorOnSecondary">@color/dark_background</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/dark_background</item>
         <!-- Customize your theme here. -->
         <item name="bgColor">@color/dark_background</item>
         <item name="textColor">@color/white</item>
@@ -24,7 +24,7 @@
 
     <style name="headerText" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/opensans_bold</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:textSize">24sp</item>
     </style>
     <style name="lightText" parent="Widget.AppCompat.TextView">
@@ -34,14 +34,14 @@
     </style>
     <style name="boldText" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/opensans_bold</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="button" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:textSize">18sp</item>
         <item name="android:background">@drawable/btn_background</item>
         <item name="android:layout_gravity">center_horizontal</item>
@@ -49,12 +49,12 @@
     <style name="regularText" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/opensans_regular</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
     </style>
     <style name="editText" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/opensans_regular</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">30</item>
         <item name="android:inputType">text</item>
@@ -73,14 +73,14 @@
 
     <style name="checkBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:fontFamily">@font/opensans_light</item>
-        <item name="android:textColor">?attr/textColor</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:textSize">14sp</item>
         <item name="android:height">20dp</item>
         <item name="android:paddingStart">5dp</item>
     </style>
 
     <style name="horizontalProgress" >
-        <item name="trackColor">?attr/bgColor</item>
+        <item name="trackColor">@color/dark_background</item>
         <item name="android:progress">0</item>
         <item name="android:max">100</item>
         <item name="trackThickness">30dp</item>

@@ -14,7 +14,7 @@
         <item name="colorSecondaryVariant">@color/text_gray</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <!-- Customize your theme here. -->
         <item name="bgColor">@color/white</item>
         <item name="textColor">@color/black</item>
@@ -80,10 +80,10 @@
     </style>
 
     <style name="horizontalProgress" >
-        <item name="trackColor">?attr/bgColor</item>
+        <item name="trackColor">@color/white</item>
         <item name="android:progress">0</item>
         <item name="android:max">100</item>
         <item name="trackThickness">30dp</item>
-        <item name="indicatorColor">?attr/btnColor</item>
+        <item name="indicatorColor">@color/btn_light_green</item>
     </style>
 </resources>
