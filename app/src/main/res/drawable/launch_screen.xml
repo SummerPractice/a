@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
 
-    <!-- background with solid color -->
-    <item android:drawable="@drawable/splash_gradient"/>
-
-    <!-- logo -->
-    <item
-        android:drawable="@drawable/icst_logo"
-        android:gravity="center"/>
+   <item android:drawable="@drawable/splash_gradient"/>
+      <item>
+        <bitmap
+            android:src="@drawable/logo_icst"
+            android:gravity="center"/>
+    </item>
 </layer-list>

@@ -4,9 +4,10 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
+
     <style name="Theme.PolyCareer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/splash_light_d</item>
+        <item name="colorPrimary">@color/splash_dark</item>
         <item name="colorPrimaryVariant">@color/btn_light_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,12 +15,8 @@
         <item name="colorSecondaryVariant">@color/text_gray</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="bgColor">@color/white</item>
-        <item name="textColor">@color/black</item>
-        <item name="answerColor">@color/answer_light</item>
-        <item name="btnColor">@color/btn_light_green</item>
     </style>
 
     <style name="headerText" parent="Widget.AppCompat.TextView">
@@ -61,13 +58,11 @@
         <item name="android:textColorHint">@color/text_gray</item>
         <item name="android:background">@drawable/edit_text_frame</item>
         <item name="android:height">20dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
@@ -80,10 +75,11 @@
     </style>
 
     <style name="horizontalProgress" >
-        <item name="trackColor">@color/white</item>
+        <item name="trackColor">@color/splash_light</item>
         <item name="android:progress">0</item>
         <item name="android:max">100</item>
         <item name="trackThickness">30dp</item>
         <item name="indicatorColor">@color/btn_light_green</item>
     </style>
+
 </resources>

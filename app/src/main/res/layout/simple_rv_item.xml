@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bgColor"
     android:layout_marginVertical="10dp">
 
     <TextView
@@ -12,7 +11,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/rect"
-        android:textColor="?attr/bgColor"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="18sp"

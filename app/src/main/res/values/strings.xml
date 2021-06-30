@@ -31,6 +31,7 @@
 
     <string name="fragment__quiz__quiz_results__head_tv">Результаты</string>
     <string name="fragment__quiz__quiz_results__res_tv">Рекомендуемые направления</string>
+    <string name="fragment__quiz__quiz_results__gl_tv">Успехов!</string>
     <string name="fragment__quiz__quiz_results__next_text_button"><![CDATA[Подробнее >]]></string>
 
     <string name="screen_result_error_message">Произошла ошибка! <br/>Попробуйте ещё раз</string>
@@ -41,9 +42,11 @@
     <string name="press_again">Нажмите назад еще раз, чтобы закрыть тест</string>
 
 
+    <string name="fragment__main__main_screen_title">Что далее?</string>
     <string name="fragment__main__main_screen_new_test">Новый тест</string>
     <string name="fragment__main__main_screen_old_results">Результаты</string>
     <string name="fragment__main__main_screen_register">Регистрация</string>
 
+    <string name="try_title">Попытка №%1$d</string>
     <string name="fragment__main__quiz_results__main_btn">Меню</string>
 </resources>

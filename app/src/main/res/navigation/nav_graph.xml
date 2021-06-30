@@ -43,6 +43,14 @@
         android:name="com.example.polycareer.screens.auth.grades.GradesFragment"
         android:label="fragment__main__grades"
         tools:layout="@layout/fragment__main__grades">
+        <action
+            android:id="@+id/action_gradesMarksFragment_to_quizItemFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizItemFragment"
@@ -65,14 +73,6 @@
             android:name="try_number"
             app:argType="long"
             android:defaultValue="1L" />
-        <action
-            android:id="@+id/action_quizResultsFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"

@@ -33,11 +33,7 @@ class PieChartAdapter(
 
         chart.isDrawHoleEnabled = true
 
-        val typedValue = TypedValue()
-        val theme = context?.theme
-        theme?.resolveAttribute(R.attr.bgColor, typedValue, true)
-        //TODO(ATTRIBUTE)
-        chart.setHoleColor(typedValue.data)
+        chart.setHoleColor(Color.WHITE)
         chart.setTransparentCircleAlpha(110)
 
         chart.holeRadius = 45f
@@ -61,8 +57,7 @@ class PieChartAdapter(
         l.yEntrySpace = 0f
         l.yOffset = -40f
         l.textSize = 16f
-        theme?.resolveAttribute(R.attr.textColor, typedValue, true)
-        l.textColor = typedValue.data
+        l.textColor = Color.BLACK
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelColor(Color.alpha(1))
         chart.invalidate()
