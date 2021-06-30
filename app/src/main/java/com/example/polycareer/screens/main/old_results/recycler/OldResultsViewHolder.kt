@@ -11,8 +11,8 @@ class OldResultsViewHolder(itemView: View, private val listener : OldResultsAdap
     private val title: TextView = itemView.findViewById(R.id.dir_item__tv_dest)
     private var dateOfTry: TextView = itemView.findViewById(R.id.dir_item__tv_descr)
 
-    fun bind(result: UserResultInfo) {
-        number.text = result.tryNumber.toString()
+    fun bind(result: UserResultInfo, position: Int) {
+        number.text = position.toString()
         title.visibility = View.GONE
         dateOfTry.text = result.date
         itemView.setOnClickListener { listener.onItemClick(result.tryNumber) }

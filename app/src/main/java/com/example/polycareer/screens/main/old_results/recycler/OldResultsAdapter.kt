@@ -15,7 +15,7 @@ class OldResultsAdapter(private val inflater: LayoutInflater, private val listen
     }
 
     override fun onBindViewHolder(holder: OldResultsViewHolder, position: Int) {
-        holder.bind(resultsInfo[position])
+        holder.bind(resultsInfo[position], position + 1)
     }
 
     override fun getItemCount() = resultsInfo.size
