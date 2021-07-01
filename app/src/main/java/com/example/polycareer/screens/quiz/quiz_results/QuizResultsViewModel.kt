@@ -16,7 +16,7 @@ class QuizResultsViewModel(
 ) {
     var tryNumber: Long = -1
 
-    fun getData() {
+    override fun onLoadData() {
         viewModelScope.launch {
             sendAction(QuizResultAction.ShowLoader)
 
@@ -35,10 +35,6 @@ class QuizResultsViewModel(
             }
 
         }
-    }
-
-    fun navigationComplete() {
-        state = QuizResultState()
     }
 
     override fun onReduceState(action: QuizResultAction): QuizResultState = when (action) {

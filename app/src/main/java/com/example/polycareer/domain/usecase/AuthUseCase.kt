@@ -19,36 +19,36 @@ class AuthUseCase(
     private val localRepository: UserRepository,
     private val remoteRepository: UserRemoteRepository
 ) : ValidateParam() {
-    var user: UserDetails? = null
-    var isNewsChecked: Boolean = false
-    var userId: Long = App.USER_ID_DEFAULT_VALUE
+    private lateinit var user: UserDetails
+    private var isNewsChecked: Boolean = false
 
-    suspend fun saveUser(user: UserDetails, isNewsChecked: Boolean): Result {
-        userId = localRepository.checkUserEmail(user.email)
-            ?: localRepository.saveUserDetail(user)
-                    ?: return Result.Error("Failed to save data")
+    fun saveUser(user: UserDetails, isNewsChecked: Boolean): Result {
         this.user = user
         this.isNewsChecked = isNewsChecked
         return Result.DataCorrect
     }
 
-
     suspend fun saveGrades(grades: UserGrades): Result {
-        localRepository.setCurrentUser(userId)
+        val resultOfSaveUserOnServer = sendUserInfo(grades)
+        if (resultOfSaveUserOnServer is Result.Error) return resultOfSaveUserOnServer
+
+        val userId = localRepository.checkUserEmail(user.email)
+            ?: localRepository.saveUserDetail(user)
+                    ?: App.USER_ID_DEFAULT_VALUE
+
         return if (userId != App.USER_ID_DEFAULT_VALUE
             && localRepository.saveUserGrades(userId, grades)
         ) {
+            localRepository.setCurrentUser(userId)
             Result.DataCorrect
         } else {
             Result.Error("Failed to save data")
         }
     }
 
-    suspend fun sendUserInfo(grades: UserGrades): Result = withContext(Dispatchers.IO) {
+    private suspend fun sendUserInfo(grades: UserGrades): Result = withContext(Dispatchers.IO) {
         try {
-            if (isNewsChecked) {
-                remoteRepository.saveUser(user!!, grades)
-            }
+            if (isNewsChecked) remoteRepository.saveUser(user, grades)
             Result.DataCorrect
         } catch (e: LostConnectionException) {
             Result.Error("Lost connection with server")

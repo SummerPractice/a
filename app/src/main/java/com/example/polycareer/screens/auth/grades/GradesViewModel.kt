@@ -23,13 +23,6 @@ class GradesViewModel(
         viewModelScope.launch {
             if (!isParamsValid(math, rus, phys, inf, id)) return@launch
 
-            useCase.sendUserInfo(UserGrades(math, rus, phys, inf, id)).also { result ->
-                if (result is Result.Error) {
-                    sendAction(ValidationAction.Error(result.message))
-                    return@launch
-                }
-            }
-
             useCase.saveGrades(UserGrades(math, rus, phys, inf, id)).also { result ->
                 if (result is Result.Error)
                     sendAction(ValidationAction.Error(result.message))
@@ -37,8 +30,6 @@ class GradesViewModel(
                 if (result is Result.DataCorrect)
                     sendAction(ValidationAction.DataSaved)
             }
-
-
         }
     }
 

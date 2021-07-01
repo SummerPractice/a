@@ -68,8 +68,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
         toMenuBtn = rootView.findViewById(R.id.fragment__main__quiz_results__main_btn)
 
         chart =
-            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
-            context)
+            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc))
         createRecyclerView()
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
@@ -81,7 +80,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     private fun setReloadButton() {
         val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
         button.setOnClickListener {
-            viewModel.getData()
+            viewModel.loadData()
         }
     }
 
@@ -96,7 +95,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toMenuBtn.setOnClickListener(this)
-        viewModel.getData()
+        viewModel.loadData()
     }
 
     override fun onClick(v: View?) {
