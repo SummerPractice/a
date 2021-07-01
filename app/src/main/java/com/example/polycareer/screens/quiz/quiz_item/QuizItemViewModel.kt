@@ -72,7 +72,7 @@ class QuizItemViewModel(
 
 
     private fun isFirstQuestion(): Boolean =
-        questionId == 0
+        questionId <= 0
 
     private fun getNextQuestion(): List<String> = questions[++questionId]
 
@@ -86,7 +86,14 @@ class QuizItemViewModel(
         }
     }
 
+    fun onReload() {
+        loadQuestions()
+    }
+
     fun toPreviousQuestion() {
+//        if (questions.isEmpty()) {
+//            return
+//        }
         if (isFirstQuestion()) {
             sendAction(QuizItemAction.ToMenu)
         } else {

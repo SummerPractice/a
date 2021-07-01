@@ -9,10 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ProgressBar
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatRadioButton
@@ -34,17 +31,22 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var btnNext: AppCompatButton
     private lateinit var pbLoading: ProgressBar
     private lateinit var pbTest: LinearProgressIndicator
+    private lateinit var errorScreen: View
+    private lateinit var correctScreen: View
 
     private val viewModel: QuizItemViewModel by viewModel()
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
         if (state.toResults != -1L) toResults(state.toResults)
         if (state.toMenu) toMenu()
-        if (state.errorMessage.isEmpty()) {
+        if (state.answers.isEmpty()) {
+            correctScreen.isVisible = false
+            errorScreen.isVisible = true
+        } else {
+            correctScreen.isVisible =  true
+            errorScreen.isVisible = false
             bindAnswers(state.answers)
             bindProgress(state.progress)
-        } else {
-            showToast(state.errorMessage)
         }
     }
 
@@ -77,7 +79,9 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         btnNext = rootView.findViewById(R.id.fragment__main__quiz_item__next_btn)
         pbLoading = rootView.findViewById(R.id.fragment__main__quiz_item__loading_pb)
         pbTest = rootView.findViewById(R.id.fragment__main__quiz_item__test_pb)
-
+        errorScreen = rootView.findViewById(R.id.quiz_item__error_screen)
+        correctScreen = rootView.findViewById(R.id.quiz_item__correct)
+        setReloadButton()
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
@@ -126,8 +130,11 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         findNavController().navigateUp()
     }
 
-    private fun showToast(errorMessage: String) {
-        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+    private fun setReloadButton() {
+        val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
+        button.setOnClickListener {
+            viewModel.onReload()
+        }
     }
 }
 
