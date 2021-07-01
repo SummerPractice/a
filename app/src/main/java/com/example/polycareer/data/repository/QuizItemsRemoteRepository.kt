@@ -13,11 +13,7 @@ class QuizItemsRemoteRepository(
         val response = getResponse()
 
         if (response.isSuccessful) {
-            return QuestionsApiResponse(
-                response.body()!!.quiz,
-                response.body()!!.matrix,
-                response.body()!!.prof
-            )
+            return response.body()!!
         } else throw WrongResponseException(response.message())
     }
 

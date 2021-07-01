@@ -49,4 +49,7 @@
 
     <string name="try_title">Попытка №%1$d</string>
     <string name="fragment__main__quiz_results__main_btn">Меню</string>
+    <string name="no_items">Ты пока не проходил тест</string>
+    <string name="error">Произошла ошибка при загрузке прошлых результов, попробуйте попозже</string>
+    <string name="icon_placeholder">Icon placeholder</string>
 </resources>

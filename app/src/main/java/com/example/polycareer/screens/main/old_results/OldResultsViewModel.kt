@@ -32,11 +32,11 @@ class OldResultsViewModel(
     override fun onReduceState(action: OldResultsAction): OldResultsState = when (action) {
         is OldResultsAction.ShowResults -> state.copy(
             resultsInfo = action.resultsInfo,
-            error = ""
+            error = false
         )
         is OldResultsAction.Error -> state.copy(
             resultsInfo = emptyList(),
-            error = action.message
+            error = true
         )
     }
 
@@ -50,6 +50,6 @@ class OldResultsViewModel(
 
     data class OldResultsState(
         val resultsInfo: List<UserResultInfo> = emptyList(),
-        val error: String = ""
+        val error: Boolean = false
     ) : BaseState
 }
