@@ -133,13 +133,12 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 
 private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
-    val sp = context.resources.displayMetrics.scaledDensity
     buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button_inset)
 
 
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
-    setTextSize(TypedValue.COMPLEX_UNIT_SP, 7 * sp)
-    setPadding(15 * dp, 15 * dp, 15 * dp, 15 * dp)
+    setTextSize(TypedValue.COMPLEX_UNIT_SP, 19f)
+    setPadding(12 * dp, 12 * dp, 12 * dp, 12 * dp)
     background = ContextCompat.getDrawable(context, R.drawable.radio_button_background)
 
     val lp = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)

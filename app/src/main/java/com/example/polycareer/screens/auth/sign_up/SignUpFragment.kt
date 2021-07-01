@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.example.polycareer.R
+import com.example.polycareer.utils.removeValidateRule
 import com.example.polycareer.utils.setValidateRule
 import com.example.polycareer.utils.setValueByCondition
 import com.example.polycareer.utils.value
@@ -76,15 +77,25 @@ class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
 
         button.setOnClickListener(this)
 
-        firstnameInput.setValidateRule(viewModel) { onFirstNameChanged(firstnameInput.value) }
-        lastnameInput.setValidateRule(viewModel) { onLastNameChanged(lastnameInput.value) }
-        emailInput.setValidateRule(viewModel) { onEmailChanged(emailInput.value) }
-
         firstnameInput.onFocusChangeListener = this
 
         cbConf.setOnCheckedChangeListener { _: CompoundButton, state: Boolean ->
             viewModel.onConfCheckedChange(state)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        firstnameInput.setValidateRule(viewModel) { onFirstNameChanged(firstnameInput.value) }
+        lastnameInput.setValidateRule(viewModel) { onLastNameChanged(lastnameInput.value) }
+        emailInput.setValidateRule(viewModel) { onEmailChanged(emailInput.value) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        firstnameInput.removeValidateRule()
+        lastnameInput.removeValidateRule()
+        emailInput.removeValidateRule()
     }
 
     override fun onClick(v: View?) {

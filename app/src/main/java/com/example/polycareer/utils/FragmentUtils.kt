@@ -12,6 +12,10 @@ fun <T : ViewModel> EditText.setValidateRule(viewModel: T, validator: T.() -> Un
     this.doOnTextChanged { _, _, _, _ -> viewModel.validator() }
 }
 
+fun EditText.removeValidateRule() {
+    this.doOnTextChanged { _, _, _, _ -> }
+}
+
 fun <T> setValueByCondition(condition: Boolean, message: T): T? = if (condition) message else null
 
 val EditText.value: String
