@@ -16,6 +16,13 @@ class QuizResultsViewModel(
 ) {
     var tryNumber: Long = -1
 
+    var isFirstRender = true
+        get() {
+            val result = field
+            isFirstRender = false
+            return result
+        }
+
     override fun onLoadData() {
         viewModelScope.launch {
             sendAction(QuizResultAction.ShowLoader)

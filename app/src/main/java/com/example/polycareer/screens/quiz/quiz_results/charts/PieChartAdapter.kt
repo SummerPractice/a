@@ -1,18 +1,24 @@
 package com.example.polycareer.screens.quiz.quiz_results.charts
 
+import android.content.Context
 import android.graphics.Color
+import android.widget.ListView
+import com.example.polycareer.domain.model.LegendLabel
 import com.example.polycareer.domain.model.Profession
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import java.util.*
 
+
 class PieChartAdapter(
-    private val chart: PieChart
+    private val context: Context,
+    private val chart: PieChart,
+    private val legend: ListView,
+    private val isFirstRender: Boolean
 ) : Chart {
     private val pastelColors = listOf(
         Color.rgb(0, 185, 197),
@@ -23,7 +29,7 @@ class PieChartAdapter(
     override fun render(professions: List<Profession>) {
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
-        chart.setExtraOffsets(20f, 10f, 20f, 50f)
+        chart.setExtraOffsets(20f, 10f, 20f, 0f)
 
         chart.dragDecelerationFrictionCoef = 1f
 
@@ -41,23 +47,23 @@ class PieChartAdapter(
         chart.isRotationEnabled = true
         chart.isHighlightPerTapEnabled = true
 
-        chart.animateY(1100, Easing.EaseInOutQuad)
+        if (isFirstRender) {
+            chart.animateY(1100, Easing.EaseInOutQuad)
+        }
 
-        val l = chart.legend
-        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-        l.orientation = Legend.LegendOrientation.VERTICAL
-        l.isWordWrapEnabled = true
-        l.setDrawInside(false)
-        l.xEntrySpace = 1f
-        l.yEntrySpace = 0f
-        l.yOffset = -40f
-        l.textSize = 16f
-        l.textColor = Color.BLACK
+        chart.legend.isEnabled = false
+
         chart.setEntryLabelColor(Color.rgb(112, 112, 112))
         chart.setEntryLabelColor(Color.alpha(1))
         chart.invalidate()
         setData(professions)
+
+        val legendAdapter = LegendAdapter(context, chart.legend.entries
+            .filter { entry ->  entry.label.isNotEmpty()}
+            .map {
+                legendEntry -> LegendLabel(color = legendEntry.formColor, text = legendEntry.label)
+        })
+        legend.adapter = legendAdapter
     }
 
     private fun setData(data1: List<Profession>) {
@@ -71,6 +77,7 @@ class PieChartAdapter(
                 )
             )
         }
+
         val dataSet = PieDataSet(entries, "")
         dataSet.setDrawIcons(false)
         dataSet.sliceSpace = 3f
@@ -84,5 +91,6 @@ class PieChartAdapter(
         chart.data = data
 
         chart.highlightValues(null)
+
     }
 }

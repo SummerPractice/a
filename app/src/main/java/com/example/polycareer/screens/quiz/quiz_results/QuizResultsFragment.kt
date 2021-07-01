@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
@@ -25,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizResultsFragment : Fragment(), View.OnClickListener {
     private lateinit var chart: Chart
+    private lateinit var legend: ListView
     private lateinit var recommendedDirections: DirectionAdapter
 
     private lateinit var correctScreen: View
@@ -67,8 +69,12 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
         loader = rootView.findViewById(R.id.fragment__quiz__quiz_results_progress_bar)
         toMenuBtn = rootView.findViewById(R.id.fragment__main__quiz_results__main_btn)
 
-        chart =
-            PieChartAdapter(correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc))
+        chart = PieChartAdapter(
+                requireContext(),
+                correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
+                correctScreen.findViewById(R.id.fragment__main__quiz_results__legend_lv),
+                viewModel.isFirstRender)
+
         createRecyclerView()
 
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
