@@ -1,9 +1,6 @@
 package com.example.polycareer.screens.quiz.quiz_results.charts
 
-import android.content.Context
 import android.graphics.Color
-import android.util.TypedValue
-import com.example.polycareer.R
 import com.example.polycareer.domain.model.Profession
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -15,8 +12,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import java.util.*
 
 class PieChartAdapter(
-    private val chart: PieChart,
-    private val context: Context?
+    private val chart: PieChart
 ) : Chart {
     private val pastelColors = listOf(
         Color.rgb(0, 185, 197),
