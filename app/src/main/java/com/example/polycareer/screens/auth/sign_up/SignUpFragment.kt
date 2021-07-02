@@ -2,13 +2,16 @@ package com.example.polycareer.screens.auth.sign_up
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.example.polycareer.R
@@ -91,8 +94,8 @@ class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
         emailInput.setValidateRule(viewModel) { onEmailChanged(emailInput.value) }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         firstnameInput.removeValidateRule()
         lastnameInput.removeValidateRule()
         emailInput.removeValidateRule()

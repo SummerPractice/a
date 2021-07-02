@@ -17,7 +17,7 @@
         layout="@layout/screen__result_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/fragment__quiz__quiz_results_progress_bar"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:visibility="gone"
+        android:visibility="visible"
         />
 
 </FrameLayout>

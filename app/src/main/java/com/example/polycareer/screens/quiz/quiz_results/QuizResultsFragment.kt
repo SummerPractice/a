@@ -26,7 +26,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuizResultsFragment : Fragment(), View.OnClickListener {
     private lateinit var chart: Chart
-    private lateinit var legend: ListView
     private lateinit var recommendedDirections: DirectionAdapter
 
     private lateinit var correctScreen: View
@@ -37,14 +36,14 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     private val viewModel: QuizResultsViewModel by viewModel()
 
     private val stateObserver = Observer<QuizResultsViewModel.QuizResultState> { state ->
-        loader.isVisible = state.isLoad
-        errorScreen.isVisible = state.error.isNotEmpty()
-
         if (state.error.isEmpty() && !state.isLoad) {
+            loader.isVisible = false
             correctScreen.isVisible = true
             showChart(state.professions)
             showDirections(state.directions)
         }
+        loader.isVisible = state.isLoad
+        errorScreen.isVisible = state.error.isNotEmpty()
     }
 
     private fun showDirections(directions: List<Direction>) {

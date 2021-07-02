@@ -4,6 +4,7 @@ import com.example.polycareer.domain.usecase.ValidateParam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import com.example.polycareer.domain.model.Result
+import com.example.polycareer.utils.isValidExamGrade
 
 abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : ValidateParam>(
     private val useCase: UseCase,
@@ -32,6 +33,8 @@ abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : Validat
     protected suspend fun validateParam(
         firstParam: ValidationAction.Param,
         secondParam: ValidationAction.Param,
+        firstString: String,
+        secondString: String,
         validationFunction: suspend UseCase.() -> Result
     ): Result {
         return useCase.validationFunction().also { result ->
@@ -40,8 +43,12 @@ abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : Validat
                 sendAction(ValidationAction.CorrectParam(param = secondParam))
             }
             else {
-                sendAction(ValidationAction.WrongParam(param = firstParam))
-                sendAction(ValidationAction.WrongParam(param = secondParam))
+                if (!firstString.isValidExamGrade()) {
+                    sendAction(ValidationAction.WrongParam(param = firstParam))
+                }
+                if (!secondString.isValidExamGrade()) {
+                    sendAction(ValidationAction.WrongParam(param = secondParam))
+                }
             }
         }
     }

@@ -42,8 +42,8 @@ class GradesViewModel(
     ) = withContext(viewModelScope.coroutineContext) {
         val isMathGradeCorrect = checkParamAsync { validateMath(math) }
         val isRusGradeCorrect = checkParamAsync { validateRus(rus) }
-        val isPhysGradeCorrect = checkParamAsync { validatePhys(phys, inf) }
-        val isInfGradeCorrect = checkParamAsync { validateInf(phys, inf) }
+        val isPhysGradeCorrect = checkParamAsync { validatePhysAndInf(phys, inf) }
+        val isInfGradeCorrect = checkParamAsync { validatePhysAndInf(phys, inf) }
         val isIdGradeCorrect = checkParamAsync { validateId(id) }
 
         return@withContext isMathGradeCorrect.await()
@@ -66,13 +66,13 @@ class GradesViewModel(
 
     fun onPhysGradeChange(phys: String, inf: String) {
         viewModelScope.launch {
-            validatePhys(phys, inf)
+            validatePhysAndInf(phys, inf)
         }
     }
 
     fun onInfGradeChange(phys: String, inf: String) {
         viewModelScope.launch {
-            validateInf(phys, inf)
+            validatePhysAndInf(phys, inf)
         }
     }
 
@@ -94,14 +94,8 @@ class GradesViewModel(
         }
     }
 
-    private suspend fun validatePhys(phys: String, inf: String): Result {
-        return validateParam(GradesParam.Phys, GradesParam.Inf) {
-            validateExamGrade(phys, inf)
-        }
-    }
-
-    private suspend fun validateInf(phys: String, inf: String): Result {
-        return validateParam(GradesParam.Phys, GradesParam.Inf) {
+    private suspend fun validatePhysAndInf(phys: String, inf: String): Result {
+        return validateParam(GradesParam.Phys, GradesParam.Inf, phys, inf) {
             validateExamGrade(phys, inf)
         }
     }

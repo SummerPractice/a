@@ -135,13 +135,6 @@ class QuizItemViewModel(
         is QuizItemAction.Error -> state.copy(errorMessage = action.message)
     }
 
-    fun onFragmentDestroyed() {
-        if (questionId > 0) {
-            deleteUnfinishedTests()
-        }
-    }
-
-
     sealed interface QuizItemAction : BaseAction {
         class ToNextQuestion(val answers: List<String>) : QuizItemAction
         class ToResults(val tryNumber: Long) : QuizItemAction

@@ -77,16 +77,29 @@ class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
         super.onViewCreated(view, savedInstanceState)
 
         btnNext.setOnClickListener(this)
-        etMath.setValidateRule(viewModel) { onMathGradeChange(etMath.value) }
-        etRus.setValidateRule(viewModel) { onRusGradeChange(etRus.value) }
-        etPhys.setValidateRule(viewModel) { onPhysGradeChange(etPhys.value, etInf.value) }
-        etInf.setValidateRule(viewModel) { onInfGradeChange(etPhys.value, etInf.value) }
-        etId.setValidateRule(viewModel) { onIdGradeChange(etId.value) }
         etMath.onFocusChangeListener = this
         etRus.onFocusChangeListener = this
         etPhys.onFocusChangeListener = this
         etInf.onFocusChangeListener = this
         etId.onFocusChangeListener = this
+    }
+
+    override fun onResume() {
+        super.onResume()
+        etMath.setValidateRule(viewModel) { onMathGradeChange(etMath.value) }
+        etRus.setValidateRule(viewModel) { onRusGradeChange(etRus.value) }
+        etPhys.setValidateRule(viewModel) { onPhysGradeChange(etPhys.value, etInf.value) }
+        etInf.setValidateRule(viewModel) { onInfGradeChange(etPhys.value, etInf.value) }
+        etId.setValidateRule(viewModel) { onIdGradeChange(etId.value) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        etMath.removeValidateRule()
+        etRus.removeValidateRule()
+        etPhys.removeValidateRule()
+        etInf.removeValidateRule()
+        etId.removeValidateRule()
     }
 
     override fun onClick(v: View?) {

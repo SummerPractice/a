@@ -1,8 +1,6 @@
 package com.example.polycareer.screens.quiz.quiz_item
 
 import android.animation.ObjectAnimator
-import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -25,6 +23,7 @@ import com.example.polycareer.R
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val BUNDLE_KEY = "CHECKED_BUTTON_ID"
 
 class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var rgAnswers: RadioGroup
@@ -34,17 +33,17 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private lateinit var errorScreen: View
     private lateinit var correctScreen: View
 
+    private var checkedButton = -1
+
     private val viewModel: QuizItemViewModel by viewModel()
 
     private val stateObserver = Observer<QuizItemViewModel.QuizItemState> { state ->
         if (state.toResults != -1L) toResults(state.toResults)
         if (state.toMenu) toMenu()
         if (state.answers.isEmpty()) {
-            correctScreen.isVisible = false
-            errorScreen.isVisible = true
+            showErrorScreen()
         } else {
-            correctScreen.isVisible =  true
-            errorScreen.isVisible = false
+            showCorrectScreen()
             bindAnswers(state.answers)
             bindProgress(state.progress)
         }
@@ -67,6 +66,11 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
             newRadioButton.text = answer
             rgAnswers.addView(newRadioButton)
         }
+
+        if (checkedButton != -1) {
+            (rgAnswers.getChildAt(checkedButton) as RadioButton).isChecked = true
+        }
+
         pbLoading.isVisible = false
     }
 
@@ -96,16 +100,26 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val checkedButtonId: Int? = savedInstanceState?.getInt(BUNDLE_KEY)
+        if (checkedButtonId != null && checkedButtonId != -1) {
+                checkedButton = checkedButtonId
+        }
 
         btnNext.setOnClickListener(this)
 
         viewModel.onFragmentCreated()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        viewModel.onFragmentDestroyed()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val radioButtonID: Int = rgAnswers.checkedRadioButtonId
+        val radioButton: View? = rgAnswers.findViewById(radioButtonID)
+        if (radioButtonID != -1 && radioButton != null) {
+            val idx: Int = rgAnswers.indexOfChild(radioButton)
+            outState.putInt(BUNDLE_KEY, idx)
+        } else {
+            outState.putInt(BUNDLE_KEY, -1)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -113,7 +127,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         val radioButton: View? = rgAnswers.findViewById(radioButtonID)
         if (radioButton != null) {
             val selectedAnswer = rgAnswers.indexOfChild(radioButton)
-
+            checkedButton = -1
             viewModel.onNextButtonClicked(selectedAnswer)
         }
     }
@@ -133,9 +147,29 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     private fun setReloadButton() {
         val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
         button.setOnClickListener {
+            showLoading()
             viewModel.onReload()
         }
     }
+
+    private fun showCorrectScreen() {
+        correctScreen.isVisible =  true
+        errorScreen.isVisible = false
+        pbLoading.isVisible = false
+    }
+
+    private fun showErrorScreen() {
+        correctScreen.isVisible = false
+        pbLoading.isVisible = false
+        errorScreen.isVisible = true
+    }
+
+    private fun showLoading() {
+        correctScreen.isVisible = false
+        pbLoading.isVisible = true
+        errorScreen.isVisible = false
+    }
+
 }
 
 private fun AppCompatRadioButton.setStyle() {

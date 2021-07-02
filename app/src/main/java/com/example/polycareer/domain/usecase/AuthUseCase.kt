@@ -60,7 +60,9 @@ class AuthUseCase(
     suspend fun validateExamGrade(grade: String) = validate(grade.isValidExamGrade())
 
     suspend fun validateExamGrade(firstGrade: String, secondGrade: String) =
-        validate(firstGrade.isValidExamGrade() || secondGrade.isValidExamGrade())
+        validate(firstGrade.isEmpty() && secondGrade.isValidExamGrade()
+                || firstGrade.isValidExamGrade() && secondGrade.isEmpty()
+                || firstGrade.isValidExamGrade() && secondGrade.isValidExamGrade())
 
     suspend fun validateIdGrade(grade: String) = validate(grade.isValidIdGrade())
 
