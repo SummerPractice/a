@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.CompoundButton
-import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
@@ -22,10 +22,10 @@ import com.example.polycareer.utils.value
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListener {
-    private lateinit var button: Button
-    private lateinit var firstnameInput: EditText
-    private lateinit var lastnameInput: EditText
-    private lateinit var emailInput: EditText
+    private lateinit var button: AppCompatButton
+    private lateinit var firstnameInput: AppCompatEditText
+    private lateinit var lastnameInput: AppCompatEditText
+    private lateinit var emailInput: AppCompatEditText
     private lateinit var cbConf: AppCompatCheckBox
     private lateinit var cbNews: AppCompatCheckBox
 

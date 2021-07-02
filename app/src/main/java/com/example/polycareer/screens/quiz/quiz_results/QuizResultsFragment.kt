@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ListView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
@@ -36,14 +34,19 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     private val viewModel: QuizResultsViewModel by viewModel()
 
     private val stateObserver = Observer<QuizResultsViewModel.QuizResultState> { state ->
-        if (state.error.isEmpty() && !state.isLoad) {
-            loader.isVisible = false
-            correctScreen.isVisible = true
-            showChart(state.professions)
-            showDirections(state.directions)
+        when {
+            state.isLoad -> {
+                showLoading()
+            }
+            state.directions.isNotEmpty() -> {
+                showCorrectScreen()
+                showChart(state.professions)
+                showDirections(state.directions)
+            }
+            else -> {
+                showErrorScreen()
+            }
         }
-        loader.isVisible = state.isLoad
-        errorScreen.isVisible = state.error.isNotEmpty()
     }
 
     private fun showDirections(directions: List<Direction>) {
@@ -83,7 +86,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setReloadButton() {
-        val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
+        val button = errorScreen.findViewById<AppCompatButton>(R.id.screen__result_error_btn)
         button.setOnClickListener {
             viewModel.loadData()
         }
@@ -99,6 +102,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showLoading()
         toMenuBtn.setOnClickListener(this)
         viewModel.loadData()
     }
@@ -106,5 +110,23 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         val navController = NavHostFragment.findNavController(this)
         navController.popBackStack(R.id.mainFragment, false)
+    }
+
+    private fun showCorrectScreen() {
+        correctScreen.isVisible =  true
+        errorScreen.isVisible = false
+        loader.isVisible = false
+    }
+
+    private fun showErrorScreen() {
+        correctScreen.isVisible = false
+        loader.isVisible = false
+        errorScreen.isVisible = true
+    }
+
+    private fun showLoading() {
+        correctScreen.isVisible = false
+        loader.isVisible = true
+        errorScreen.isVisible = false
     }
 }

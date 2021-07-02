@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dir_item__tv_num1"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dir_item__tv_dest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Название направления" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dir_item__tv_descr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         tools:text="Математическое обеспечение и администрирование информационных систем" />
 
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dir_item__tv_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.polycareer.App
@@ -15,9 +15,9 @@ import org.koin.android.ext.android.inject
 
 
 class MainScreenFragment : Fragment() {
-    private lateinit var newTestButton: Button
-    private lateinit var oldResultsButton: Button
-    private lateinit var registerButton: Button
+    private lateinit var newTestButton: AppCompatButton
+    private lateinit var oldResultsButton: AppCompatButton
+    private lateinit var registerButton: AppCompatButton
 
     private val viewModel: MainScreenViewModel by inject()
     private val stateObserver = Observer<MainScreenViewModel.MainScreenState> { state ->

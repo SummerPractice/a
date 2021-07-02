@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.polycareer.App
 import com.example.polycareer.R
@@ -24,10 +24,10 @@ class HelloFragment : Fragment() {
 
         firstOpen()
 
-        val beginButton = view.findViewById<Button>(R.id.fragment__auth__hello_start_btn)
+        val beginButton = view.findViewById<AppCompatButton>(R.id.fragment__auth__hello_start_btn)
         beginButton.setOnClickListener { begin() }
 
-        val registerButton = view.findViewById<Button>(R.id.fragment__auth__hello_register_btn)
+        val registerButton = view.findViewById<AppCompatButton>(R.id.fragment__auth__hello_register_btn)
         registerButton.setOnClickListener { register() }
     }
 

@@ -91,6 +91,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                checkedButton = -1
                 viewModel.toPreviousQuestion()
             }
         })
@@ -145,7 +146,7 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setReloadButton() {
-        val button = errorScreen.findViewById<Button>(R.id.screen__result_error_btn)
+        val button = errorScreen.findViewById<AppCompatButton>(R.id.screen__result_error_btn)
         button.setOnClickListener {
             showLoading()
             viewModel.onReload()

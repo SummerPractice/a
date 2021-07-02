@@ -8,57 +8,66 @@
     android:paddingVertical="22dp"
     tools:context=".screens.main.old_results.OldResultsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/screen_without_items"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:fillViewport="true"
+        >
 
-        <ImageView
-            android:id="@+id/screen_without_items__icon"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            tools:src="@drawable/ic_no_items"
-            android:contentDescription="@string/icon_placeholder"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/screen_without_items__text"
-            android:layout_marginBottom="40dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/screen_without_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-        <TextView
-            android:id="@+id/screen_without_items__text"
-            style="@style/headerText"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:text="@string/no_items"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/screen_without_items__icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                tools:src="@drawable/ic_no_items"
+                android:contentDescription="@string/icon_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/screen_without_items__text"
+                android:layout_marginBottom="40dp"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/screen_without_items_"
-            style="@style/button"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp"
-            android:gravity="center"
-            android:text="@string/fragment__main__quiz_results__main_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/screen_without_items__text"
+                style="@style/headerText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="@string/no_items"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/screen_without_items_"
+                style="@style/button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="@string/fragment__main__quiz_results__main_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/screen_with_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/fragment__main__old__result__head__tv"
             style="@style/headerText"
             android:layout_width="match_parent"

@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,13 +40,13 @@ class OldResultsFragment : Fragment(), OldResultsAdapter.OnResultItemClickListen
         withItemsView.isVisible = false
         noItemsView.isVisible = true
 
-        val icon = noItemsView.findViewById<ImageView>(R.id.screen_without_items__icon)
+        val icon = noItemsView.findViewById<AppCompatImageView>(R.id.screen_without_items__icon)
         icon.setImageResource(iconRes)
 
-        val textView = noItemsView.findViewById<TextView>(R.id.screen_without_items__text)
+        val textView = noItemsView.findViewById<AppCompatTextView>(R.id.screen_without_items__text)
         textView.setText(text)
 
-        val button = noItemsView.findViewById<Button>(R.id.screen_without_items_)
+        val button = noItemsView.findViewById<AppCompatButton>(R.id.screen_without_items_)
         button.setOnClickListener {
             val navController = NavHostFragment.findNavController(this)
             navController.popBackStack(R.id.mainFragment, false)
