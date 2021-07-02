@@ -35,18 +35,26 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
 
     private val stateObserver = Observer<QuizResultsViewModel.QuizResultState> { state ->
         when {
-            state.isLoad -> {
-                showLoading()
-            }
-            state.directions.isNotEmpty() -> {
-                showCorrectScreen()
-                showChart(state.professions)
-                showDirections(state.directions)
-            }
-            else -> {
-                showErrorScreen()
-            }
+            state.isLoad -> changeVisibility(isLoaderVisible = true)
+            state.directions.isNotEmpty() -> showCorrectScreen(state.professions, state.directions)
+            else -> changeVisibility(isErrorVisible = true)
         }
+    }
+
+    private fun changeVisibility(
+        isLoaderVisible: Boolean = false,
+        isErrorVisible: Boolean = false,
+        isResultVisible: Boolean = false
+    ) {
+        loader.isVisible = isLoaderVisible
+        errorScreen.isVisible = isErrorVisible
+        correctScreen.isVisible = isResultVisible
+    }
+
+    private fun showCorrectScreen(professions: List<Profession>, directions: List<Direction>) {
+        changeVisibility(isResultVisible = true)
+        showChart(professions)
+        showDirections(directions)
     }
 
     private fun showDirections(directions: List<Direction>) {
@@ -72,10 +80,11 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
         toMenuBtn = rootView.findViewById(R.id.fragment__main__quiz_results__main_btn)
 
         chart = PieChartAdapter(
-                requireContext(),
-                correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
-                correctScreen.findViewById(R.id.fragment__main__quiz_results__legend_lv),
-                viewModel.isFirstRender)
+            requireContext(),
+            correctScreen.findViewById(R.id.fragment__main__quiz_results__graph_rc),
+            correctScreen.findViewById(R.id.fragment__main__quiz_results__legend_lv),
+            viewModel.isFirstRender
+        )
 
         createRecyclerView()
 
@@ -102,7 +111,6 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showLoading()
         toMenuBtn.setOnClickListener(this)
         viewModel.loadData()
     }
@@ -110,23 +118,5 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         val navController = NavHostFragment.findNavController(this)
         navController.popBackStack(R.id.mainFragment, false)
-    }
-
-    private fun showCorrectScreen() {
-        correctScreen.isVisible =  true
-        errorScreen.isVisible = false
-        loader.isVisible = false
-    }
-
-    private fun showErrorScreen() {
-        correctScreen.isVisible = false
-        loader.isVisible = false
-        errorScreen.isVisible = true
-    }
-
-    private fun showLoading() {
-        correctScreen.isVisible = false
-        loader.isVisible = true
-        errorScreen.isVisible = false
     }
 }
