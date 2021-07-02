@@ -43,12 +43,36 @@ abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : Validat
                 sendAction(ValidationAction.CorrectParam(param = secondParam))
             }
             else {
-                if (!firstString.isValidExamGrade()) {
+                if (firstString.isEmpty() && secondString.isEmpty()) {
+                    sendAction(ValidationAction.WrongParam(param = firstParam))
+                    sendAction(ValidationAction.WrongParam(param = secondParam))
+                    return@also
+                }
+
+                if (!firstString.isValidExamGrade() && secondString.isEmpty()) {
+                    sendAction(ValidationAction.WrongParam(param = firstParam))
+                    sendAction(ValidationAction.CorrectParam(param = secondParam))
+                    return@also
+                }
+
+                if (firstString.isEmpty() && !secondString.isValidExamGrade()) {
+                    sendAction(ValidationAction.CorrectParam(param = firstParam))
+                    sendAction(ValidationAction.WrongParam(param = secondParam))
+                    return@also
+                }
+
+                if (firstString.isValidExamGrade() || firstString.isEmpty()) {
+                    sendAction(ValidationAction.CorrectParam(param = firstParam))
+                } else {
                     sendAction(ValidationAction.WrongParam(param = firstParam))
                 }
-                if (!secondString.isValidExamGrade()) {
+
+                if (secondString.isValidExamGrade() || secondString.isEmpty()) {
+                    sendAction(ValidationAction.CorrectParam(param = secondParam))
+                } else {
                     sendAction(ValidationAction.WrongParam(param = secondParam))
                 }
+
             }
         }
     }
