@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="22dp"
     android:paddingVertical="22dp"
+    style="@style/background"
     tools:context=".screens.main.old_results.OldResultsFragment">
 
     <androidx.core.widget.NestedScrollView

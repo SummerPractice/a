@@ -91,9 +91,6 @@ class QuizItemViewModel(
     }
 
     fun toPreviousQuestion() {
-//        if (questions.isEmpty()) {
-//            return
-//        }
         if (isFirstQuestion()) {
             sendAction(QuizItemAction.ToMenu)
         } else {

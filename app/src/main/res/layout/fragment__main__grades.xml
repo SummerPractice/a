@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    style="@style/background"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/grades_error_screen"
+        layout="@layout/untitled_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/grades_correct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
-        android:focusableInTouchMode="true"
         tools:context=".screens.auth.grades.GradesFragment"
         android:focusable="true">
 
@@ -42,7 +55,8 @@
             android:id="@+id/fragment__main__grades__next_btn"
             style="@style/button"
             android:text="@string/fragment_auth__sign_up__next_btn"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,3 +182,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/fragment__main__grades__loading_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        />
+
+</FrameLayout>
+

@@ -83,9 +83,10 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
         btnNext = rootView.findViewById(R.id.fragment__main__quiz_item__next_btn)
         pbLoading = rootView.findViewById(R.id.fragment__main__quiz_item__loading_pb)
         pbTest = rootView.findViewById(R.id.fragment__main__quiz_item__test_pb)
-        errorScreen = rootView.findViewById(R.id.quiz_item__error_screen)
+        errorScreen = rootView.findViewById(R.id.quiz_item_error_screen)
         correctScreen = rootView.findViewById(R.id.quiz_item__correct)
         setReloadButton()
+        errorScreen.visibility = View.GONE
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
@@ -176,7 +177,6 @@ class QuizItemFragment : Fragment(), View.OnClickListener {
 private fun AppCompatRadioButton.setStyle() {
     val dp = context.resources.displayMetrics.density.toInt()
     buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button_inset)
-
 
     typeface = ResourcesCompat.getFont(context, R.font.opensans_regular)
     setTextSize(TypedValue.COMPLEX_UNIT_SP, 19f)

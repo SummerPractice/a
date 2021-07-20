@@ -1,9 +1,8 @@
 package com.example.polycareer.screens
 
-import android.content.pm.ActivityInfo
-import android.graphics.drawable.GradientDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.polycareer.App
 import com.example.polycareer.R
@@ -13,16 +12,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.getKoin
-import org.koin.core.context.GlobalContext.get
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_PolyCareer)
+        super.onCreate(savedInstanceState)
+        setMode()
         setContentView(R.layout.activity_main)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
         createDefaultUser()
+    }
+
+    private fun setMode() {
+        val appSharedPrefs: SharedPreferences = getSharedPreferences(App.IS_DARK_MODE, 0)
+        if ((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) && (!appSharedPrefs.contains(App.DARK_MODE_KEY))) {
+            return
+        }
+
+        val isNightModeOn: Boolean = appSharedPrefs.getBoolean(App.DARK_MODE_KEY, false)
+        if (isNightModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun createDefaultUser() = runBlocking {

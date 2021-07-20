@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/background"
     tools:context=".screens.quiz.quiz_results.QuizResultsFragment">
 
     <include
@@ -14,7 +15,7 @@
 
     <include
         android:id="@+id/error_screen"
-        layout="@layout/screen__result_error"
+        layout="@layout/untitled_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>

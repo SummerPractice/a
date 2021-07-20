@@ -21,7 +21,7 @@ import com.example.polycareer.utils.setValueByCondition
 import com.example.polycareer.utils.value
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListener {
+class SignUpFragment : Fragment(), View.OnClickListener {
     private lateinit var button: AppCompatButton
     private lateinit var firstnameInput: AppCompatEditText
     private lateinit var lastnameInput: AppCompatEditText
@@ -80,8 +80,6 @@ class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
 
         button.setOnClickListener(this)
 
-        firstnameInput.onFocusChangeListener = this
-
         cbConf.setOnCheckedChangeListener { _: CompoundButton, state: Boolean ->
             viewModel.onConfCheckedChange(state)
         }
@@ -109,12 +107,5 @@ class SignUpFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
         val isNewsChecked = cbNews.isChecked
 
         viewModel.saveUserDetail(firstname, lastname, email, isConfChecked, isNewsChecked)
-    }
-
-    override fun onFocusChange(v: View?, hasFocus: Boolean) {
-        if (!hasFocus) {
-            val imm : InputMethodManager? = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        }
     }
 }

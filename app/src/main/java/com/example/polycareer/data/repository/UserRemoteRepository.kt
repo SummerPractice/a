@@ -1,19 +1,16 @@
 package com.example.polycareer.data.repository
 
-import com.example.polycareer.data.api.ApiFactory.retrofit
 import com.example.polycareer.data.api.ApiService
 import com.example.polycareer.domain.model.UserDetails
 import com.example.polycareer.domain.model.UserGrades
 import com.example.polycareer.domain.model.UserPostInfo
 import com.example.polycareer.exception.LostConnectionException
 import com.example.polycareer.exception.WrongResponseException
-import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import retrofit2.Response
 import retrofit2.Retrofit
 
 class UserRemoteRepository(
-    retrofit: Retrofit
+    private val retrofit: Retrofit
 ) {
     suspend fun saveUser(user: UserDetails, grades: UserGrades) {
         val userInfo = UserPostInfo(

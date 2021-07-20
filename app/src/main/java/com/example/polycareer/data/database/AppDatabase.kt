@@ -10,7 +10,7 @@ import com.example.polycareer.data.database.model.*
 
 @Database(entities = [UserEntity::class, GradesEntity::class,
     AnswersEntity::class, UsersAnswersEntity::class, CoeffsEntity::class,
-    DirectionEntity::class, ProfessionEntity::class], version = 1)
+    DirectionEntity::class, ProfessionEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val userDao: UserDao
     abstract val quizDao: QuizDao

@@ -20,6 +20,9 @@ class App : Application() {
         const val IS_FIRST_OPEN = "FIRST_OPEN"
         const val FIRST_OPEN_KEY = "first_open"
 
+        const val IS_DARK_MODE = "DARK_MODE"
+        const val DARK_MODE_KEY = "dark_mode"
+
         const val TRY_NUMBER = "try_number"
     }
 

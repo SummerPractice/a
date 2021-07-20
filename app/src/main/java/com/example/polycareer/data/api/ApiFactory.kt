@@ -1,5 +1,6 @@
 package com.example.polycareer.data.api
 
+import com.example.polycareer.BuildConfig
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,9 +9,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object ApiFactory {
 
-    private const val BASE_URL = "https://poly-career.herokuapp.com/"
+    private const val BASE_URL = BuildConfig.BASE_URL
 
-    var gson = GsonBuilder()
+    private var gson = GsonBuilder()
         .setLenient()
         .create()
 

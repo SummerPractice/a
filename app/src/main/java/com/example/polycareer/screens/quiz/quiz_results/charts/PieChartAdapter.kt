@@ -29,13 +29,13 @@ class PieChartAdapter(
     override fun render(professions: List<Profession>) {
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
-        chart.setExtraOffsets(20f, 10f, 20f, 0f)
+        chart.setExtraOffsets(20f, 0f, 20f, 0f)
 
         chart.dragDecelerationFrictionCoef = 1f
 
         chart.isDrawHoleEnabled = true
 
-        chart.setHoleColor(Color.WHITE)
+        chart.setHoleColor(Color.TRANSPARENT)
         chart.setTransparentCircleAlpha(110)
 
         chart.holeRadius = 45f
@@ -85,7 +85,7 @@ class PieChartAdapter(
         dataSet.colors = pastelColors
 
         val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
+        data.setValueFormatter(PercentFormatter(chart))
         data.setValueTextSize(16f)
         data.setValueTextColor(Color.WHITE)
         chart.data = data

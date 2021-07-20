@@ -126,4 +126,5 @@ class SingUpViewModel(
         val isConfRuleNotExcepted: Boolean = false,
         val errorMessage: String = ""
     ) : BaseState
+
 }

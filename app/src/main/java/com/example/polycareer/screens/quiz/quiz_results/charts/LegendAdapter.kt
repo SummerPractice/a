@@ -9,6 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.polycareer.R
 import com.example.polycareer.domain.model.LegendLabel
 
@@ -32,18 +33,31 @@ class LegendAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view = layoutInflater.inflate(R.layout.fragment__main__chart_legend, parent, false)
-
+        var convView = convertView
         val l: LegendLabel = objects[position]
+        val holder: LegendViewHolder
+
+        if (convView == null) {
+            convView = layoutInflater.inflate(R.layout.fragment__main__chart_legend, parent, false)
+            holder = LegendViewHolder(
+                convView.findViewById<View>(R.id.legend_text) as AppCompatTextView,
+                convView.findViewById<View>(R.id.legend_circle) as AppCompatImageView
+            )
+            convView.tag = holder
+        } else {
+            holder = convView.tag as LegendViewHolder
+        }
 
         val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.circle)
         val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
         DrawableCompat.setTint(wrappedDrawable, l.color)
 
-        view?.findViewById<AppCompatImageView>(R.id.legend_circle)?.background = wrappedDrawable
+        holder.text.text = l.text
+        holder.image.background = wrappedDrawable
 
-        view?.findViewById<AppCompatTextView>(R.id.legend_text)?.text = l.text
-
-        return view
+        return convView
     }
+
+    class LegendViewHolder(val text: AppCompatTextView, val image: AppCompatImageView) {}
+
 }

@@ -35,9 +35,12 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
 
     private val stateObserver = Observer<QuizResultsViewModel.QuizResultState> { state ->
         when {
-            state.isLoad -> changeVisibility(isLoaderVisible = true)
-            state.directions.isNotEmpty() -> showCorrectScreen(state.professions, state.directions)
-            else -> changeVisibility(isErrorVisible = true)
+            state.isLoad ->
+                changeVisibility(isLoaderVisible = true)
+            state.directions.isNotEmpty() ->
+                showCorrectScreen(state.professions, state.directions)
+            else ->
+                changeVisibility(isErrorVisible = true)
         }
     }
 
@@ -76,6 +79,7 @@ class QuizResultsFragment : Fragment(), View.OnClickListener {
         correctScreen = rootView.findViewById(R.id.result_screen)
         errorScreen = rootView.findViewById(R.id.error_screen)
         setReloadButton()
+        errorScreen.visibility = View.GONE
         loader = rootView.findViewById(R.id.fragment__quiz__quiz_results_progress_bar)
         toMenuBtn = rootView.findViewById(R.id.fragment__main__quiz_results__main_btn)
 

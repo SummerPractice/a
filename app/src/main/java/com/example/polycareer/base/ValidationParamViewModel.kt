@@ -95,7 +95,6 @@ abstract class ValidationParamViewModel<ViewState : BaseState, UseCase : Validat
 
     sealed interface ValidationAction : BaseAction {
         interface Param
-
         object DataSaved : ValidationAction
         class CorrectParam(val param: Param) : ValidationAction
         class WrongParam(val param: Param) : ValidationAction

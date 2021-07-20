@@ -1,29 +1,32 @@
 package com.example.polycareer.screens.auth.grades
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import android.widget.ProgressBar
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.polycareer.R
 import com.example.polycareer.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListener {
+class GradesFragment : Fragment(), View.OnClickListener {
     private lateinit var etMath: AppCompatEditText
     private lateinit var etRus: AppCompatEditText
     private lateinit var etPhys: AppCompatEditText
     private lateinit var etInf: AppCompatEditText
     private lateinit var etId: AppCompatEditText
     private lateinit var btnNext: AppCompatButton
+    private lateinit var pbLoading: ProgressBar
+    private lateinit var errorScreen: View
+    private lateinit var correctScreen: View
 
     private val viewModel: GradesViewModel by viewModel()
 
@@ -42,9 +45,11 @@ class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
 
         etId.error =
             setValueByCondition(state.isNotValidId, getString(R.string.invalid_id_grade))
-
-        if (state.isSaved) nextFragment()
-        if (state.errorMessage.isNotEmpty()) showError(state.errorMessage)
+        when {
+            state.errorMessage.isNotEmpty() -> showErrorScreen()
+            state.isSaved -> toMenu()
+            state.isLoading -> showLoading()
+        }
     }
 
     override fun onCreateView(
@@ -58,30 +63,35 @@ class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
         etInf = rootView.findViewById(R.id.fragment__main__grades__inf_ev)
         etId = rootView.findViewById(R.id.fragment__main__grades__id_ev)
         btnNext = rootView.findViewById(R.id.fragment__main__grades__next_btn)
-
+        pbLoading = rootView.findViewById(R.id.fragment__main__grades__loading_pb)
+        errorScreen = rootView.findViewById(R.id.grades_error_screen)
+        setReloadButton()
+        errorScreen.visibility = View.GONE
+        correctScreen = rootView.findViewById(R.id.grades_correct)
         viewModel.stateLiveData.observe(viewLifecycleOwner, stateObserver)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object:
+            OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (errorScreen.isVisible) {
+                    toMenu()
+                } else {
+                    findNavController().navigateUp()
+                }
+            }
+        })
+
         return rootView
     }
 
-    private fun nextFragment() {
-        val navController = NavHostFragment.findNavController(this)
-        navController.popBackStack(R.id.mainFragment, false)
-    }
-
-    private fun showError(errorMessage: String) {
-        if (errorMessage.isEmpty()) return
-        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+    private fun toMenu() {
+        findNavController().popBackStack(R.id.mainFragment, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         btnNext.setOnClickListener(this)
-        etMath.onFocusChangeListener = this
-        etRus.onFocusChangeListener = this
-        etPhys.onFocusChangeListener = this
-        etInf.onFocusChangeListener = this
-        etId.onFocusChangeListener = this
     }
 
     override fun onResume() {
@@ -108,14 +118,25 @@ class GradesFragment : Fragment(), View.OnClickListener, View.OnFocusChangeListe
         val phys = etPhys.value
         val inf = etInf.value
         val id = etId.value
-
         viewModel.saveGrades(math, rus, phys, inf, id)
     }
 
-    override fun onFocusChange(v: View?, hasFocus: Boolean) {
-        if (!hasFocus) {
-            val imm : InputMethodManager? = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+    private fun setReloadButton() {
+        val button = errorScreen.findViewById<AppCompatButton>(R.id.screen__result_error_btn)
+        button.setOnClickListener {
+            onClick(button)
         }
+    }
+
+    private fun showErrorScreen() {
+        correctScreen.isVisible = false
+        pbLoading.isVisible = false
+        errorScreen.isVisible = true
+    }
+
+    private fun showLoading() {
+        correctScreen.isVisible = false
+        pbLoading.isVisible = true
+        errorScreen.isVisible = false
     }
 }

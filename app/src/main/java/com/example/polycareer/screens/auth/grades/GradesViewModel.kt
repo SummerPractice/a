@@ -2,6 +2,7 @@ package com.example.polycareer.screens.auth.grades
 
 import androidx.lifecycle.viewModelScope
 import com.example.polycareer.base.BaseState
+import com.example.polycareer.base.BaseViewModel
 import com.example.polycareer.base.ValidationParamViewModel
 import com.example.polycareer.domain.model.UserGrades
 import kotlinx.coroutines.launch
@@ -22,6 +23,8 @@ class GradesViewModel(
     ) {
         viewModelScope.launch {
             if (!isParamsValid(math, rus, phys, inf, id)) return@launch
+
+            state = onLoading()
 
             useCase.saveGrades(UserGrades(math, rus, phys, inf, id)).also { result ->
                 if (result is Result.Error)
@@ -116,6 +119,10 @@ class GradesViewModel(
         errorMessage = message
     )
 
+    private fun onLoading(): GradesState = state.copy(
+        isLoading = true
+    )
+
     override fun changeStateByParam(
         param: ValidationAction.Param,
         isCorrect: Boolean
@@ -126,6 +133,7 @@ class GradesViewModel(
             is GradesParam.Phys -> state.copy(isNotValidPhys = !isCorrect, errorMessage = "")
             is GradesParam.Inf -> state.copy(isNotValidInf = !isCorrect, errorMessage = "")
             is GradesParam.Id -> state.copy(isNotValidId = !isCorrect, errorMessage = "")
+            is GradesParam.Loading -> state.copy(isLoading = true, errorMessage = "")
         }
     }
 
@@ -135,6 +143,7 @@ class GradesViewModel(
         object Phys : GradesParam
         object Inf : GradesParam
         object Id : GradesParam
+        object Loading: GradesParam
     }
 
     data class GradesState(
@@ -144,6 +153,7 @@ class GradesViewModel(
         val isNotValidPhys: Boolean = false,
         val isNotValidInf: Boolean = false,
         val isNotValidId: Boolean = false,
+        val isLoading: Boolean = false,
         val errorMessage: String = ""
     ) : BaseState
 }

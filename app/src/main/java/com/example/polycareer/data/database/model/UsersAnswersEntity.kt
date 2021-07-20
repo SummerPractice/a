@@ -20,7 +20,7 @@ import androidx.room.ForeignKey
 )
 data class UsersAnswersEntity(
     @ColumnInfo(name = "user_id") val userId: Long,
-    @ColumnInfo(name = "answer_id") val answerId: Long,
+    @ColumnInfo(name = "answer_id", index = true) val answerId: Long,
     @ColumnInfo(name = "try_number") val tryNumber: Long = 0,
     @ColumnInfo val time: Long
 )

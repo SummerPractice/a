@@ -32,7 +32,8 @@ class HelloFragment : Fragment() {
     }
 
     private fun register() {
-        openScreen(R.id.action_helloFragment_to_signUpFragment)
+        openScreen(R.id.action_helloFragment_to_mainFragment)
+        openScreen(R.id.action_mainFragment_to_signUpFragment)
     }
 
     private fun begin() {
