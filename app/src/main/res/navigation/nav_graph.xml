@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/helloFragment"
+        android:name="com.example.polycareer.screens.hello.HelloFragment"
+        android:label="fragment__auth__hello"
+        tools:layout="@layout/fragment__auth__hello" >
+        <action
+            android:id="@+id/action_helloFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_helloFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.polycareer.screens.auth.sign_up.SignUpFragment"
+        android:label="fragment__auth__sign_up"
+        tools:layout="@layout/fragment__auth__sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_gradesMarksFragment"
+            app:destination="@id/gradesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/gradesFragment"
+        android:name="com.example.polycareer.screens.auth.grades.GradesFragment"
+        android:label="fragment__main__grades"
+        tools:layout="@layout/fragment__main__grades">
+    </fragment>
+    <fragment
+        android:id="@+id/quizItemFragment"
+        android:name="com.example.polycareer.screens.quiz.quiz_item.QuizItemFragment"
+        android:label="fragment__main__quiz_item"
+        tools:layout="@layout/fragment__main__quiz_item" >
+        <action
+            android:id="@+id/action_quizItemFragment_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizResultsFragment"
+        android:name="com.example.polycareer.screens.quiz.quiz_results.QuizResultsFragment"
+        android:label="fragment__main__quiz_results"
+        tools:layout="@layout/fragment__main__quiz_results" >
+        <argument
+            android:name="try_number"
+            app:argType="long"
+            android:defaultValue="1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.polycareer.screens.main.main_screen.MainScreenFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment__main__main_screen" >
+        <action
+            android:id="@+id/action_mainFragment_to_quizItemFragment"
+            app:destination="@id/quizItemFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_mainFragment_to_oldResultsFragment"
+            app:destination="@id/oldResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_mainFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_mainFragment_to_helloFragment"
+            app:destination="@id/helloFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/oldResultsFragment"
+        android:name="com.example.polycareer.screens.main.old_results.OldResultsFragment"
+        android:label="fragment_old_results"
+        tools:layout="@layout/fragment_old_results" >
+        <action
+            android:id="@+id/action_oldResultsFragment2_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+</navigation>

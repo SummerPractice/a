@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="splash_light">#FFE7FFF0</color>
-    <color name="splash_dark">#FFBEF9BF</color>
+    <color name="transparent">#00000000</color>
+    <color name="dark_green">#FF216B2C</color>
     <color name="btn_light_green">#FF2CBD63</color>
     <color name="et_dark_green">#FF6AAE74</color>
+    <color name="splash_light">#FFE7FFF0</color>
+    <color name="splash_dark">#FFBEF9BF</color>
+    <color name="text_gray">#FFBABABA</color>
+
+    <color name="night_splash_dark">#FF3C3F41</color>
+    <color name="night_splash_light">#FF515154</color>
+
+    <color name="dark_background">#3C3F41</color>
+    <color name="dark_btn">#499C54</color>
+    <color name="answer_dark">#373737</color>
+    <color name="splash_dark_d">#FF373737</color>
+    <color name="splash_light_d">#FF3C3F41</color>
+    <color name="splash_dark_l">#FFBEF9BF</color>
+    <color name="splash_light_l">#FFE7FFF0</color>
+    <color name="answer_light">#FFBEF9BF</color>
 </resources>

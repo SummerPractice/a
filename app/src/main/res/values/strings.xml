@@ -1,25 +1,51 @@
 <resources>
-    <string name="app_name">PolyCareer</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="fragment__auth__hello__welcome_tv">Приветствую, абитуриент!</string>
-    <string name="fragment__auth__hello_desc_tv">Это приложение поможет тебе определиться с выбором направления в ИКТН, узнать больше об образовательных программах, которые тебе подходят</string>
-    <string name="fragment__auth__hello_start_btn">Начать</string>
+[]    <string name="app_name">Навигатор ИКНТ</string>
+
+    <string name="fragment__hello_welcome_tv">Приветствуем, абитуриент!</string>
+    <string name="fragment__hello_desc_tv">Это приложение поможет определиться с выбором специальности в IT и узнать об образовательных программах ИКНТ, которые подходят именно тебе.</string>
+    <string name="fragment__hello_start_btn">Начать</string>
+    <string name="fragment__hello_register_btn">Зарегистрироваться</string>
+
     <string name="fragment_auth__sign_up__head_tv">Давай знакомиться</string>
-    <string name="fragment_auth__sign_up__firstname_et">Имя</string>
+    <string name="fragment__auth__sign_up__firstname_et">Имя</string>
     <string name="fragment_auth__sign_up__lastname_et">Фамилия</string>
     <string name="fragment_auth__sign_up__email_et">Email</string>
-    <string name="fragment_auth__sign_up__terms_cb">Принимаю условия конфиденциальности</string>
-    <string name="fragment_auth__sign_up__email_cb">Хочу получать новости университета на указанную почту</string>
+    <string name="fragment_auth__sign_up__terms_cb">Согласен на обработку персональных данных</string>
+    <string name="fragment_auth__sign_up__email_cb">Хочу быть в курсе последних новостей университета</string>
     <string name="fragment_auth__sign_up__next_btn">Далее</string>
-    <string name="fragment_auth__sign_in__head_tv">Войти</string>
-    <string name="fragment__main__grades_choose">Баллы ЕГЭ</string>
-    <string name="fragment__main__grades__desc_tv">Укажите баллы полученные за ЕГЭ, так нам будет проще оценить вероятность прохождения на то или инное направление.</string>
-    <string name="fragment__main__grades__math_tv">Математика</string>
-    <string name="fragment__main__grades__phys_tv">Физика</string>
-    <string name="fragment__main__grades__rus_tv">Русский язык</string>
-    <string name="fragment__main__grades__inf_tv">Информатика</string>
-    <string name="fragment__main__quiz_results__head_tv">Результаты</string>
-    <string name="fragment__main__quiz_results__res_tv">Рекомендуемые направления</string>
-    <string name="fragment__main__quiz_results__gl_tv">Удачи!</string>
+    <string name="terms_error">Примите условия</string>
+    <string name="invalid_name">Строка должна содержать буквы</string>
+    <string name="invalid_email">Некорректный адрес</string>
+
+
+    <string name="fragment__auth__grades_choose">Баллы ЕГЭ</string>
+    <string name="fragment__auth__grades__desc_tv">Укажите Ваши баллы, так нам будет проще оценить вероятность прохождения на то или иное направление.</string>
+    <string name="fragment__auth__grades__math_tv">Математика</string>
+    <string name="fragment__auth__grades__phys_tv">Физика</string>
+    <string name="fragment__auth__grades__rus_tv">Русский язык</string>
+    <string name="fragment__auth__grades__inf_tv">Информатика</string>
+    <string name="fragment__auth__grades__id_tv">ИД</string>
+    <string name="invalid_exam_grade">Баллы за экзамен в диапазоне 1 – 100</string>
+    <string name="invalid_id_grade">Баллы за ИД в диапазоне 0 – 10</string>
+
+
+    <string name="fragment__quiz__quiz_results__head_tv">Результаты</string>
+    <string name="fragment__quiz__quiz_results__res_tv">Рекомендуемые направления</string>
+    <string name="fragment__quiz__quiz_results__next_text_button"><![CDATA[Подробнее >]]></string>
+
+    <string name="screen_result_error_message">Произошла ошибка! <br/>Попробуйте ещё раз</string>
+    <string name="screen__result_error_button">Перезагрузить</string>
+
+
+    <string name="fragment__quiz__quiz_item__head_tv">Что из перечисленного тебя больше интересует?</string>
+
+
+    <string name="fragment__main__main_screen_new_test">Новый тест</string>
+    <string name="fragment__main__main_screen_old_results">Результаты</string>
+    <string name="fragment__main__main_screen_register">Регистрация</string>
+
+    <string name="fragment__main__quiz_results__main_btn">Меню</string>
+    <string name="no_items">Ты пока не проходил тест</string>
+    <string name="error">Произошла ошибка при загрузке прошлых результов, попробуйте попозже</string>
+    <string name="icon_placeholder">Icon placeholder</string>
 </resources>

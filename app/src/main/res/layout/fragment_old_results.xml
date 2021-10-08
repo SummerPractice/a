@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="22dp"
+    android:paddingVertical="22dp"
+    style="@style/background"
+    tools:context=".screens.main.old_results.OldResultsFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/screen_without_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/screen_without_items__icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                tools:src="@drawable/ic_no_items"
+                android:contentDescription="@string/icon_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/screen_without_items__text"
+                android:layout_marginBottom="40dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/screen_without_items__text"
+                style="@style/headerText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="@string/no_items"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/screen_without_items_"
+                style="@style/button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="@string/fragment__main__quiz_results__main_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/screen_with_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment__main__old__result__head__tv"
+            style="@style/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:paddingBottom="22dp"
+            android:text="@string/fragment__main__main_screen_old_results"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment__main__old__result__rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment__main__old__result__head__tv"
+            tools:itemCount="6"
+            tools:listitem="@layout/simple_rv_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

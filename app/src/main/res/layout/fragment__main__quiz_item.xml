@@ -1,36 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_item__head_tv"
-        style="@style/headerText"
+    <include
+        android:id="@+id/quiz_item_error_screen"
+        layout="@layout/untitled_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/quiz_item__correct"
+        style="@style/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".screens.quiz.quiz_item.QuizItemFragment">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/fragment__main__quiz_item__test_pb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/horizontalProgress"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment__main__quiz_item__head_tv"
+                style="@style/headerText"
+                android:layout_marginTop="35dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/fragment__quiz__quiz_item__head_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__test_pb"
+                android:gravity="center_horizontal"
+                />
+
+            <RadioGroup
+                android:id="@+id/fragment__main__quiz_item__answers_rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__next_btn"
+                app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_item__head_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__head_tv"
+                android:radius="20dp"
+                android:bottomRightRadius="20dp"
+                android:bottomLeftRadius="20dp"
+                android:topRightRadius="20dp"
+                >
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment__main__quiz_item__next_btn"
+                style="@style/button"
+                android:text="@string/fragment_auth__sign_up__next_btn"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/fragment__main__quiz_item__loading_pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__answers_rg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Текст вопроса" />
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        />
 
-    <RadioGroup
-        android:id="@+id/fragment__main__quiz_item__answers_rg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_item__next_btn"
-        app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_item__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__head_tv" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment__main__quiz_item__next_btn"
-        style="@style/button"
-        android:text="@string/fragment_auth__sign_up__next_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_item__answers_rg" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

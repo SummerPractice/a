@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/background"
+    tools:context=".screens.quiz.quiz_results.QuizResultsFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__head_tv"
-        style="@style/headerText"
+    <include
+        android:id="@+id/result_screen"
+        layout="@layout/screen__result_correct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/error_screen"
+        layout="@layout/untitled_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/fragment__quiz__quiz_results_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__head_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:visibility="visible"
+        />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__res_tv"
-        style="@style/boldText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__res_tv"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__rv"
-        app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__head_tv" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment__main__quiz_results__rv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment__main__quiz_results__gl_tv"
-        app:layout_constraintStart_toStartOf="@id/fragment__main__quiz_results__head_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__res_tv" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fragment__main__quiz_results__gl_tv"
-        style="@style/headerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment__main__quiz_results__gl_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment__main__quiz_results__rv" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
